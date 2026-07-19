@@ -489,3 +489,21 @@
     page-break-inside: avoid;
   }
 }
+
+
+
+@media (max-width: 600px){
+  .intro{
+    font-size: 12px;
+
+  }
+  .heading{
+    font-size: 15px;
+  }
+  .vision{
+    font-size: 12px;
+  }
+  .copy{
+    font-size: 12px;
+  }
+}

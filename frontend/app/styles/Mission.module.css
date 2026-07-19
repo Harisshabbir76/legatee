@@ -72,3 +72,17 @@
   background: rgba(23, 57, 70, 0.4);
   margin: 56px auto 0;
 }
+
+
+
+@media (max-width: 768px) {
+  .missionText {
+    font-size: 15px;
+    max-width: 300px;
+  }
+
+  .visionText {
+    font-size: 15px;
+    max-width: 300px;
+  }
+}

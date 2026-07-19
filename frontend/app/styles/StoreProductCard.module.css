@@ -94,6 +94,7 @@
   right: 0;
   background: #173946;
   color: #fff;
+  font-family: var(--font-body);
   font-size: 10px;
   cursor: pointer;
   font-weight: 500;
@@ -121,6 +122,7 @@
 }
 
 .cardName {
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 700;
   color: #173946;
@@ -132,6 +134,7 @@
 }
 
 .cardPrice {
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 300;
   color: #173946;
@@ -190,6 +193,7 @@
 }
 
 .listName {
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 700;
   color: #173946;
@@ -198,6 +202,7 @@
 }
 
 .listPrice {
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 300;
   color: #173946;

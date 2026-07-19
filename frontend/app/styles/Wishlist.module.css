@@ -40,6 +40,7 @@
   background: #173946;
   color: #fff;
   padding: 10px 0;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -56,6 +57,7 @@
   border: 1px solid #e5e7eb;
   color: #9ca3af;
   padding: 8px 0;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 500;
   cursor: pointer;
@@ -72,13 +74,14 @@
   text-align: center;
   background: color-mix(in srgb, var(--color-cream-light) 30%, transparent);
 }
-.emptyText { font-size: 0.875rem; color: #000; }
+.emptyText { font-family: var(--font-body); font-size: 0.875rem; color: #000; }
 .shopLink {
   display: inline-block;
   margin-top: 24px;
   background: #173946;
   color: #fff;
   padding: 10px 24px;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;

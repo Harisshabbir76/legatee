@@ -54,7 +54,7 @@
 
 .transparent {
   background: transparent;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid rgb(255 255 255 / 0.35);
 }
 
 .scrolled {
@@ -142,7 +142,7 @@
 }
 
 .logoImg {
-  height: 35px;
+  height: 30px;
   width: auto;
   display: block;
   object-fit: contain;

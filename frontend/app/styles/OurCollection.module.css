@@ -1,6 +1,6 @@
 .section {
   background: #F5FBFF;
-  padding: 25px 24px 72px;
+  padding: 50px 24px 72px;
 }
 
 .header {
@@ -26,10 +26,11 @@
   font-size: 24px;
   font-weight: 400;
   letter-spacing: 0.06em;
-  margin: 0 0 16px;
+  margin: 0 0 10px;
 }
 
 .copy {
+  font-family: var(--font-body);
   color: #000000;
   font-size: 12px;
   font-weight: 300;
@@ -91,6 +92,7 @@
 }
 
 .cardName {
+  font-family: var(--font-body);
   display: block;
   color: #fff;
   font-size: 13px;
@@ -116,6 +118,7 @@
 }
 
 .cardDescription {
+  font-family: var(--font-body);
   color: rgba(255,255,255,0.88);
   font-size: 12px;
   font-weight: 300;
@@ -124,6 +127,7 @@
 }
 
 .cardCta {
+  font-family: var(--font-body);
   color: #fff;
   font-size: 11px;
   font-weight: 400;
@@ -134,6 +138,7 @@
 }
 
 .empty {
+  font-family: var(--font-body);
   text-align: center;
   color: #173946;
   font-size: 13px;
@@ -153,7 +158,11 @@
   }
 
   .title {
-    font-size: 24px;
+    font-size: 18px;
+  }
+  .copy{
+    font-size: 12px;
+    max-width: 272px;
   }
 }
 

@@ -53,6 +53,7 @@
 }
 
 .label {
+  font-family: var(--font-body);
   font-size: 15px;
   font-weight: 400;
   color: #173946;
@@ -239,9 +240,144 @@
   }
 
   .layout {
-    grid-template-columns: 72px auto 72px;
-    max-width: 340px;
+    grid-template-columns: 90px auto 90px;
+    max-width: 400px;
     column-gap: 0;
+  }
+
+  .col {
+    gap: 18px;
+    margin: 0 -40px;
+  }
+
+  .bottleWrap {
+    width: 180px;
+  }
+
+  .item {
+    gap: 3px;
+  }
+
+  .arrow {
+    width: 20px;
+    height: 16px;
+  }
+
+  .label {
+    font-size: 9px;
+    line-height: 1.2;
+  }
+
+  .labelTopLeft {
+    max-width: 100px;
+    margin-top: -12px;
+  }
+
+  .labelBottomLeft {
+    max-width: 100px;
+    margin-top: 22px;
+  }
+
+  .labelTopRight {
+    max-width: 100px;
+  }
+
+  .labelBottomRight {
+    max-width: 100px;
+  }
+
+  .labelBottom {
+    max-width: 110px;
+  }
+
+  .bottomItem .arrow {
+    width: 12px;
+    height: 20px;
+  }
+}
+
+/* ── Mobile portrait (480px) ── */
+@media (max-width: 480px) {
+  .section {
+    padding: 16px 12px 32px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .layout {
+    grid-template-columns: 80px auto 80px;
+    max-width: 350px;
+    column-gap: 0;
+  }
+
+  .col {
+    gap: 16px;
+    margin: 0 -35px;
+  }
+
+  .bottleWrap {
+    width: 160px;
+  }
+
+  .item {
+    gap: 3px;
+  }
+
+  .arrow {
+    width: 18px;
+    height: 14px;
+  }
+
+  .label {
+    font-size: 8px;
+    line-height: 1.15;
+  }
+
+  .labelTopLeft {
+    max-width: 85px;
+    margin-top: -10px;
+  }
+
+  .labelBottomLeft {
+    max-width: 85px;
+    margin-top: 18px;
+  }
+
+  .labelTopRight {
+    max-width: 85px;
+  }
+
+  .labelBottomRight {
+    max-width: 85px;
+  }
+
+  .labelBottom {
+    max-width: 95px;
+  }
+
+  .bottomItem .arrow {
+    width: 12px;
+    height: 18px;
+  }
+}
+
+/* ── Small mobile (400px) ── */
+@media (max-width: 400px) {
+  .section {
+    padding: 14px 10px 28px;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+
+  .layout {
+    grid-template-columns: 70px auto 70px;
+    max-width: 300px;
   }
 
   .col {
@@ -263,48 +399,52 @@
   }
 
   .label {
-    font-size: 8px;
-    line-height: 1.2;
+    font-size: 7px;
+    line-height: 1.1;
   }
 
   .labelTopLeft {
-    max-width: 80px;
-    margin-top: -10px;
+    max-width: 75px;
+    margin-top: -8px;
   }
 
   .labelBottomLeft {
-    max-width: 80px;
-    margin-top: 18px;
+    max-width: 75px;
+    margin-top: 16px;
   }
 
   .labelTopRight {
-    max-width: 80px;
+    max-width: 75px;
   }
 
   .labelBottomRight {
-    max-width: 80px;
+    max-width: 75px;
   }
 
   .labelBottom {
-    max-width: 95px;
+    max-width: 80px;
+  }
+
+  .bottomItem .arrow {
+    width: 10px;
+    height: 16px;
   }
 }
 
-/* ── Mobile portrait (480px) ── */
-@media (max-width: 480px) {
+/* ── Very small devices (340px) ── */
+@media (max-width: 340px) {
   .section {
-    padding: 16px 12px 32px;
+    padding: 12px 8px 24px;
   }
 
   .title {
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 16px;
+    margin-bottom: 16px;
   }
 
   .layout {
     grid-template-columns: 60px auto 60px;
-    max-width: 300px;
-    column-gap: 0;
+    max-width: 260px;
   }
 
   .col {
@@ -326,53 +466,57 @@
   }
 
   .label {
-    font-size: 7px;
-    line-height: 1.15;
+    font-size: 6px;
+    line-height: 1.1;
   }
 
   .labelTopLeft {
-    max-width: 68px;
-    margin-top: -8px;
+    max-width: 65px;
+    margin-top: -6px;
   }
 
   .labelBottomLeft {
-    max-width: 68px;
+    max-width: 65px;
     margin-top: 14px;
   }
 
   .labelTopRight {
-    max-width: 68px;
+    max-width: 65px;
   }
 
   .labelBottomRight {
-    max-width: 68px;
+    max-width: 65px;
   }
 
   .labelBottom {
-    max-width: 80px;
+    max-width: 70px;
+  }
+
+  .bottomItem .arrow {
+    width: 8px;
+    height: 14px;
   }
 }
 
-/* ── Small mobile (380px) ── */
-@media (max-width: 380px) {
+/* ── Extremely small (280px) ── */
+@media (max-width: 280px) {
   .section {
-    padding: 12px 8px 24px;
+    padding: 10px 6px 20px;
   }
 
   .title {
-    font-size: 15px;
-    margin-bottom: 16px;
+    font-size: 14px;
+    margin-bottom: 14px;
   }
 
   .layout {
-    grid-template-columns: 52px auto 52px;
-    max-width: 260px;
-    column-gap: 0;
+    grid-template-columns: 50px auto 50px;
+    max-width: 220px;
   }
 
   .col {
     gap: 10px;
-    margin: 0 -25px;
+    margin: 0 -20px;
   }
 
   .bottleWrap {
@@ -389,93 +533,30 @@
   }
 
   .label {
-    font-size: 6px;
-    line-height: 1.1;
-  }
-
-  .labelTopLeft {
-    max-width: 58px;
-    margin-top: -6px;
-  }
-
-  .labelBottomLeft {
-    max-width: 58px;
-    margin-top: 12px;
-  }
-
-  .labelTopRight {
-    max-width: 58px;
-  }
-
-  .labelBottomRight {
-    max-width: 58px;
-  }
-
-  .labelBottom {
-    max-width: 68px;
-  }
-}
-
-/* ── Very small devices (320px) ── */
-@media (max-width: 320px) {
-  .section {
-    padding: 10px 6px 16px;
-  }
-
-  .title {
-    font-size: 12px;
-    margin-bottom: 12px;
-  }
-
-  .layout {
-    grid-template-columns: 46px auto 46px;
-    max-width: 220px;
-    column-gap: 0;
-  }
-
-  .col {
-    gap: 8px;
-    margin: 0 -20px;
-  }
-
-  .bottleWrap {
-    width: 85px;
-  }
-
-  .item {
-    gap: 1px;
-  }
-
-  .arrow {
-    width: 10px;
-    height: 8px;
-  }
-
-  .label {
     font-size: 5px;
     line-height: 1.1;
   }
 
   .labelTopLeft {
-    max-width: 48px;
+    max-width: 55px;
     margin-top: -5px;
   }
 
   .labelBottomLeft {
-    max-width: 48px;
-    margin-top: 10px;
+    max-width: 55px;
+    margin-top: 12px;
   }
 
   .labelTopRight {
-    max-width: 48px;
+    max-width: 55px;
   }
 
   .labelBottomRight {
-    max-width: 48px;
+    max-width: 55px;
   }
 
   .labelBottom {
-    max-width: 56px;
+    max-width: 60px;
   }
 
   .bottomItem {
@@ -484,70 +565,7 @@
 
   .bottomItem .arrow {
     width: 6px;
-    height: 10px;
-  }
-}
-
-/* ── Extremely small (below 320px) ── */
-@media (max-width: 280px) {
-  .section {
-    padding: 8px 4px 12px;
-  }
-
-  .title {
-    font-size: 10px;
-    margin-bottom: 10px;
-  }
-
-  .layout {
-    grid-template-columns: 38px auto 38px;
-    max-width: 180px;
-  }
-
-  .col {
-    gap: 6px;
-    margin: 0 -15px;
-  }
-
-  .bottleWrap {
-    width: 70px;
-  }
-
-  .arrow {
-    width: 8px;
-    height: 6px;
-  }
-
-  .label {
-    font-size: 4px;
-    line-height: 1;
-  }
-
-  .labelTopLeft {
-    max-width: 40px;
-    margin-top: -4px;
-  }
-
-  .labelBottomLeft {
-    max-width: 40px;
-    margin-top: 8px;
-  }
-
-  .labelTopRight {
-    max-width: 40px;
-  }
-
-  .labelBottomRight {
-    max-width: 40px;
-  }
-
-  .labelBottom {
-    max-width: 46px;
-  }
-
-  .bottomItem .arrow {
-    width: 5px;
-    height: 8px;
+    height: 12px;
   }
 }
 

@@ -64,6 +64,12 @@
 @media (max-width: 640px) {
   .heading {
     font-size: 20px;
+    line-height: 1.4;
+  }
+  .copy{
+    font-size: 12px;
+    max-width: 260px;
+    opacity: 1;
   }
 
   .monogram {

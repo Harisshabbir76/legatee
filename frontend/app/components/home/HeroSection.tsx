@@ -10,6 +10,12 @@ import { resolveText, resolveStyle } from "@/lib/resolve-text";
 import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
 
+function omitCssOverrides(style: React.CSSProperties): React.CSSProperties {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { fontSize, maxWidth, ...rest } = style as React.CSSProperties & { fontSize?: unknown; maxWidth?: unknown };
+  return rest;
+}
+
 export default function HeroSection({ content }: { content?: HomepageData["hero"] }) {
   const hero = content ?? {} as HomepageData["hero"];
   const { lang } = useLanguage();
@@ -22,11 +28,11 @@ export default function HeroSection({ content }: { content?: HomepageData["hero"
       }
       <div className={styles.overlay} />
       <div className={styles.content}>
-        <h1 className={styles.title} style={{ whiteSpace: "pre-wrap", ...resolveStyle(hero.title, lang) as React.CSSProperties }} data-editable="hero.title"
+        <h1 className={styles.title} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.title, lang) as React.CSSProperties) }} data-editable="hero.title"
           dangerouslySetInnerHTML={{ __html: resolveText(hero.title, lang) || t.home.heroTitle }} />
-        <p className={styles.copy} style={{ whiteSpace: "pre-wrap", ...resolveStyle(hero.copy, lang) as React.CSSProperties }} data-editable="hero.copy"
+        <p className={styles.copy} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.copy, lang) as React.CSSProperties) }} data-editable="hero.copy"
           dangerouslySetInnerHTML={{ __html: resolveText(hero.copy, lang) || t.home.heroCopy }} />
-        <Link href={hero.buttonLink || "/shop"} className={styles.button} style={{ whiteSpace: "pre-wrap", ...resolveStyle(hero.buttonText, lang) as React.CSSProperties }} data-editable="hero.buttonText"
+        <Link href={hero.buttonLink || "/shop"} className={styles.button} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.buttonText, lang) as React.CSSProperties) }} data-editable="hero.buttonText"
           dangerouslySetInnerHTML={{ __html: resolveText(hero.buttonText, lang) || t.home.heroButton }} />
       </div>
     </section>

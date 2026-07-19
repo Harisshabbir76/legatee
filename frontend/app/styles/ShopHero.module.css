@@ -181,7 +181,7 @@
   }
   
   .copy {
-    font-size: 9px;
+    font-size: 12px;
     max-width: 300px;
     margin-bottom: 22px;
     line-height: 1.6;
@@ -214,8 +214,8 @@
   }
   
   .copy {
-    font-size: 8px;
-    max-width: 260px;
+    font-size: 11px;
+    max-width: 300px;
     margin-bottom: 18px;
     line-height: 1.55;
   }

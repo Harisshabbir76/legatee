@@ -40,6 +40,12 @@ body {
   direction: inherit;
 }
 
+/* Force brand font inheritance on all elements — prevents UA stylesheet
+   serif fallback when CSS modules set other properties but not font-family. */
+*, *::before, *::after {
+  font-family: inherit;
+}
+
 @keyframes slideInLeft {
   from {
     transform: translateX(-100%);

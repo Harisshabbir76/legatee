@@ -107,6 +107,10 @@
     line-height: 1.1;
     margin-top: 60px;
   }
+  .copy{
+    font-size: 13px;
+    
+  }
 }
 
 /* ── Mobile landscape & small tablets (640px - 767px) ── */
@@ -171,7 +175,7 @@
   }
   
   .title {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.3;
     margin-top: 24px;
   }
@@ -325,3 +329,23 @@
     padding: 5px 30px;
   }
 }
+
+
+@media (max-width: 420px) {
+  .title {
+    font-size: 24px;
+    max-width: 280px;
+    line-height: 1.4;
+  }
+  
+  .copy {
+    font-size: 12px;
+    max-width: 350px;
+  }
+  
+  .button{
+    padding: 4px 20px;
+  }
+
+}
+

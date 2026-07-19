@@ -5,6 +5,7 @@
 }
 
 .breadcrumb {
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 300;
   color: #173946;
@@ -35,6 +36,7 @@
 }
 
 .subtitle {
+  font-family: var(--font-body);
   text-align: center;
   font-size: 12px;
   font-weight: 300;
@@ -87,7 +89,7 @@
   cursor: pointer;
   font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.2;
   padding: 8px 19px 8px 13px;
   text-align: left;
@@ -107,6 +109,7 @@
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 400;
+  opacity:1;
   line-height: 1.6;
 }
 
@@ -142,6 +145,7 @@
 }
 
 .helpCopy {
+  font-family: var(--font-body);
   max-width: 540px;
   margin: 27px auto 31px;
   color: var(--color-ink);
@@ -158,6 +162,7 @@
   justify-content: center;
   background-color: #173946;
   color: #FFFCF8;
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -520,12 +525,12 @@
 
   .title {
     font-size: 15px;
-    margin-top: 16px;
+    margin-top: 30px;
     letter-spacing: 0.01em;
   }
 
   .subtitle {
-    font-size: 10px;
+    font-size: 11px;
     max-width: 330px;
     margin: 8px auto 16px;
   }
@@ -535,14 +540,14 @@
   }
 
   .question {
-    font-size: 10px;
+    font-size: 11px;
     min-height: 28px;
     padding: 4px 8px 4px 6px;
     border-width: 1px;
   }
 
   .answer {
-    font-size: 10px;
+    font-size: 11px;
     padding: 8px 8px 10px 6px;
     border-width: 1px;
     border-top: none;
@@ -564,7 +569,7 @@
   }
 
   .helpCopy {
-    font-size: 10px;
+    font-size: 12px;
     max-width: 300px;
     margin: 12px auto 16px;
   }
@@ -713,4 +718,9 @@
     background: #173946;
     color: #fff;
   }
+}
+
+
+.question{
+  font-weight: 300px;
 }
