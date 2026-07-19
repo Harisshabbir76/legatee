@@ -112,12 +112,6 @@
     
   }
 }
-@media (max-width: 1023px) {
-  
-  .copy {
-    font-size: 13px;
-  }
-}
 
 /* ── Mobile landscape & small tablets (640px - 767px) ── */
 @media (max-width: 767px) {
