@@ -349,3 +349,9 @@
 
 }
 
+@media (min-width: 1024px) {
+  
+  .copy {
+    font-size: 12px;
+  }
+}
