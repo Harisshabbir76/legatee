@@ -175,3 +175,19 @@
     font-size: 28px;
   }
 }
+
+
+@media(min-width:1400px){
+  .copy{
+    font-size: 15px;
+  }
+  .cardName{
+    font-size: 15px;
+  }
+  .cardDescription{
+    font-size: 15px;
+  }
+  .cardCta{
+    font-size: 15px;
+  }
+}

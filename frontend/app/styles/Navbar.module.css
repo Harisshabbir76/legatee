@@ -759,3 +759,11 @@
     height: 56px;
   }
 }
+
+
+
+@media(min-width:1400px){
+  .leftLinks, .rightLinks, .navLinkDropdown, .dropdownLink{
+    font-size: 13px;
+  }
+}

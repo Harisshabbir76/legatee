@@ -94,12 +94,12 @@ export default function WishlistSidebar() {
                     <Link
                       href={productPath(product)}
                       onClick={closeWishlist}
-                      className="font-body font-semibold text-xs uppercase tracking-wider block truncate"
+                      className="font-body font-semibold text-m uppercase tracking-wider block truncate"
                       style={{color:"#000"}}
                     >
                       {product.name}
                     </Link>
-                    <p className="mt-1 text-xs font-semibold" style={{color:"#000"}}>
+                    <p className="mt-1 text-s font-semibold" style={{color:"#000"}}>
                       {product.price.toLocaleString("en-US")} AED
                     </p>
 

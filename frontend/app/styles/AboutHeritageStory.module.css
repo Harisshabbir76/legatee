@@ -16,20 +16,19 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 1.25;
-  margin: 0 0 40px;
+  margin: 0 auto 40px;
   max-width: 500px;
   letter-spacing: 0.5px;
   text-align: center;
-  margin-left: 80px;
 }
 
 .intro {
   color: black;
   font-size: 12px;
   font-weight: 300;
-  margin: 0 0 48px;
+  margin: 0 auto 48px;
   max-width: 550px;
-  margin-left: 80px;
+  text-align: center;
 }
 
 .manWrap {
@@ -48,13 +47,13 @@
   font-size: 12px;
   font-weight: 300;
   line-height: 1.8;
-  margin: 0 0 64px;
+  margin: 0 auto 64px;
   max-width: 650px;
-  margin-left: 80px;
+  text-align: center;
 }
 
 .vision strong {
-  font-weight: 600;
+  font-weight: 500;
   color: #173946;
 }
 
@@ -84,8 +83,9 @@
   color: #000000;
   font-size: 12px;
   font-weight: 300;
-  margin: 0 0 24px;
+  margin: 0 auto 24px;
   max-width: 850px;
+  text-align: center;
 }
 
 .copy:last-child {
@@ -93,7 +93,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════ */
-/* RESPONSIVE: All devices                                      */
+/* RESPONSIVE: All devices                                        */
 /* ═══════════════════════════════════════════════════════════════ */
 
 /* ── Large screens (1400px and above) ── */
@@ -105,13 +105,11 @@
   .heading {
     font-size: 22px;
     max-width: 550px;
-    margin-left: 100px;
   }
 
   .intro {
     font-size: 13px;
     max-width: 600px;
-    margin-left: 100px;
   }
 
   .manWrap {
@@ -121,7 +119,6 @@
   .vision {
     font-size: 13px;
     max-width: 700px;
-    margin-left: 100px;
   }
 
   .wideImageWrap {
@@ -144,14 +141,12 @@
   .heading {
     font-size: 16px;
     max-width: 400px;
-    margin-left: 40px;
     margin-bottom: 32px;
   }
 
   .intro {
     font-size: 11px;
     max-width: 450px;
-    margin-left: 40px;
     margin-bottom: 36px;
   }
 
@@ -163,7 +158,6 @@
   .vision {
     font-size: 11px;
     max-width: 500px;
-    margin-left: 40px;
     margin-bottom: 48px;
     line-height: 1.7;
   }
@@ -193,14 +187,12 @@
   .heading {
     font-size: 15px;
     max-width: 350px;
-    margin-left: 20px;
     margin-bottom: 28px;
   }
 
   .intro {
     font-size: 11px;
     max-width: 400px;
-    margin-left: 20px;
     margin-bottom: 32px;
   }
 
@@ -212,7 +204,6 @@
   .vision {
     font-size: 11px;
     max-width: 450px;
-    margin-left: 20px;
     margin-bottom: 40px;
     line-height: 1.7;
   }
@@ -246,17 +237,13 @@
   .heading {
     font-size: 14px;
     max-width: 300px;
-    margin-left: 0;
-    margin: 0 auto 24px;
-    text-align: center;
+    margin-bottom: 24px;
   }
 
   .intro {
     font-size: 10px;
     max-width: 350px;
-    margin-left: 0;
-    margin: 0 auto 28px;
-    text-align: center;
+    margin-bottom: 28px;
   }
 
   .manWrap {
@@ -267,9 +254,7 @@
   .vision {
     font-size: 10px;
     max-width: 380px;
-    margin-left: 0;
-    margin: 0 auto 32px;
-    text-align: center;
+    margin-bottom: 32px;
     line-height: 1.6;
   }
 
@@ -285,8 +270,7 @@
   .copy {
     font-size: 10px;
     max-width: 400px;
-    margin: 0 auto 16px;
-    text-align: center;
+    margin-bottom: 16px;
   }
 }
 
@@ -452,17 +436,14 @@
 
   .heading {
     font-size: 14px;
-    margin-left: 40px;
   }
 
   .intro {
     font-size: 10px;
-    margin-left: 40px;
   }
 
   .vision {
     font-size: 10px;
-    margin-left: 40px;
   }
 }
 
@@ -490,20 +471,28 @@
   }
 }
 
-
-
-@media (max-width: 600px){
-  .intro{
+@media (max-width: 600px) {
+  .intro {
     font-size: 12px;
-
   }
-  .heading{
+  .heading {
     font-size: 15px;
   }
-  .vision{
+  .vision {
     font-size: 12px;
   }
-  .copy{
+  .copy {
     font-size: 12px;
+  }
+}
+
+
+
+@media(min-width:1400px){
+  .copy, .intro, .vision{
+        font-size: 15px;
+  }
+  .heading{
+    line-height: 1.4;
   }
 }

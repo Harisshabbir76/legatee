@@ -5,12 +5,23 @@ import { useState } from "react";
 import styles from "../../styles/Legal.module.css";
 import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
+import { resolveText, resolveStyle } from "@/lib/resolve-text"; // resolveStyle used for hero blocks
+import type { LegalPageData } from "@/lib/api";
 
-export default function Legal() {
+interface Props {
+  content?: LegalPageData | null;
+}
+
+export default function Legal({ content }: Props = {}) {
   const [activeTab, setActiveTab] = useState(0);
   const { lang } = useLanguage();
   const t = getT(lang);
-  const tab = t.legal.tabsContent[activeTab];
+
+  const titleText  = content?.heroTitle ? resolveText(content.heroTitle, lang) || t.legal.title : t.legal.title;
+  const titleStyle = content?.heroTitle ? resolveStyle(content.heroTitle, lang) as React.CSSProperties : {};
+  const subText    = content?.heroSubtitle ? resolveText(content.heroSubtitle, lang) || t.legal.subtitle : t.legal.subtitle;
+  const subStyle   = content?.heroSubtitle ? resolveStyle(content.heroSubtitle, lang) as React.CSSProperties : {};
+
 
   return (
     <section className={styles.section}>
@@ -21,8 +32,18 @@ export default function Legal() {
       </p>
 
       <div className={styles.header}>
-        <h1 className={styles.title}>{t.legal.title}</h1>
-        <p className={styles.subtitle}>{t.legal.subtitle}</p>
+        <h1
+          className={styles.title}
+          data-editable="heroTitle"
+          style={{ whiteSpace: "pre-wrap", ...titleStyle }}
+          dangerouslySetInnerHTML={{ __html: titleText }}
+        />
+        <p
+          className={styles.subtitle}
+          data-editable="heroSubtitle"
+          style={{ whiteSpace: "pre-wrap", ...subStyle }}
+          dangerouslySetInnerHTML={{ __html: subText }}
+        />
       </div>
 
       <div className={styles.dividerLine} />
@@ -35,6 +56,7 @@ export default function Legal() {
               className={`${styles.tab} ${activeTab === i ? styles.activeTab : ""}`}
               onClick={() => setActiveTab(i)}
               type="button"
+              data-legal-tab={i}
             >
               {t.legal.tabs[i]}
               <span className={`${styles.tabArrow} no-rtl`}>{activeTab === i ? "▼" : "▶"}</span>
@@ -43,7 +65,7 @@ export default function Legal() {
         </div>
 
         <div className={styles.content}>
-          {tab.sections.map((sec, si) => (
+          {t.legal.tabsContent[activeTab]?.sections.map((sec, si) => (
             <div className={styles.policyBlock} key={si}>
               <h2 className={styles.policyTitle}>{sec.title}</h2>
               {sec.lines.map((line, li) => (

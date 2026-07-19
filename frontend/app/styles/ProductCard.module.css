@@ -36,7 +36,7 @@
   margin-top: 16px;
   color: #3B1814;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .price {
@@ -78,7 +78,7 @@
   font-family: var(--font-body);
   color: #3B1814;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .listPrice {
@@ -304,7 +304,7 @@
 .outOfStockText {
   font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #dc2626;
@@ -322,3 +322,5 @@
     font-size: 9px;
   }
 }
+
+

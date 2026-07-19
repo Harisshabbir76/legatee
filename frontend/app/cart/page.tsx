@@ -41,12 +41,12 @@ export default function CartPage() {
 
                   <div className="min-w-[10rem] flex-1">
                     <p className="font-medium" style={{color:"#000"}}>{item.name}</p>
-                    <p className="text-xs" style={{color:"#000"}}>
+                    <p className="text-m" style={{color:"#000"}}>
                       {[item.size, ...item.variants.map((v) => `${v.name}: ${v.value}`)]
                         .filter(Boolean)
                         .join(" · ")}
                     </p>
-                    <p className="mt-1 text-sm" style={{color:"#000"}}>
+                    <p className="mt-1 text-m" style={{color:"#000"}}>
                       {item.price.toLocaleString("en-US")} AED
                     </p>
                   </div>
@@ -60,7 +60,7 @@ export default function CartPage() {
                     >
                       &minus;
                     </button>
-                    <span className="w-6 text-center text-sm" style={{color:"#000"}}>{item.quantity}</span>
+                    <span className="w-6 text-center text-m" style={{color:"#000"}}>{item.quantity}</span>
                     <button
                       type="button"
                       onClick={() => updateQuantity(item.key, item.quantity + 1)}
@@ -71,14 +71,14 @@ export default function CartPage() {
                     </button>
                   </div>
 
-                  <p className="w-24 text-right text-sm" style={{color:"#000"}}>
+                  <p className="w-24 text-right text-s" style={{color:"#000"}}>
                     {(item.price * item.quantity).toLocaleString("en-US")} AED
                   </p>
 
                   <button
                     type="button"
                     onClick={() => removeItem(item.key)}
-                    className="text-xs hover:text-red-600"
+                    className="text-m hover:text-red-600"
                     style={{color:"#000"}}
                   >
                     {t.cart.remove}

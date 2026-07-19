@@ -45,7 +45,7 @@
 .label {
   font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.04em;
   color: #000000;
   margin: 0 0 8px;
@@ -167,4 +167,13 @@
     width: 40px !important;
     height: 40px !important;
   }
+}
+
+
+@media(min-width:1400px){
+  .description{
+    font-size: 15px;
+    max-width: 700px;
+  }
+  
 }

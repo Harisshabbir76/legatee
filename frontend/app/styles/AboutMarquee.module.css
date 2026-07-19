@@ -39,3 +39,10 @@
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+
+@media(min-width:1400px){
+  .word{
+        font-size: 15px;
+  }
+}

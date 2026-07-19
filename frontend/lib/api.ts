@@ -332,6 +332,7 @@ export interface LegalTab {
 
 export interface LegalPageData {
   heroTitle: ContentBlock;
+  heroSubtitle?: ContentBlock;
   heroImage?: string;
   tabs: LegalTab[];
 }

@@ -84,15 +84,15 @@ export default function CartSidebar() {
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <p className="font-body text-xs font-semibold uppercase tracking-wider truncate" style={{color:"#000"}}>
+                    <p className="font-body text-l font-semibold uppercase tracking-wider truncate" style={{color:"#000"}}>
                       {item.name}
                     </p>
-                    <p className="text-2xs mt-0.5" style={{color:"#000"}}>
+                    <p className="text-s mt-0.5" style={{color:"#000"}}>
                       {[item.size, ...item.variants.map((v) => `${v.name}: ${v.value}`)]
                         .filter(Boolean)
                         .join(" / ")}
                     </p>
-                    <p className="mt-1 text-xs font-semibold" style={{color:"#000"}}>
+                    <p className="mt-1 text-m font-semibold" style={{color:"#000"}}>
                       {item.price.toLocaleString("en-US")} AED
                     </p>
 
@@ -103,7 +103,7 @@ export default function CartSidebar() {
                         <button
                           type="button"
                           onClick={() => updateQuantity(item.key, item.quantity - 1)}
-                          className="font-semibold text-xs cursor-pointer" style={{color:"#000"}}
+                          className="font-semibold text-s cursor-pointer" style={{color:"#000"}}
                         >
                           &minus;
                         </button>
@@ -144,7 +144,7 @@ export default function CartSidebar() {
             */}
 
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold" style={{color:"#000"}}>{t.cart.estimatedTotal}</span>
+              <span className="text-m font-semibold" style={{color:"#000"}}>{t.cart.estimatedTotal}</span>
               <span className="text-base font-bold" style={{color:"#000"}}>
                 {subtotal.toLocaleString("en-US")} AED
               </span>

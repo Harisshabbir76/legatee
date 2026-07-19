@@ -81,3 +81,10 @@
     gap: 10px;
   }
 }
+
+@media(min-width:1400px){
+  .copy{
+        font-size: 15px;
+        max-width: 380px;
+  }
+}

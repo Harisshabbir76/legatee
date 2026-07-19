@@ -529,3 +529,27 @@
     font-size: 9px;
   }
 }
+
+
+@media(min-width:1400px){
+  .copy{
+    font-size: 15px;
+    max-width: 380px;
+  }
+  .navLink{
+    font-size: 13px;
+  }
+  .copyright{
+    font-size: 13px;
+  }
+  .langSelect{
+    font-size: 13px;
+  }
+  .langOption{
+    font-size: 13px;
+  }
+  .socialLink svg{
+    width: 22px;
+    height: 22px;
+  }
+}

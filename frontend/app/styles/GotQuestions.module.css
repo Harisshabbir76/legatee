@@ -119,3 +119,20 @@
     letter-spacing: 0;
   }
 }
+
+
+@media(min-width:1400px){
+  .copy{
+    font-size: 15px;
+    max-width: 550px;
+  }
+  .summary{
+    font-size: 15px;
+  }
+  .answer{
+    font-size: 15px;
+  }
+  .faqBtn{
+    font-size: 15px;
+  }
+}

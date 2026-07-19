@@ -376,3 +376,10 @@
     background: #173946;
   }
 }
+
+
+@media(min-width:1400px){
+  .copy{
+    font-size: 15px;
+  }
+}

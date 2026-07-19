@@ -106,7 +106,7 @@
   padding: 6px 14px 4px;
   font-family: var(--font-body);
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.06em;
   color: color-mix(in srgb, var(--color-ink) 40%, transparent);
   text-transform: uppercase;
@@ -132,7 +132,7 @@
 }
 
 .sortOptionActive {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-maroon);
 }
 
@@ -165,7 +165,7 @@
 .filterTitle {
   font-family: var(--font-body);
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.08em;
   color: var(--color-ink);
 }
@@ -209,7 +209,7 @@
 .filterSectionTitle {
   font-family: var(--font-body);
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.08em;
   color: color-mix(in srgb, var(--color-ink) 50%, transparent);
   margin-bottom: 10px;
@@ -555,3 +555,5 @@
 @media (prefers-reduced-motion: reduce) {
   .toolButton, .viewButton, .sortOption, .sizeChip { transition: none; }
 }
+
+

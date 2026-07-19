@@ -5,6 +5,7 @@ import styles from "../../styles/ContactUs.module.css";
 import formStyles from "../../styles/ContactUsForm.module.css";
 import type { ContactPageData, ContentBlock } from "@/lib/api";
 import { resolveText, resolveStyle } from "@/lib/resolve-text";
+import { API_URL } from "@/lib/api-client";
 import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
 
@@ -31,7 +32,7 @@ export default function ContactUsForm({ content }: Props) {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contactpage/send`, {
+      const res = await fetch(`${API_URL}/api/contactpage/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, message }),

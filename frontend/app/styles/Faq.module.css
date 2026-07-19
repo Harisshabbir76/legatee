@@ -32,7 +32,7 @@
 
 .breadcrumbCurrent {
   color: #173946;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .subtitle {
@@ -723,4 +723,16 @@
 
 .question{
   font-weight: 300px;
+}
+
+
+@media(min-width:1400px){
+  .subtitle, .question, .answer {
+    font-size: 15px;
+  }
+  .helpCopy{
+    font-size: 15px;
+    max-width:650px;
+  }
+
 }

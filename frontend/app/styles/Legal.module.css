@@ -31,7 +31,7 @@
 
 .breadcrumbCurrent {
   color: #173946;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .header {
@@ -130,16 +130,20 @@
 .policyTitle {
   font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 600;
-  color: #000000;
+  font-weight: 500;
+  color: #1F150F;
   margin: 0 0 8px;
   letter-spacing: 0.02em;
+  line-height: 1.75;
 }
 
 .policyLine {
   font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  color: #1F150F;
   margin: 0 0 2px;
-  color: #000000;
+  line-height: 1.75;
 }
 
 /* Responsive Styles */
