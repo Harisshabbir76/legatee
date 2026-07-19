@@ -33,7 +33,7 @@
 }
 
 .iconError {
-  background: #8b1a1a;
+  background: #173946;
 }
 
 .modalTitle {
@@ -58,7 +58,7 @@
   height: 36px;
   padding: 0 28px;
   border: 0;
-  background: #3B1814;
+  background: #173946;
   color: #fff;
   cursor: pointer;
   font-family: var(--font-body);
@@ -68,5 +68,5 @@
 }
 
 .modalBtn:hover {
-  background: #5a2420;
+  background: #1f4d62;
 }

@@ -17,7 +17,7 @@ export default async function ProductCatalogPage() {
       actions={
         <Link
           href="/legatee/admin/panel/products/new"
-          className="rounded-md bg-maroon px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+          className="rounded-md bg-[#173946] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
         >
           Add product
         </Link>
