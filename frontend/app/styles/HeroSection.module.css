@@ -101,17 +101,18 @@
 }
 
 /* ── Large tablets / small laptops (1024px+) ── */
-@media (min-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1280px) {
   .title {
     font-size: 35px;
     line-height: 1.1;
     margin-top: 60px;
   }
   .copy{
-    font-size: 18px;
+    font-size: 14px;
     
   }
 }
+
 
 /* ── Mobile landscape & small tablets (640px - 767px) ── */
 @media (max-width: 767px) {
