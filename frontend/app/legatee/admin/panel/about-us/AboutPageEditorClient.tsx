@@ -526,8 +526,8 @@ export default function AboutPageEditorClient({ initialContent, initialFooterCon
           <LanguageProvider defaultLang={previewLang}>
             <div style={{ pointerEvents: "none" }}><Navbar /></div>
 
-            <AboutHero     content={content.hero} />
-            <HeritageStory content={content.story} />
+            <AboutHero />
+            <HeritageStory />
 
             <div data-marquee-edit className={selMarquee ? "legatee-marquee-selected" : ""}>
               <Marquee content={content.marquee} />
