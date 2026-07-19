@@ -1,0 +1,221 @@
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 400px;
+}
+
+.background {
+  z-index: -10;
+  object-fit: cover;
+  object-position: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  background: color-mix(in srgb, var(--color-maroon)10%, transparent);
+}
+
+.content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px 0;
+  text-align: center;
+}
+
+.title {
+  color: #FFFCF8;
+  font-family: var(--font-heading);
+  font-size: 25px;
+  font-weight: 500;
+  margin-top: 140px;
+}
+
+.insetWrap {
+  position: relative;
+  z-index: 1;
+  width: 100px;
+  margin: -150px auto 0;
+  overflow: hidden;
+}
+
+.insetImage {
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+
+/* Large screens (1400px and above) */
+@media (min-width: 1400px) {
+  .section {
+    height: clamp(320px, 36vw, 500px);
+  }
+
+  .title {
+    font-size: 40px;
+    margin-top: 130px;
+  }
+
+  .insetWrap {
+    width: 250px;
+    margin-top: -190px;
+  }
+
+  .insetImage {
+    height: 420px;
+  }
+
+  .content {
+    padding: 50px 40px 0;
+  }
+}
+
+/* Desktops (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .title {
+    font-size: 35px;
+  }
+
+  .insetWrap {
+    width: 200px;
+    margin-top: -90px;
+  }
+
+  .insetImage {
+    height: 250px;
+  }
+}
+
+/* Tablets (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section {
+    height: 400px;
+  }
+
+  .title {
+    font-size: 30px;
+    margin-top: 130px;
+  }
+
+  .insetWrap {
+    width: 220px;
+    margin-top: -100px;
+  }
+
+  .insetImage {
+    height: 300px;
+  }
+
+  .content {
+    padding: 30px 20px 0;
+  }
+}
+
+/* Small tablets and large phones (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .section {
+    height: 400px;
+  }
+
+  .title {
+    font-size: 30px;
+    margin-top: 140px;
+    
+  }
+
+  .insetWrap {
+    width: 160px;
+    margin-top: -120px;
+  }
+
+  .insetImage {
+    height: 240px;
+  }
+
+  .content {
+    padding: 20px 16px 0;
+  }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+  .section {
+    height: 300px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-top: 120px;
+    
+  }
+
+  .insetWrap {
+    width: 130px;
+    margin-top: -100px;
+  }
+
+  .insetImage {
+    height: 180px;
+  }
+
+  .content {
+    padding: 16px 12px 0;
+  }
+}
+
+/* Very small phones (380px and below) */
+@media (max-width: 380px) {
+  .section {
+    height: 300px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-top: 120px;
+    
+  }
+
+  .insetWrap {
+    width: 100px;
+    margin-top: -80px;
+  }
+
+  .insetImage {
+    height: 140px;
+  }
+
+  .content {
+    padding: 12px 10px 0;
+  }
+}
+
+/* For extremely small screens (320px) */
+@media (max-width: 320px) {
+  .section {
+    height: 230px;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-top: 100px;
+  }
+
+  .insetWrap {
+    width: 80px;
+    margin-top: -60px;
+  }
+
+  .insetImage {
+    height: 110px;
+  }
+
+  .content {
+    padding: 10px 8px 0;
+  }
+}

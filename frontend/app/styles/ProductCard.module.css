@@ -1,0 +1,319 @@
+.card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.imageWrap {
+  overflow: hidden;
+  background: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.image {
+  width: 100%;
+  max-width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  object-fit: cover;
+  display: block;
+}
+
+.name {
+  margin-top: 16px;
+  color: #3B1814;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.price {
+  margin-top: 0px;
+  color: #3B1814;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.listCard {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, #3B1814 12%, transparent);
+}
+
+.listImageWrap {
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.listImage {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+}
+
+.listInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.listName {
+  color: #3B1814;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.listPrice {
+  color: #3B1814;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* Large screens (1400px and above) */
+@media (min-width: 1400px) {
+  .image {
+    max-width: 320px;
+    height: 320px;
+  }
+
+  .name {
+    font-size: 17px;
+    margin-top: 18px;
+  }
+
+  .price {
+    font-size: 13px;
+  }
+
+  .listImage {
+    width: 110px;
+    height: 110px;
+  }
+
+  .listName {
+    font-size: 17px;
+  }
+
+  .listPrice {
+    font-size: 13px;
+  }
+
+  .listCard {
+    gap: 24px;
+    padding: 24px 0;
+  }
+}
+
+/* Desktops (1024px - 1399px) - your original */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .image {
+    max-width: 280px;
+    height: 280px;
+  }
+
+  .name {
+    font-size: 15px;
+  }
+
+  .price {
+    font-size: 12px;
+  }
+}
+
+/* Tablets (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .image {
+    max-width: 200px;
+    height: 200px;
+  }
+
+  .name {
+    font-size: 14px;
+    margin-top: 14px;
+  }
+
+  .price {
+    font-size: 11px;
+  }
+
+  .listImage {
+    width: 80px;
+    height: 80px;
+  }
+
+  .listName {
+    font-size: 14px;
+  }
+
+  .listPrice {
+    font-size: 11px;
+  }
+
+  .listCard {
+    gap: 16px;
+    padding: 16px 0;
+  }
+}
+
+/* Small tablets and large phones (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .image {
+    max-width: 160px;
+    height: 160px;
+  }
+
+  .name {
+    font-size: 13px;
+    margin-top: 12px;
+  }
+
+  .price {
+    font-size: 11px;
+  }
+
+  .listImage {
+    width: 72px;
+    height: 72px;
+  }
+
+  .listName {
+    font-size: 13px;
+  }
+
+  .listPrice {
+    font-size: 11px;
+  }
+
+  .listCard {
+    gap: 14px;
+    padding: 14px 0;
+  }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+  .image {
+    max-width: 130px;
+    height: 130px;
+  }
+
+  .name {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  .price {
+    font-size: 10px;
+  }
+
+  .listImage {
+    width: 60px;
+    height: 60px;
+  }
+
+  .listName {
+    font-size: 12px;
+  }
+
+  .listPrice {
+    font-size: 10px;
+  }
+
+  .listCard {
+    gap: 12px;
+    padding: 12px 0;
+  }
+}
+
+/* Very small phones (380px and below) */
+@media (max-width: 380px) {
+  .image {
+    max-width: 100px;
+    height: 100px;
+  }
+
+  .name {
+    font-size: 11px;
+    margin-top: 8px;
+  }
+
+  .price {
+    font-size: 9px;
+  }
+
+  .listImage {
+    width: 50px;
+    height: 50px;
+  }
+
+  .listName {
+    font-size: 11px;
+  }
+
+  .listPrice {
+    font-size: 9px;
+  }
+
+  .listCard {
+    gap: 10px;
+    padding: 10px 0;
+  }
+}
+
+/* ── Out of stock ── */
+.imageWrap,
+.listImageWrap {
+  position: relative;
+}
+
+.outOfStockBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  border-radius: 9999px;
+  background: rgba(220, 38, 38, 0.95);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  pointer-events: none;
+}
+
+.outOfStockText {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #dc2626;
+  margin-top: 2px;
+}
+
+@media (max-width: 480px) {
+  .outOfStockBadge {
+    font-size: 8px;
+    padding: 2px 8px;
+    top: 6px;
+    left: 6px;
+  }
+  .outOfStockText {
+    font-size: 9px;
+  }
+}

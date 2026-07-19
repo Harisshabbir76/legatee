@@ -1,0 +1,133 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5fbff;
+  font-family: var(--font-body);
+  padding: 120px 24px 64px;
+}
+
+.content {
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: rgba(23, 57, 70, 0.5);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.code {
+  margin: 0 0 4px;
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: clamp(80px, 18vw, 140px);
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0.12;
+  letter-spacing: 0.05em;
+}
+
+.heading {
+  margin: 0 0 16px;
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 5vw, 38px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.06em;
+}
+
+.copy {
+  margin: 0 0 36px;
+  color: rgba(23, 57, 70, 0.65);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: #173946;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.primary:hover {
+  opacity: 0.82;
+}
+
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 32px;
+  border: 1px solid rgba(23, 57, 70, 0.4);
+  color: #173946;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.secondary:hover {
+  background: #173946;
+  color: #fff;
+}
+
+.divider {
+  width: 83vw;
+  height: 1px;
+  background: rgba(23, 57, 70, 0.2);
+  margin: 0 auto 28px;
+}
+
+.links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.link {
+  color: rgba(23, 57, 70, 0.5);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.link:hover {
+  color: #173946;
+}

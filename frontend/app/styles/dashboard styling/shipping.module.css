@@ -1,0 +1,164 @@
+/* ─────────────────────────────────────────
+   Shipping page
+   Flat shipping price form + a small
+   checkout preview. Fully responsive.
+   ───────────────────────────────────────── */
+
+.shippingPage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 1.5rem; /* 24px */
+  align-items: start;
+  max-width: 56rem; /* 896px */
+}
+
+/* ── Form card ── */
+.shippingCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* 16px */
+  border-radius: 0.5rem; /* 8px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 1.5rem; /* 24px */
+}
+
+.shippingTitle {
+  font-family: var(--font-heading);
+  font-size: 1.125rem; /* 18px */
+  font-weight: 500;
+  color: #173946;
+}
+
+.shippingHint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem; /* 12px */
+  color: rgba(23, 57, 70, 0.6);
+  line-height: 1.6;
+}
+
+.shippingField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem; /* 14px */
+  color: #173946;
+}
+
+.shippingInput {
+  width: 10rem; /* 160px */
+  max-width: 100%;
+  border-radius: 0.375rem; /* 6px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 0.5rem 0.75rem; /* 8px 12px */
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.shippingInput:focus {
+  border-color: #173946;
+}
+
+.shippingSaved {
+  font-size: 0.8125rem; /* 13px */
+  color: #16a34a;
+}
+
+.shippingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ── Checkout preview card ── */
+.shippingPreview {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #F5FBFF;
+  padding: 1.25rem 1.5rem; /* 20px 24px */
+}
+
+.shippingPreviewTitle {
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(23, 57, 70, 0.6);
+  margin-bottom: 0.75rem;
+}
+
+.shippingPreviewRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0; /* 8px */
+  font-size: 0.8125rem; /* 13px */
+  color: #173946;
+  border-bottom: 1px solid #E6F2F8;
+}
+
+.shippingPreviewTotal {
+  border-bottom: none;
+  font-weight: 600;
+  color: #173946;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+  .shippingPage {
+    gap: 1rem;
+  }
+  .shippingCard {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .shippingPage {
+    grid-template-columns: 1fr;
+  }
+  .shippingTitle {
+    font-size: 1rem; /* 16px */
+  }
+  .shippingInput {
+    width: 100%;
+  }
+  .shippingActions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .shippingCard {
+    padding: 1rem;
+  }
+  .shippingPreview {
+    padding: 1rem;
+  }
+  .shippingTitle {
+    font-size: 0.9375rem; /* 15px */
+  }
+  .shippingHint {
+    font-size: 0.6875rem; /* 11px */
+  }
+  .shippingPreviewRow {
+    font-size: 0.75rem; /* 12px */
+  }
+}
+
+@media (max-width: 360px) {
+  .shippingCard,
+  .shippingPreview {
+    padding: 0.75rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .shippingInput {
+    min-height: 44px;
+  }
+}

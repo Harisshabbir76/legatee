@@ -1,0 +1,1040 @@
+.page {
+  background: #ffffff;
+  color: #231d1b;
+}
+
+.heroOuter {
+  position: relative;
+  padding-top: 160px;
+  padding-bottom: 0;
+}
+
+.heroSection {
+  width: min(820px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 0 0 100px;
+}
+
+.breadcrumb {
+  position: absolute;
+  top: 110px;
+  left: 53px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.breadcrumbLink {
+  color: rgba(23, 57, 70, 0.45);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.2s;
+}
+
+.breadcrumbLink:hover {
+  color: #173946;
+}
+
+.breadcrumbSep {
+  color: rgba(23, 57, 70, 0.45);
+  font-size: 10px;
+}
+
+.breadcrumbCurrent {
+  color: #173946;
+  font-weight: 600;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainImageWrap {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.mainImage {
+  width: auto;
+  height: 520px;
+  max-width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+}
+
+
+.thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  margin-top: 54px;
+}
+
+/* Slider wrapper — same position as original thumbnails, scrollable when many images */
+.thumbnailSliderWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 54px;
+}
+
+.thumbnailSlider {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* show exactly 3 thumbnails: 3×86px + 2×24px gap */
+  width: calc(3 * 86px + 2 * 24px);
+  flex-shrink: 0;
+}
+
+.thumbnailSlider::-webkit-scrollbar {
+  display: none;
+}
+
+.thumbnailSlider .thumbnail {
+  scroll-snap-align: start;
+}
+
+.sliderArrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #bfb8b3;
+  background: #fff;
+  color: #3B1814;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s;
+}
+
+.sliderArrow:hover {
+  border-color: #3B1814;
+}
+
+.thumbnail {
+  width: 86px;
+  height: 86px;
+  flex-shrink: 0;
+  border: 1px solid #bfb8b3;
+  object-fit: cover;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.thumbnail:hover {
+  border-color: #3B1814;
+}
+
+.thumbnailActive {
+  border: 2px solid #3B1814;
+}
+
+
+.summary {
+  padding-top: 18px;
+}
+
+.category {
+  color: #C3C3C3;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.nameRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.summary h1 {
+  margin: 0;
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: 35px;
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.stars {
+  margin-top: 10px;
+  color: #f4b32a;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.price {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.description {
+  max-width: 500px;
+  margin-top: 27px;
+  color: #000000;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.size {
+  margin-top: 30px;
+  color: #000000;
+  font-size: 12px;
+}
+
+.detailsList {
+  width: min(100%, 500px);
+  margin-top: 28px;
+  border-top: 1px solid #e2dedb;
+}
+
+.detailRow,
+.noteRow {
+  border-bottom: 1px solid #e2dedb;
+}
+
+.detailRow summary,
+.noteRow summary {
+  display: flex;
+  min-height: 43px;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  color: #000000;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  padding-right: 12px;
+}
+
+.detailRow summary::-webkit-details-marker,
+.noteRow summary::-webkit-details-marker {
+  display: none;
+}
+
+.detailRow summary::after,
+.noteRow summary::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 1px solid #c7c1bd;
+  border-bottom: 1px solid #c7c1bd;
+  transform: rotate(45deg) translateY(-2px);
+}
+
+.detailRow[open] summary::after,
+.noteRow[open] summary::after {
+  transform: rotate(225deg) translateY(-2px);
+}
+
+.detailBody,
+.noteBody {
+  padding: 0 26px 18px 0;
+  color: #000000;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  width: min(100%, 400px);
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.quantityRow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid #173946;
+  width: fit-content;
+}
+
+.qtyBtn {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 300;
+  color: #173946;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.qtyBtn:hover {
+  background: rgba(23, 57, 70, 0.07);
+}
+
+.qtyValue {
+  width: 40px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #173946;
+  border-left: 1px solid #173946;
+  border-right: 1px solid #173946;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.outOfStockLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #c0392b;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.addButton,
+.buyButton {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #173946;
+  background: #ffffff;
+  color: #173946;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  transition: opacity 160ms ease, background-color 160ms ease;
+  cursor: pointer;
+}
+
+.buyButton {
+  border-color: #173946;
+  background: #173946;
+  color: #ffffff;
+}
+
+.addButton:hover,
+.buyButton:hover {
+  opacity: 0.8;
+}
+
+.composition {
+  display: flex;
+  min-height: 278px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #F8F2ED;
+  text-align: center;
+}
+
+.composition p {
+  color: #3B1814;
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.treeRow {
+  display: flex;
+  gap: 24px;
+  margin-top: 42px;
+}
+
+.treeIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.ingredientsSection {
+  border-bottom: 8px solid #f5eee9;
+  padding: 84px 0 68px;
+}
+
+.ingredientsGrid {
+  display: grid;
+  width: min(860px, calc(100% - 48px));
+  margin: 0 auto;
+  grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.1fr);
+  gap: 70px;
+  align-items: center;
+}
+
+.ingredientImageWrap {
+  width: 100%;
+}
+
+.ingredientImage {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.notesPanel h2 {
+  color: #3B1814;
+  font-family: var(--font-heading);
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.notesList {
+  margin-top: 23px;
+  border-top: 1px solid #e2dedb;
+}
+
+.noteRow summary {
+  min-height: 42px;
+}
+
+.noteRowSummary {
+  display: flex;
+  width: 100%;
+  min-height: 42px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  color: #000000;
+  font-size: 12px;
+  font-family: var(--font-body);
+  letter-spacing: 0.04em;
+  background: none;
+  border: none;
+  padding: 0 12px 0 0;
+  text-align: left;
+}
+
+.noteRowSummary::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 1.5px solid #173946;
+  border-bottom: 1.5px solid #173946;
+  transform: rotate(45deg) translateY(-2px);
+  flex-shrink: 0;
+}
+
+.noteRowSummary[aria-expanded="true"]::after {
+  transform: rotate(225deg) translateY(-2px);
+}
+
+.noteBody {
+  padding-bottom: 26px;
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+
+/* Large screens (1400px and above) */
+@media (min-width: 1400px) {
+  .heroSection {
+    padding: 0 0 120px;
+  }
+
+  .breadcrumb {
+    left: 175px;
+    font-size: 12px;
+  }
+
+  .heroGrid {
+    gap: clamp(80px, 10vw, 160px);
+  }
+
+  .summary h1 {
+    font-size: 42px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 12px;
+    max-width: 450px;
+  }
+
+  .composition p {
+    font-size: 36px;
+  }
+
+  .ingredientsSection {
+    padding: 100px 0 80px;
+  }
+
+  .ingredientsGrid {
+    max-width: 1000px;
+    gap: 80px;
+  }
+
+  .ingredientImage {
+    height: 300px;
+  }
+
+  .notesPanel h2 {
+    font-size: 30px;
+  }
+}
+
+/* Desktops (1024px - 1399px) - your original */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .heroSection {
+    padding: 0 0 100px;
+  }
+
+  .breadcrumb {
+    margin: 0 117px 52px;
+  }
+
+  .heroGrid {
+    gap: clamp(56px, 9vw, 138px);
+  }
+
+  .summary h1 {
+    font-size: 35px;
+  }
+}
+
+/* Tablets (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .heroSection {
+    width: calc(100% - 40px);
+    padding: 24px 0 60px;
+  }
+
+  .breadcrumb {
+    margin: 0 20px 32px;
+    font-size: 12px;
+  }
+
+  .heroGrid {
+    grid-template-columns: minmax(260px, 1.12fr) minmax(260px, 0.88fr);
+    gap: clamp(24px, 4vw, 56px);
+  }
+
+  .mainImageWrap {
+    min-height: 260px;
+  }
+
+  .mainImage {
+    max-height: 260px;
+  }
+
+  .thumbnailSliderWrap {
+    gap: 6px;
+    margin-top: 28px;
+  }
+
+  .thumbnail {
+    width: 64px;
+    height: 64px;
+  }
+
+  .summary h1 {
+    font-size: 28px;
+  }
+
+  .description {
+    max-width: 100%;
+    font-size: 12px;
+  }
+
+  .detailsList,
+  .actions {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .composition {
+    min-height: 220px;
+    padding: 40px 24px;
+  }
+
+  .composition p {
+    font-size: 24px;
+  }
+
+  .treeRow {
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .treeIcon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .ingredientsSection {
+    padding: 56px 0 48px;
+  }
+
+  .ingredientsGrid {
+    grid-template-columns: minmax(220px, 1fr) minmax(240px, 1.1fr);
+    gap: 40px;
+    width: calc(100% - 40px);
+    max-width: 100%;
+  }
+
+  .ingredientImage {
+    height: 220px;
+  }
+
+  .notesPanel h2 {
+    font-size: 22px;
+  }
+}
+
+/* Small tablets and large phones (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .heroSection {
+    width: calc(100% - 32px);
+    padding: 20px 0 48px;
+  }
+
+  .breadcrumb {
+    margin: 0 0 24px;
+    font-size: 12px;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .gallery {
+    max-width: 100%;
+  }
+
+  .mainImageWrap {
+    width: 100%;
+    min-height: 240px;
+  }
+
+  .mainImage {
+    max-height: 240px;
+  }
+
+  .thumbnailSliderWrap {
+    gap: 6px;
+    margin-top: 24px;
+  }
+
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+
+  .summary {
+    padding-top: 0;
+  }
+
+  .summary h1 {
+    font-size: 28px;
+    line-height: 1.1;
+  }
+
+  .category {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 12px;
+  }
+
+  .description {
+    max-width: 100%;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+
+  .detailsList,
+  .actions {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .detailRow summary,
+  .noteRow summary {
+    font-size: 12px;
+    min-height: 38px;
+  }
+
+  .addButton,
+  .buyButton {
+    font-size: 12px;
+    min-height: 36px;
+  }
+
+  .composition {
+    min-height: 180px;
+    padding: 32px 20px;
+  }
+
+  .composition p {
+    font-size: 20px;
+  }
+
+  .treeRow {
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .treeIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ingredientsSection {
+    padding: 44px 0 36px;
+  }
+
+  .ingredientsGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    width: calc(100% - 32px);
+    max-width: 100%;
+  }
+
+  .ingredientImage {
+    height: 200px;
+  }
+
+  .notesPanel h2 {
+    font-size: 20px;
+  }
+
+  .noteRow summary {
+    font-size: 12px;
+    min-height: 38px;
+  }
+
+  .noteBody {
+    font-size: 12px;
+    padding: 0 20px 16px 0;
+  }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+  .page {
+    overflow-x: hidden;
+  }
+
+  .heroSection {
+    width: calc(100% - 24px);
+    padding: 16px 0 40px;
+  }
+
+  .breadcrumb {
+    margin: 0 0 20px;
+    font-size: 12px;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .gallery {
+    max-width: 100%;
+  }
+
+  .mainImageWrap {
+    width: 100%;
+    min-height: 200px;
+  }
+
+  .mainImage {
+    max-height: 200px;
+  }
+
+  .thumbnailSliderWrap {
+    gap: 6px;
+    margin-top: 20px;
+  }
+
+  .thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .summary {
+    padding-top: 0;
+  }
+
+  .category {
+    font-size: 12px;
+  }
+
+  .summary h1 {
+    font-size: 24px;
+    margin-top: 6px;
+    line-height: 1.1;
+  }
+
+  .stars {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  .price {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  .description {
+    max-width: 100%;
+    font-size: 12px;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  .size {
+    font-size: 12px;
+    margin-top: 24px;
+  }
+
+  .detailsList {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .detailRow summary,
+  .noteRow summary {
+    font-size: 12px;
+    min-height: 34px;
+  }
+
+  .detailRow summary::after,
+  .noteRow summary::after {
+    width: 8px;
+    height: 8px;
+  }
+
+  .detailBody {
+    font-size: 12px;
+    padding: 0 16px 14px 0;
+    line-height: 1.6;
+  }
+
+  .actions {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 24px;
+    gap: 10px;
+  }
+
+  .addButton,
+  .buyButton {
+    font-size: 12px;
+    min-height: 34px;
+  }
+
+  .composition {
+    min-height: 150px;
+    padding: 28px 16px;
+  }
+
+  .composition p {
+    font-size: 18px;
+  }
+
+  .treeRow {
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .treeIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ingredientsSection {
+    padding: 36px 0 28px;
+    border-bottom-width: 4px;
+  }
+
+  .ingredientsGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: calc(100% - 24px);
+    max-width: 100%;
+  }
+
+  .ingredientImage {
+    height: 180px;
+  }
+
+  .notesPanel h2 {
+    font-size: 18px;
+  }
+
+  .notesList {
+    margin-top: 16px;
+  }
+
+  .noteRow summary {
+    font-size: 12px;
+    min-height: 34px;
+  }
+
+  .noteBody {
+    font-size: 12px;
+    padding: 0 16px 14px 0;
+    line-height: 1.6;
+  }
+}
+
+/* Very small phones (380px and below) */
+@media (max-width: 380px) {
+  .heroSection {
+    padding: 12px 0 32px;
+  }
+
+  .mainImageWrap {
+    min-height: 160px;
+  }
+
+  .mainImage {
+    max-height: 160px;
+  }
+
+  .thumbnailSliderWrap {
+    gap: 4px;
+    margin-top: 16px;
+  }
+
+  .thumbnail {
+    width: 40px;
+    height: 40px;
+  }
+
+  .summary h1 {
+    font-size: 20px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .composition p {
+    font-size: 16px;
+  }
+
+  .ingredientImage {
+    height: 150px;
+  }
+
+  .notesPanel h2 {
+    font-size: 16px;
+  }
+}
+
+/* For extremely small screens (320px) */
+@media (max-width: 320px) {
+  .heroSection {
+    padding: 10px 0 24px;
+  }
+
+  .mainImageWrap {
+    min-height: 140px;
+  }
+
+  .mainImage {
+    max-height: 140px;
+  }
+
+  .thumbnailSliderWrap {
+    gap: 4px;
+    margin-top: 12px;
+  }
+
+  .thumbnail {
+    width: 34px;
+    height: 34px;
+  }
+
+  .summary h1 {
+    font-size: 18px;
+  }
+
+  .price {
+    font-size: 12px;
+  }
+
+  .composition p {
+    font-size: 12px;
+  }
+
+  .treeIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .treeRow {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .ingredientImage {
+    height: 120px;
+  }
+
+  .notesPanel h2 {
+    font-size: 12px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .addButton:hover,
+  .buyButton:hover {
+    opacity: 1;
+  }
+
+  .addButton:active,
+  .buyButton:active {
+    opacity: 0.7;
+  }
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .addButton,
+  .buyButton {
+    transition: none;
+  }
+}

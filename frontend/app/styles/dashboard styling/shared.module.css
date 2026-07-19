@@ -1,0 +1,309 @@
+/* ─────────────────────────────────────────
+   Dashboard shared primitives
+   Buttons, inputs, cards, modals and empty
+   states used by every dashboard page.
+   ───────────────────────────────────────── */
+
+/* ── Generic cards / panels ── */
+.card {
+  border-radius: 8px;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 24px;
+}
+
+.cardHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  color: #173946;
+}
+
+/* ── Form elements ── */
+.formSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: #173946;
+}
+
+.input {
+  border-radius: 6px;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 8px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.input:focus {
+  border-color: #173946;
+}
+
+.inputSm {
+  width: 160px;
+  max-width: 100%;
+}
+
+.selectField {
+  width: 240px;
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 8px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.selectField:focus {
+  border-color: #173946;
+}
+
+.textarea {
+  border-radius: 6px;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 8px 12px;
+  font-size: 14px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.textarea:focus {
+  border-color: #173946;
+}
+
+.fieldHint {
+  font-size: 12px;
+  color: rgba(23, 57, 70, 0.6);
+  font-weight: 400;
+}
+
+.formError {
+  border-radius: 6px;
+  background: #fef2f2;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #dc2626;
+}
+
+/* ── Buttons ── */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: #173946;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.btnPrimary:hover {
+  opacity: 0.88;
+}
+
+.btnPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #173946;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.btnOutline:hover {
+  border-color: #173946;
+  color: #173946;
+}
+
+.btnOutline:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnDanger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #173946;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.btnDanger:hover {
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+.btnDanger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnText {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  color: #173946;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnText:hover {
+  text-decoration: underline;
+}
+
+.btnText:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnFullWidth {
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* ── Empty state ── */
+.empty {
+  border-radius: 8px;
+  border: 1px dashed rgba(23, 57, 70, 0.15);
+  padding: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(23, 57, 70, 0.6);
+}
+
+/* ── Checkbox row ── */
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  font-size: 14px;
+  color: #173946;
+}
+
+.checkboxHint {
+  font-size: 12px;
+  color: rgba(23, 57, 70, 0.6);
+}
+
+/* ── Modal ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+}
+
+.modal {
+  width: 100%;
+  max-width: 384px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  margin: 0 16px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.modalTitle {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: #173946;
+}
+
+.modalBody {
+  margin-top: 8px;
+  font-size: 14px;
+  color: rgba(23, 57, 70, 0.6);
+}
+
+.modalActions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .inputSm,
+  .selectField {
+    width: 100%;
+  }
+  .modal {
+    padding: 20px;
+  }
+}
+
+/* ── Touch devices: comfortable tap targets (44px) ── */
+@media (pointer: coarse) {
+  .btnPrimary,
+  .btnOutline,
+  .btnDanger {
+    min-height: 44px;
+  }
+  .input,
+  .selectField,
+  .textarea {
+    min-height: 44px;
+  }
+}

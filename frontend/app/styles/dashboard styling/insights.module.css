@@ -1,0 +1,154 @@
+/* ─────────────────────────────────────────
+   Dashboard insights (main page)
+   Standard stat cards with consistent responsive behavior
+   ───────────────────────────────────────── */
+
+.dashboardHint {
+  font-size: 0.875rem; /* 14px */
+  color: rgba(23, 57, 70, 0.6);
+}
+
+.statsGrid {
+  margin-top: 1.5rem; /* 24px */
+  display: grid;
+  gap: 1rem; /* 16px */
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 7rem; /* 112px */
+  border-radius: 0.5rem; /* 8px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 1.5rem; /* 24px */
+  transition: all 0.2s ease;
+}
+
+.statCard:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.statLabel {
+  font-size: 0.875rem; /* 14px */
+  color: rgba(23, 57, 70, 0.6);
+  font-weight: 500;
+}
+
+.statValue {
+  margin-top: 0.5rem; /* 8px */
+  font-family: var(--font-heading);
+  font-size: 1.875rem; /* 30px */
+  font-weight: 600;
+  color: #173946;
+  line-height: 1.2;
+}
+
+/* ── Tablet (768px - 1024px) ── */
+@media (max-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* 16px */
+  }
+  
+  .statCard {
+    min-height: 6.5rem; /* 104px */
+    padding: 1.25rem; /* 20px */
+  }
+  
+  .statLabel {
+    font-size: 0.8125rem; /* 13px */
+  }
+  
+  .statValue {
+    font-size: 1.625rem; /* 26px */
+  }
+}
+
+/* ── Small Tablet / Large Phone (600px - 767px) ── */
+@media (max-width: 767px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem; /* 12px */
+  }
+  
+  .statCard {
+    min-height: 5.5rem; /* 88px */
+    padding: 1rem; /* 16px */
+  }
+  
+  .statLabel {
+    font-size: 0.75rem; /* 12px */
+  }
+  
+  .statValue {
+    margin-top: 0.375rem; /* 6px */
+    font-size: 1.375rem; /* 22px */
+  }
+}
+
+/* ── Mobile (480px - 599px) ── */
+@media (max-width: 599px) {
+  .statsGrid {
+    gap: 0.625rem; /* 10px */
+  }
+  
+  .statCard {
+    min-height: 5rem; /* 80px */
+    padding: 0.75rem 0.875rem; /* 12px 14px */
+  }
+  
+  .statLabel {
+    font-size: 0.6875rem; /* 11px */
+  }
+  
+  .statValue {
+    margin-top: 0.25rem; /* 4px */
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+/* ── Small Mobile (320px - 479px) ── */
+@media (max-width: 479px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem; /* 8px */
+  }
+  
+  .statCard {
+    min-height: 4.5rem; /* 72px */
+    padding: 0.625rem 0.75rem; /* 10px 12px */
+  }
+  
+  .statLabel {
+    font-size: 0.625rem; /* 10px */
+  }
+  
+  .statValue {
+    margin-top: 0.125rem; /* 2px */
+    font-size: 1rem; /* 16px */
+  }
+}
+
+/* ── Very Small Mobile (below 320px) ── */
+@media (max-width: 319px) {
+  .statsGrid {
+    grid-template-columns: 1fr; /* Single column for tiny screens */
+    gap: 0.5rem; /* 8px */
+  }
+  
+  .statCard {
+    min-height: 4rem; /* 64px */
+    padding: 0.5rem 0.75rem; /* 8px 12px */
+  }
+  
+  .statLabel {
+    font-size: 0.625rem; /* 10px */
+  }
+  
+  .statValue {
+    font-size: 0.9375rem; /* 15px */
+  }
+}

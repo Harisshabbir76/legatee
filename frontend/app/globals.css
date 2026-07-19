@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette */
+  --color-cream: #f5efe4;
+  --color-cream-soft: #f1e8db;
+  --color-cream-light: #faf7f1;
+  --color-maroon: #45211a;
+  --color-ink: #2b2723;
+  --color-muted: #6f6459;
+  --color-line: #cdbfae;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #2b2723;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  direction: ltr;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent the browser's Unicode Bidi Algorithm from auto-flipping
+   block direction when it encounters Arabic characters.
+   Arabic glyphs still render correctly as Arabic script. */
+*, *::before, *::after {
+  direction: inherit;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Arabic: no layout or alignment changes — positions stay identical to English */

@@ -1,0 +1,168 @@
+.section {
+  background: #F5FBFF;
+  padding: 25px 24px 72px;
+}
+
+.header {
+  max-width: 900px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.monogramWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.monogram {
+  width: 48px;
+  height: auto;
+}
+
+.title {
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 0 0 16px;
+}
+
+.copy {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card {
+  display: block;
+  text-decoration: none;
+}
+
+.cardImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .cardImage {
+  transform: scale(1.04);
+}
+
+.cardPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: #173946;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 50%, transparent 100%);
+}
+
+.cardInfo {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+.cardName {
+  display: block;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+}
+
+.cardHoverContent {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
+  margin-top: 0;
+}
+
+.card:hover .cardHoverContent {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
+.cardDescription {
+  color: rgba(255,255,255,0.88);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.cardCta {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-block;
+}
+
+.empty {
+  text-align: center;
+  color: #173946;
+  font-size: 13px;
+  font-weight: 300;
+  opacity: 0.6;
+  margin-top: 32px;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .cardImageWrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}

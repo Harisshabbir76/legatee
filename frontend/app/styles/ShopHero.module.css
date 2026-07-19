@@ -1,0 +1,378 @@
+.section {
+  padding: 160px 24px 0;
+  text-align: center;
+  position: relative;
+}
+
+.breadcrumb {
+  position: absolute;
+  top: 110px;
+  left: 175px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 300;
+  color: #000000;
+}
+
+.breadcrumbLink {
+  color: rgba(23, 57, 70, 1);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.2s;
+}
+
+.breadcrumbLink:hover {
+  color: #173946;
+}
+
+.breadcrumbSep {
+  font-size: 10px;
+  color: rgba(23, 57, 70, 1);
+}
+
+.breadcrumbCurrent {
+  font-weight: 600;
+  color: #173946;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 400;
+  color: #173946;
+  margin: 0 0 20px;
+}
+
+.copy {
+  font-size: 12px;
+  font-weight: 300;
+  color: #000000;
+  line-height: 1.75;
+  max-width: 550px;
+  margin: 0 auto 45px;
+}
+
+.divider {
+  width: 84%;
+  height: 2px;
+  background: rgba(23, 57, 70, 0.3);
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE: All devices                                       */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ── Laptops & small desktops (1024px) ── */
+@media (max-width: 1024px) {
+  .section {
+    padding: 140px 24px 0;
+  }
+  
+  .breadcrumb {
+    top: 100px;
+    left: 140px;
+    font-size: 11px;
+  }
+  
+  .title {
+    font-size: 32px;
+    margin-bottom: 18px;
+  }
+  
+  .copy {
+    font-size: 11px;
+    max-width: 480px;
+    margin-bottom: 38px;
+  }
+  
+  .divider {
+    width: 80%;
+  }
+}
+
+/* ── Tablets (820px) ── */
+@media (max-width: 820px) {
+  .section {
+    padding: 120px 20px 0;
+  }
+  
+  .breadcrumb {
+    position: relative;
+    top: auto;
+    left: auto;
+    justify-content: center;
+    margin-bottom: 24px;
+    font-size: 11px;
+  }
+  
+  .title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  
+  .copy {
+    font-size: 11px;
+    max-width: 420px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  
+  .divider {
+    width: 76%;
+  }
+}
+
+/* ── Mobile landscape & small tablets (640px) ── */
+@media (max-width: 640px) {
+  .section {
+    padding: 100px 16px 0;
+  }
+  
+  .breadcrumb {
+    font-size: 10px;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .breadcrumbSep {
+    font-size: 8px;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+  
+  .copy {
+    font-size: 10px;
+    max-width: 360px;
+    margin-bottom: 28px;
+    line-height: 1.65;
+  }
+  
+  .divider {
+    width: 72%;
+  }
+}
+
+/* ── Mobile portrait (480px) ── */
+@media (max-width: 480px) {
+  .section {
+    padding: 80px 12px 0;
+  }
+  
+  .breadcrumb {
+    font-size: 9px;
+    gap: 3px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .breadcrumbSep {
+    font-size: 7px;
+  }
+  
+  .title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  
+  .copy {
+    font-size: 9px;
+    max-width: 300px;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  
+  .divider {
+    width: 68%;
+  }
+}
+
+/* ── Small mobile (380px) ── */
+@media (max-width: 380px) {
+  .section {
+    padding: 64px 10px 0;
+  }
+  
+  .breadcrumb {
+    font-size: 8px;
+    gap: 2px;
+    margin-bottom: 14px;
+  }
+  
+  .breadcrumbSep {
+    font-size: 6px;
+  }
+  
+  .title {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  
+  .copy {
+    font-size: 8px;
+    max-width: 260px;
+    margin-bottom: 18px;
+    line-height: 1.55;
+  }
+  
+  .divider {
+    width: 64%;
+    height: 1.5px;
+  }
+}
+
+/* ── Very small devices (320px) ── */
+@media (max-width: 320px) {
+  .section {
+    padding: 52px 8px 0;
+  }
+  
+  .breadcrumb {
+    font-size: 7px;
+    gap: 2px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .breadcrumbSep {
+    font-size: 5px;
+  }
+  
+  .title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .copy {
+    font-size: 7px;
+    max-width: 220px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  
+  .divider {
+    width: 60%;
+    height: 1px;
+  }
+}
+
+/* ── Extremely small (below 320px) ── */
+@media (max-width: 280px) {
+  .section {
+    padding: 44px 6px 0;
+  }
+  
+  .breadcrumb {
+    font-size: 6px;
+    gap: 1px;
+    margin-bottom: 10px;
+  }
+  
+  .breadcrumbSep {
+    font-size: 4px;
+  }
+  
+  .title {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .copy {
+    font-size: 6px;
+    max-width: 180px;
+    margin-bottom: 12px;
+    line-height: 1.45;
+  }
+  
+  .divider {
+    width: 56%;
+    height: 1px;
+  }
+}
+
+/* ── Landscape phones ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .section {
+    padding: 80px 24px 0;
+  }
+  
+  .breadcrumb {
+    position: relative;
+    top: auto;
+    left: auto;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 10px;
+  }
+  
+  .title {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  
+  .copy {
+    font-size: 10px;
+    max-width: 400px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  
+  .divider {
+    width: 70%;
+  }
+}
+
+/* ── Very large screens (1600px+) ── */
+@media (min-width: 1600px) {
+  .section {
+    padding: 200px 24px 0;
+  }
+  
+  .breadcrumb {
+    top: 140px;
+    left: 220px;
+    font-size: 14px;
+    gap: 8px;
+  }
+  
+  .title {
+    font-size: 42px;
+    margin-bottom: 24px;
+  }
+  
+  .copy {
+    font-size: 14px;
+    max-width: 620px;
+    margin-bottom: 52px;
+    line-height: 1.8;
+  }
+  
+  .divider {
+    width: 80%;
+  }
+}
+
+/* ── Print styles ── */
+@media print {
+  .section {
+    padding: 40px 20px 0;
+  }
+  
+  .breadcrumb {
+    position: relative;
+    top: auto;
+    left: auto;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .divider {
+    background: #173946;
+  }
+}

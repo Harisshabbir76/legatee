@@ -1,0 +1,586 @@
+/* ─────────────────────────────────────────
+   Add Product / Edit Product pages
+   Both pages render the same ProductForm:
+   sizes, image gallery and ingredients.
+   Fully responsive with consistent sizing
+   ───────────────────────────────────────── */
+
+/* ── Sizes ── */
+.sizesWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* 8px */
+  margin-bottom: 0.25rem;
+}
+
+.sizeRow {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem; /* 4px */
+  flex: 0 1 auto;
+}
+
+.sizeInput {
+  width: 7rem; /* 112px */
+  max-width: 100%;
+  border-radius: 0.375rem; /* 6px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  padding: 0.375rem 0.5rem; /* 6px 8px */
+  font-size: 0.875rem; /* 14px */
+  outline: none;
+  transition: border-color 0.15s ease;
+  font-family: inherit;
+  min-height: 2.5rem; /* 40px */
+}
+
+.sizeInput:focus {
+  border-color: #173946;
+  box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+}
+
+.sizeRemove {
+  background: none;
+  border: none;
+  font-size: 0.875rem; /* 14px */
+  color: rgba(23, 57, 70, 0.6);
+  cursor: pointer;
+  padding: 0 0.25rem; /* 0 4px */
+  min-height: 2.5rem; /* 40px */
+  min-width: 2rem; /* 32px */
+  transition: color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sizeRemove:hover {
+  color: #dc2626;
+}
+
+/* ── Images gallery ── */
+.galleryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.galleryAddLabel {
+  font-size: 0.875rem; /* 14px */
+  color: #173946;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.15s ease;
+  padding: 0.375rem 0;
+}
+
+.galleryAddLabel:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.galleryAddLabelDisabled {
+  font-size: 0.875rem; /* 14px */
+  color: rgba(23, 57, 70, 0.6);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.galleryHint {
+  margin-top: 0.25rem; /* 4px */
+  font-size: 0.75rem; /* 12px */
+  color: rgba(23, 57, 70, 0.6);
+  line-height: 1.4;
+}
+
+.galleryEmpty {
+  margin-top: 0.75rem; /* 12px */
+  font-size: 0.875rem; /* 14px */
+  color: rgba(23, 57, 70, 0.6);
+  text-align: center;
+  padding: 2rem 1rem;
+  border: 2px dashed rgba(23, 57, 70, 0.15);
+  border-radius: 0.375rem;
+}
+
+.galleryGrid {
+  margin-top: 0.75rem; /* 12px */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem; /* 12px */
+}
+
+.gallerySlot {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 0.375rem; /* 6px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #E6F2F8;
+  transition: border-color 0.15s ease;
+}
+
+.gallerySlot:hover {
+  border-color: #173946;
+}
+
+.gallerySlot:hover .galleryRemove {
+  opacity: 1;
+}
+
+.galleryImg {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.galleryRemove {
+  position: absolute;
+  right: 0.25rem; /* 4px */
+  top: 0.25rem; /* 4px */
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.25rem 0.5rem; /* 4px 8px */
+  font-size: 0.75rem; /* 12px */
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  border: none;
+  cursor: pointer;
+  min-height: 2rem; /* 32px */
+  min-width: 2rem; /* 32px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.galleryRemove:hover {
+  background: rgba(220, 38, 38, 0.9);
+}
+
+.galleryRemove:active {
+  transform: scale(0.95);
+}
+
+/* ── Ingredients ── */
+.ingredientsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ingredientsTitle {
+  font-family: var(--font-heading);
+  font-size: 1rem; /* 16px */
+  color: #173946;
+  font-weight: 600;
+}
+
+.ingredientsList {
+  margin-top: 0.75rem; /* 12px */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+}
+
+.ingredientRow {
+  display: grid;
+  gap: 0.5rem; /* 8px */
+  grid-template-columns: 1fr 1fr auto;
+  border-radius: 0.375rem; /* 6px */
+  background: #E6F2F8;
+  padding: 0.75rem; /* 12px */
+  align-items: center;
+  transition: background 0.15s ease;
+}
+
+.ingredientRow:hover {
+  background: rgba(139, 69, 19, 0.05);
+}
+
+.ingredientInput {
+  border-radius: 0.375rem; /* 6px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 0.375rem 0.5rem; /* 6px 8px */
+  font-size: 0.875rem; /* 14px */
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+  min-height: 2.5rem; /* 40px */
+  width: 100%;
+}
+
+.ingredientInput:focus {
+  border-color: #173946;
+  box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+}
+
+.ingredientsEmpty {
+  margin-top: 0.5rem; /* 8px */
+  font-size: 0.875rem; /* 14px */
+  color: rgba(23, 57, 70, 0.6);
+  text-align: center;
+  padding: 1.5rem;
+  border: 2px dashed rgba(23, 57, 70, 0.15);
+  border-radius: 0.375rem;
+}
+
+.ingredientRow button {
+  min-height: 2.5rem; /* 40px */
+  min-width: 2.5rem; /* 40px */
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  color: rgba(23, 57, 70, 0.6);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ingredientRow button:hover {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.ingredientRow button:active {
+  transform: scale(0.95);
+}
+
+/* ── Responsive Breakpoints ── */
+
+/* Extra Large Screens (1400px+) */
+@media (min-width: 1400px) {
+  .galleryGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; /* 16px */
+  }
+  
+  .sizeInput {
+    width: 8rem; /* 128px */
+    font-size: 0.9375rem; /* 15px */
+  }
+  
+  .ingredientInput {
+    font-size: 0.9375rem; /* 15px */
+  }
+}
+
+/* Desktop (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .galleryGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem; /* 12px */
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+  .galleryGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem; /* 12px */
+  }
+  
+  .sizeInput {
+    width: 6.5rem; /* 104px */
+    font-size: 0.8125rem; /* 13px */
+    min-height: 2.75rem; /* 44px */
+  }
+  
+  .sizeRemove {
+    min-height: 2.75rem; /* 44px */
+    min-width: 2.5rem; /* 40px */
+  }
+  
+  .ingredientInput {
+    font-size: 0.8125rem; /* 13px */
+    min-height: 2.75rem; /* 44px */
+  }
+  
+  .ingredientRow button {
+    min-height: 2.75rem; /* 44px */
+    min-width: 2.75rem; /* 44px */
+  }
+  
+  .galleryRemove {
+    min-height: 2.25rem; /* 36px */
+    min-width: 2.25rem; /* 36px */
+    font-size: 0.6875rem; /* 11px */
+  }
+}
+
+/* Small Tablet / Large Phone (600px - 767px) */
+@media (max-width: 767px) {
+  .galleryGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.625rem; /* 10px */
+  }
+  
+  .sizeInput {
+    width: 5.5rem; /* 88px */
+    font-size: 0.75rem; /* 12px */
+    min-height: 2.75rem; /* 44px */
+    padding: 0.25rem 0.375rem;
+  }
+  
+  .sizeRow {
+    gap: 0.125rem; /* 2px */
+  }
+  
+  .sizeRemove {
+    min-height: 2.75rem; /* 44px */
+    min-width: 2rem; /* 32px */
+    font-size: 0.8125rem; /* 13px */
+  }
+  
+  .ingredientInput {
+    font-size: 0.75rem; /* 12px */
+    min-height: 2.75rem; /* 44px */
+    padding: 0.25rem 0.375rem;
+  }
+  
+  .ingredientRow {
+    padding: 0.625rem; /* 10px */
+    gap: 0.375rem; /* 6px */
+  }
+  
+  .ingredientRow button {
+    min-height: 2.75rem; /* 44px */
+    min-width: 2.75rem; /* 44px */
+    font-size: 0.75rem;
+  }
+  
+  .galleryRemove {
+    min-height: 2rem; /* 32px */
+    min-width: 2rem; /* 32px */
+    font-size: 0.625rem; /* 10px */
+    padding: 0.1875rem 0.375rem;
+  }
+  
+  .galleryAddLabel {
+    font-size: 0.8125rem; /* 13px */
+  }
+  
+  .galleryHint {
+    font-size: 0.6875rem; /* 11px */
+  }
+}
+
+/* Mobile (480px - 599px) */
+@media (max-width: 599px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem; /* 8px */
+  }
+  
+  .ingredientRow {
+    grid-template-columns: 1fr;
+    gap: 0.5rem; /* 8px */
+    padding: 0.625rem;
+  }
+  
+  .ingredientRow button {
+    width: 100%;
+    min-height: 2.75rem; /* 44px */
+  }
+  
+  .sizeInput {
+    width: 5rem; /* 80px */
+    font-size: 0.6875rem; /* 11px */
+    min-height: 2.75rem; /* 44px */
+  }
+  
+  .sizeRow {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  
+  .sizesWrap {
+    gap: 0.375rem; /* 6px */
+  }
+  
+  .galleryRemove {
+    min-height: 1.75rem; /* 28px */
+    min-width: 1.75rem; /* 28px */
+    font-size: 0.5625rem; /* 9px */
+    padding: 0.125rem 0.25rem;
+  }
+  
+  .ingredientInput {
+    font-size: 0.6875rem; /* 11px */
+    min-height: 2.75rem; /* 44px */
+  }
+  
+  .galleryEmpty,
+  .ingredientsEmpty {
+    font-size: 0.75rem; /* 12px */
+    padding: 1.25rem;
+  }
+}
+
+/* Small Mobile (380px - 479px) */
+@media (max-width: 479px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.375rem; /* 6px */
+  }
+  
+  .sizeInput {
+    width: 4.5rem; /* 72px */
+    font-size: 0.625rem; /* 10px */
+    min-height: 2.5rem; /* 40px */
+    padding: 0.1875rem 0.3125rem;
+  }
+  
+  .sizeRemove {
+    min-height: 2.5rem; /* 40px */
+    min-width: 1.75rem; /* 28px */
+    font-size: 0.75rem; /* 12px */
+  }
+  
+  .ingredientInput {
+    font-size: 0.625rem; /* 10px */
+    min-height: 2.5rem; /* 40px */
+    padding: 0.1875rem 0.3125rem;
+  }
+  
+  .ingredientRow {
+    padding: 0.5rem; /* 8px */
+    gap: 0.375rem; /* 6px */
+  }
+  
+  .ingredientRow button {
+    min-height: 2.5rem; /* 40px */
+    font-size: 0.6875rem; /* 11px */
+    padding: 0.1875rem 0.5rem;
+  }
+  
+  .galleryRemove {
+    min-height: 1.5rem; /* 24px */
+    min-width: 1.5rem; /* 24px */
+    font-size: 0.5rem; /* 8px */
+    padding: 0.0625rem 0.1875rem;
+    right: 0.125rem;
+    top: 0.125rem;
+  }
+  
+  .galleryAddLabel {
+    font-size: 0.75rem; /* 12px */
+  }
+  
+  .galleryHint {
+    font-size: 0.625rem; /* 10px */
+  }
+  
+  .galleryEmpty,
+  .ingredientsEmpty {
+    font-size: 0.6875rem; /* 11px */
+    padding: 1rem;
+  }
+  
+  .ingredientsTitle {
+    font-size: 0.875rem; /* 14px */
+  }
+}
+
+/* Very Small Mobile (below 380px) */
+@media (max-width: 379px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.3125rem; /* 5px */
+  }
+  
+  .sizeInput {
+    width: 4rem; /* 64px */
+    font-size: 0.5625rem; /* 9px */
+    min-height: 2.25rem; /* 36px */
+    padding: 0.125rem 0.25rem;
+  }
+  
+  .sizeRow {
+    gap: 0.125rem;
+  }
+  
+  .sizeRemove {
+    min-height: 2.25rem; /* 36px */
+    min-width: 1.5rem; /* 24px */
+    font-size: 0.625rem; /* 10px */
+  }
+  
+  .ingredientInput {
+    font-size: 0.5625rem; /* 9px */
+    min-height: 2.25rem; /* 36px */
+    padding: 0.125rem 0.25rem;
+  }
+  
+  .ingredientRow {
+    padding: 0.375rem; /* 6px */
+    gap: 0.25rem; /* 4px */
+  }
+  
+  .ingredientRow button {
+    min-height: 2.25rem; /* 36px */
+    font-size: 0.625rem; /* 10px */
+    padding: 0.125rem 0.375rem;
+  }
+  
+  .galleryRemove {
+    min-height: 1.25rem; /* 20px */
+    min-width: 1.25rem; /* 20px */
+    font-size: 0.4375rem; /* 7px */
+    padding: 0.0625rem 0.125rem;
+  }
+  
+  .galleryAddLabel {
+    font-size: 0.6875rem; /* 11px */
+  }
+  
+  .galleryHint {
+    font-size: 0.5625rem; /* 9px */
+  }
+  
+  .galleryEmpty,
+  .ingredientsEmpty {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.75rem;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (pointer: coarse) {
+  .sizeInput,
+  .ingredientInput {
+    min-height: 2.75rem; /* 44px */
+  }
+  
+  .sizeRemove,
+  .galleryRemove,
+  .ingredientRow button {
+    min-height: 2.75rem; /* 44px */
+    min-width: 2.75rem; /* 44px */
+  }
+  
+  .galleryAddLabel {
+    padding: 0.5rem 0;
+  }
+}
+
+/* Hover States for Non-Touch Devices */
+@media (hover: hover) {
+  .gallerySlot:hover {
+    border-color: #173946;
+  }
+  
+  .ingredientRow:hover {
+    background: rgba(139, 69, 19, 0.05);
+  }
+}

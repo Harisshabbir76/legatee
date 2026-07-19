@@ -1,0 +1,204 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardImageWrap {
+  position: relative;
+  width: 85%;
+  aspect-ratio: 1 / 1;
+  background: #fff;
+  overflow: hidden;
+}
+
+.cardImageLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: #ede8e0;
+}
+
+/* ── Hover icons top-right ── */
+.cardIcons {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 2;
+}
+
+.card:hover .cardIcons {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cardIcon {
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  border: 1px solid rgba(23, 57, 70, 0.2);
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #173946;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  padding: 0;
+}
+
+.cardIcon:hover {
+  background: #173946;
+  color: #fff;
+}
+
+.cardIcon svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+}
+
+/* ── Add to cart button ── */
+.cardBtn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #173946;
+  color: #fff;
+  font-size: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-decoration: none;
+  padding: 8px 0;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 2;
+}
+
+.card:hover .cardBtn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Card info below image ── */
+.cardInfo {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cardName {
+  font-size: 11px;
+  font-weight: 700;
+  color: #173946;
+  text-decoration: none;
+  text-transform: uppercase;
+  line-height: 1.3;
+  display: block;
+  text-align: center;
+}
+
+.cardPrice {
+  font-size: 11px;
+  font-weight: 300;
+  color: #173946;
+  text-align: center;
+}
+
+.outOfStockBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(255,255,255,0.9);
+  color: #173946;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  z-index: 3;
+}
+
+.outOfStockText {
+  font-size: 10px;
+  color: #999;
+  text-align: center;
+}
+
+/* ── List layout ── */
+.listCard {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(23,57,70,0.1);
+  text-decoration: none;
+}
+
+.listImageWrap {
+  position: relative;
+  width: 80px;
+  height: 100px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.listImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.listInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.listName {
+  font-size: 12px;
+  font-weight: 700;
+  color: #173946;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.listPrice {
+  font-size: 11px;
+  font-weight: 300;
+  color: #173946;
+}

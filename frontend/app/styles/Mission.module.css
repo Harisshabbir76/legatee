@@ -1,0 +1,74 @@
+.section {
+  background: #fff;
+  padding: 0 0 64px;
+}
+
+.missionWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  margin-bottom: 64px;
+  overflow: hidden;
+}
+
+.stripesBg {
+  position: absolute;
+  width: 70%;
+  inset: 0;
+  z-index: 0;
+  left: 15%;
+}
+
+.stripesImg {
+  object-fit: cover;
+  object-position: center;
+}
+
+.missionText {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  max-width: 600px;
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+.visionWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  padding: 0 24px;
+}
+
+.visionText {
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.9;
+  max-width: 640px;
+}
+
+.towerWrap {
+  width: 70px;
+}
+
+.towerImg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.divider {
+  width: 75vw;
+  height: 2px;
+  background: rgba(23, 57, 70, 0.4);
+  margin: 56px auto 0;
+}

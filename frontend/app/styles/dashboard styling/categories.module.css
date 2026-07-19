@@ -1,0 +1,598 @@
+/* ─────────────────────────────────────────
+   Categories page
+   Add form + list with inline rename.
+   Fully responsive with consistent sizing
+   ───────────────────────────────────────── */
+
+/* ── Form ── */
+.categoryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+  border-radius: 0.5rem; /* 8px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 1.5rem; /* 24px */
+  transition: all 0.2s ease;
+}
+
+.categoryFormField {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.25rem; /* 4px */
+  font-size: 0.875rem; /* 14px */
+  color: #173946;
+  min-width: 0;
+}
+
+.categoryFormField label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #173946;
+}
+
+.categoryFormField input {
+  border-radius: 0.375rem; /* 6px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  padding: 0.5rem 0.75rem; /* 8px 12px */
+  font-size: 0.875rem; /* 14px */
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+  min-height: 2.75rem; /* 44px */
+  width: 100%;
+}
+
+.categoryFormField input:focus {
+  border-color: #173946;
+  box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+}
+
+.categoryForm button {
+  min-height: 2.75rem; /* 44px */
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  background: #173946;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.categoryForm button:hover {
+  background: #5a2a0f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+}
+
+.categoryForm button:active {
+  transform: translateY(0);
+}
+
+.categoryForm button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── List ── */
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem; /* 8px */
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  margin-top: 1.5rem; /* 24px */
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem; /* 12px 16px */
+  border-bottom: 1px solid rgba(23, 57, 70, 0.15);
+  transition: background 0.15s ease;
+  gap: 0.75rem;
+  min-height: 3.5rem; /* 56px */
+}
+
+.categoryItem:last-child {
+  border-bottom: none;
+}
+
+.categoryItem:hover {
+  background: rgba(139, 69, 19, 0.02);
+}
+
+.categoryName {
+  font-size: 0.875rem; /* 14px */
+  color: #173946;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  flex: 1;
+  font-weight: 500;
+  padding: 0.25rem 0;
+}
+
+.categoryItemActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* 8px */
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.categoryItemActions button {
+  min-height: 2.25rem; /* 36px */
+  min-width: 2.25rem; /* 36px */
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  font-size: 0.8125rem; /* 13px */
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #173946;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.categoryItemActions button:hover {
+  background: #E6F2F8;
+  border-color: #173946;
+}
+
+.categoryItemActions .deleteBtn:hover {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.categoryItemActions .editBtn:hover {
+  background: #dbeafe;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+/* ── Edit Form ── */
+.categoryEditForm {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* 8px */
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.categoryEditInput {
+  flex: 1;
+  min-width: 0;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  padding: 0.375rem 0.625rem; /* 6px 10px */
+  font-size: 0.875rem; /* 14px */
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+  min-height: 2.25rem; /* 36px */
+}
+
+.categoryEditInput:focus {
+  border-color: #173946;
+  box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+}
+
+.categoryEditForm .editActions {
+  display: flex;
+  gap: 0.375rem; /* 6px */
+  flex-shrink: 0;
+}
+
+.categoryEditForm button {
+  min-height: 2.25rem; /* 36px */
+  min-width: 2.25rem; /* 36px */
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categoryEditForm .saveBtn {
+  background: #173946;
+  color: #fff;
+}
+
+.categoryEditForm .saveBtn:hover {
+  background: #5a2a0f;
+}
+
+.categoryEditForm .cancelBtn {
+  background: #f3f4f6;
+  color: #173946;
+}
+
+.categoryEditForm .cancelBtn:hover {
+  background: #e5e7eb;
+}
+
+/* ── Responsive Breakpoints ── */
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .categoryForm {
+    padding: 2rem; /* 32px */
+    gap: 1rem; /* 16px */
+  }
+  
+  .categoryItem {
+    padding: 1rem 1.5rem; /* 16px 24px */
+  }
+  
+  .categoryName {
+    font-size: 1rem; /* 16px */
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+  .categoryForm {
+    padding: 1.5rem; /* 24px */
+    gap: 0.75rem;
+  }
+  
+  .categoryItem {
+    padding: 0.75rem 1rem;
+    min-height: 3.25rem; /* 52px */
+  }
+  
+  .categoryFormField input {
+    min-height: 2.75rem; /* 44px */
+    font-size: 0.875rem;
+  }
+  
+  .categoryForm button {
+    min-height: 2.75rem; /* 44px */
+  }
+}
+
+/* Small Tablet / Large Phone (600px - 767px) */
+@media (max-width: 767px) {
+  .categoryForm {
+    padding: 1.25rem; /* 20px */
+    gap: 0.625rem; /* 10px */
+  }
+  
+  .categoryFormField {
+    font-size: 0.8125rem; /* 13px */
+  }
+  
+  .categoryFormField input {
+    font-size: 0.8125rem;
+    min-height: 2.75rem; /* 44px */
+    padding: 0.375rem 0.625rem;
+  }
+  
+  .categoryForm button {
+    min-height: 2.75rem; /* 44px */
+    font-size: 0.8125rem;
+    padding: 0.375rem 1.25rem;
+  }
+  
+  .categoryItem {
+    padding: 0.625rem 0.875rem; /* 10px 14px */
+    min-height: 3rem; /* 48px */
+    gap: 0.5rem;
+  }
+  
+  .categoryName {
+    font-size: 0.8125rem; /* 13px */
+  }
+  
+  .categoryItemActions button {
+    min-height: 2rem; /* 32px */
+    min-width: 2rem; /* 32px */
+    font-size: 0.75rem; /* 12px */
+    padding: 0.1875rem 0.625rem;
+  }
+  
+  .categoryEditInput {
+    font-size: 0.8125rem;
+    min-height: 2rem; /* 32px */
+    padding: 0.3125rem 0.5rem;
+  }
+  
+  .categoryEditForm button {
+    min-height: 2rem; /* 32px */
+    min-width: 2rem; /* 32px */
+    font-size: 0.75rem;
+    padding: 0.1875rem 0.625rem;
+  }
+}
+
+/* Mobile (480px - 599px) */
+@media (max-width: 599px) {
+  .categoryForm {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem; /* 16px */
+    gap: 0.5rem; /* 8px */
+  }
+  
+  .categoryFormField {
+    font-size: 0.75rem; /* 12px */
+  }
+  
+  .categoryFormField input {
+    font-size: 0.75rem;
+    min-height: 2.75rem; /* 44px */
+    padding: 0.3125rem 0.5rem;
+  }
+  
+  .categoryForm button {
+    min-height: 2.75rem; /* 44px */
+    font-size: 0.75rem;
+    padding: 0.3125rem 1rem;
+    width: 100%;
+  }
+  
+  .categoryItem {
+    flex-wrap: wrap;
+    gap: 0.5rem; /* 8px */
+    padding: 0.625rem 0.75rem; /* 10px 12px */
+    min-height: 2.75rem; /* 44px */
+  }
+  
+  .categoryName {
+    font-size: 0.75rem; /* 12px */
+    flex-basis: 100%;
+    order: 1;
+  }
+  
+  .categoryItemActions {
+    order: 2;
+    width: 100%;
+    gap: 0.375rem; /* 6px */
+    justify-content: flex-start;
+  }
+  
+  .categoryItemActions button {
+    min-height: 2.25rem; /* 36px */
+    min-width: 2.25rem; /* 36px */
+    font-size: 0.6875rem; /* 11px */
+    padding: 0.1875rem 0.5rem;
+    flex: 0 1 auto;
+  }
+  
+  .categoryEditForm {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  
+  .categoryEditInput {
+    flex-basis: 100%;
+    font-size: 0.75rem;
+    min-height: 2.25rem; /* 36px */
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .categoryEditForm .editActions {
+    width: 100%;
+    gap: 0.375rem;
+  }
+  
+  .categoryEditForm button {
+    min-height: 2.25rem; /* 36px */
+    min-width: 2.25rem; /* 36px */
+    font-size: 0.75rem;
+    padding: 0.1875rem 0.625rem;
+    flex: 1;
+  }
+}
+
+/* Small Mobile (380px - 479px) */
+@media (max-width: 479px) {
+  .categoryForm {
+    padding: 0.75rem; /* 12px */
+    gap: 0.5rem;
+  }
+  
+  .categoryFormField {
+    font-size: 0.6875rem; /* 11px */
+  }
+  
+  .categoryFormField label {
+    font-size: 0.6875rem;
+  }
+  
+  .categoryFormField input {
+    font-size: 0.6875rem;
+    min-height: 2.5rem; /* 40px */
+    padding: 0.25rem 0.375rem;
+  }
+  
+  .categoryForm button {
+    min-height: 2.5rem; /* 40px */
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.875rem;
+  }
+  
+  .categoryItem {
+    padding: 0.5rem 0.625rem; /* 8px 10px */
+    min-height: 2.5rem; /* 40px */
+    gap: 0.375rem;
+  }
+  
+  .categoryName {
+    font-size: 0.6875rem; /* 11px */
+  }
+  
+  .categoryItemActions {
+    gap: 0.25rem; /* 4px */
+  }
+  
+  .categoryItemActions button {
+    min-height: 2rem; /* 32px */
+    min-width: 2rem; /* 32px */
+    font-size: 0.625rem; /* 10px */
+    padding: 0.125rem 0.375rem;
+  }
+  
+  .categoryEditInput {
+    font-size: 0.6875rem;
+    min-height: 2rem; /* 32px */
+    padding: 0.1875rem 0.375rem;
+  }
+  
+  .categoryEditForm button {
+    min-height: 2rem; /* 32px */
+    min-width: 2rem; /* 32px */
+    font-size: 0.625rem;
+    padding: 0.125rem 0.5rem;
+  }
+}
+
+/* Very Small Mobile (below 380px) */
+@media (max-width: 379px) {
+  .categoryForm {
+    padding: 0.625rem; /* 10px */
+    gap: 0.375rem; /* 6px */
+  }
+  
+  .categoryFormField {
+    font-size: 0.625rem; /* 10px */
+  }
+  
+  .categoryFormField label {
+    font-size: 0.625rem;
+  }
+  
+  .categoryFormField input {
+    font-size: 0.625rem;
+    min-height: 2.25rem; /* 36px */
+    padding: 0.1875rem 0.3125rem;
+  }
+  
+  .categoryForm button {
+    min-height: 2.25rem; /* 36px */
+    font-size: 0.625rem;
+    padding: 0.1875rem 0.75rem;
+  }
+  
+  .categoryItem {
+    padding: 0.375rem 0.5rem; /* 6px 8px */
+    min-height: 2.25rem; /* 36px */
+    gap: 0.25rem;
+  }
+  
+  .categoryName {
+    font-size: 0.625rem; /* 10px */
+  }
+  
+  .categoryItemActions button {
+    min-height: 1.75rem; /* 28px */
+    min-width: 1.75rem; /* 28px */
+    font-size: 0.5625rem; /* 9px */
+    padding: 0.0625rem 0.3125rem;
+  }
+  
+  .categoryEditInput {
+    font-size: 0.625rem;
+    min-height: 1.75rem; /* 28px */
+    padding: 0.125rem 0.3125rem;
+  }
+  
+  .categoryEditForm button {
+    min-height: 1.75rem; /* 28px */
+    min-width: 1.75rem; /* 28px */
+    font-size: 0.5625rem;
+    padding: 0.0625rem 0.375rem;
+  }
+}
+
+/* ── Touch Device Optimizations ── */
+@media (pointer: coarse) {
+  .categoryFormField input,
+  .categoryEditInput {
+    min-height: 2.75rem; /* 44px */
+  }
+  
+  .categoryForm button,
+  .categoryItemActions button,
+  .categoryEditForm button {
+    min-height: 2.75rem; /* 44px */
+    min-width: 2.75rem; /* 44px */
+  }
+}
+
+/* ── Hover States (Non-Touch Only) ── */
+@media (hover: hover) {
+  .categoryItem:hover {
+    background: rgba(139, 69, 19, 0.02);
+  }
+  
+  .categoryForm button:hover {
+    background: #5a2a0f;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+  }
+  
+  .categoryItemActions .deleteBtn:hover {
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #dc2626;
+  }
+  
+  .categoryItemActions .editBtn:hover {
+    background: #dbeafe;
+    border-color: #2563eb;
+    color: #2563eb;
+  }
+}
+
+/* ── Empty State ── */
+.categoryEmpty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: rgba(23, 57, 70, 0.6);
+  font-size: 0.875rem;
+}
+
+.categoryEmpty svg {
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
+
+/* ── Loading/Transition States ── */
+.categoryItemEnter {
+  animation: slideIn 0.2s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

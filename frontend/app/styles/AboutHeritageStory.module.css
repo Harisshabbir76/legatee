@@ -1,0 +1,491 @@
+.section {
+  background: #fff;
+  padding: 80px 0;
+}
+
+.inner {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.heading {
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 40px;
+  max-width: 500px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin-left: 80px;
+}
+
+.intro {
+  color: black;
+  font-size: 12px;
+  font-weight: 300;
+  margin: 0 0 48px;
+  max-width: 550px;
+  margin-left: 80px;
+}
+
+.manWrap {
+  margin: 0 auto 32px;
+  width: 260px;
+}
+
+.manImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.vision {
+  color: #173946;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.8;
+  margin: 0 0 64px;
+  max-width: 650px;
+  margin-left: 80px;
+}
+
+.vision strong {
+  font-weight: 600;
+  color: #173946;
+}
+
+.wideImageWrap {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
+  overflow: hidden;
+}
+
+.wideImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.inner2 {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.copy {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 300;
+  margin: 0 0 24px;
+  max-width: 850px;
+}
+
+.copy:last-child {
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE: All devices                                      */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ── Large screens (1400px and above) ── */
+@media (min-width: 1400px) {
+  .section {
+    padding: 90px 0;
+  }
+
+  .heading {
+    font-size: 22px;
+    max-width: 550px;
+    margin-left: 100px;
+  }
+
+  .intro {
+    font-size: 13px;
+    max-width: 600px;
+    margin-left: 100px;
+  }
+
+  .manWrap {
+    width: 300px;
+  }
+
+  .vision {
+    font-size: 13px;
+    max-width: 700px;
+    margin-left: 100px;
+  }
+
+  .wideImageWrap {
+    max-width: 1200px;
+    padding: 0 40px;
+  }
+
+  .copy {
+    font-size: 13px;
+    max-width: 900px;
+  }
+}
+
+/* ── Tablets (768px - 1023px) ── */
+@media (max-width: 1023px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .heading {
+    font-size: 16px;
+    max-width: 400px;
+    margin-left: 40px;
+    margin-bottom: 32px;
+  }
+
+  .intro {
+    font-size: 11px;
+    max-width: 450px;
+    margin-left: 40px;
+    margin-bottom: 36px;
+  }
+
+  .manWrap {
+    width: 220px;
+    margin-bottom: 24px;
+  }
+
+  .vision {
+    font-size: 11px;
+    max-width: 500px;
+    margin-left: 40px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+
+  .wideImageWrap {
+    margin-bottom: 48px;
+    padding: 0 16px;
+  }
+
+  .inner2 {
+    padding: 0 16px;
+  }
+
+  .copy {
+    font-size: 11px;
+    max-width: 650px;
+    margin-bottom: 20px;
+  }
+}
+
+/* ── Small tablets and large phones (600px - 767px) ── */
+@media (max-width: 767px) {
+  .section {
+    padding: 48px 0;
+  }
+
+  .heading {
+    font-size: 15px;
+    max-width: 350px;
+    margin-left: 20px;
+    margin-bottom: 28px;
+  }
+
+  .intro {
+    font-size: 11px;
+    max-width: 400px;
+    margin-left: 20px;
+    margin-bottom: 32px;
+  }
+
+  .manWrap {
+    width: 200px;
+    margin-bottom: 20px;
+  }
+
+  .vision {
+    font-size: 11px;
+    max-width: 450px;
+    margin-left: 20px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .wideImageWrap {
+    margin-bottom: 40px;
+    padding: 0 12px;
+  }
+
+  .inner2 {
+    padding: 0 16px;
+  }
+
+  .copy {
+    font-size: 11px;
+    max-width: 500px;
+    margin-bottom: 18px;
+  }
+}
+
+/* ── Mobile portrait (480px - 599px) ── */
+@media (max-width: 599px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .inner {
+    padding: 0 16px;
+  }
+
+  .heading {
+    font-size: 14px;
+    max-width: 300px;
+    margin-left: 0;
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+
+  .intro {
+    font-size: 10px;
+    max-width: 350px;
+    margin-left: 0;
+    margin: 0 auto 28px;
+    text-align: center;
+  }
+
+  .manWrap {
+    width: 180px;
+    margin-bottom: 16px;
+  }
+
+  .vision {
+    font-size: 10px;
+    max-width: 380px;
+    margin-left: 0;
+    margin: 0 auto 32px;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .wideImageWrap {
+    margin-bottom: 32px;
+    padding: 0 8px;
+  }
+
+  .inner2 {
+    padding: 0 16px;
+  }
+
+  .copy {
+    font-size: 10px;
+    max-width: 400px;
+    margin: 0 auto 16px;
+    text-align: center;
+  }
+}
+
+/* ── Small phones (400px - 479px) ── */
+@media (max-width: 479px) {
+  .section {
+    padding: 32px 0;
+  }
+
+  .inner {
+    padding: 0 12px;
+  }
+
+  .heading {
+    font-size: 13px;
+    max-width: 260px;
+    margin-bottom: 20px;
+  }
+
+  .intro {
+    font-size: 9px;
+    max-width: 300px;
+    margin-bottom: 24px;
+  }
+
+  .manWrap {
+    width: 150px;
+    margin-bottom: 14px;
+  }
+
+  .vision {
+    font-size: 9px;
+    max-width: 320px;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .wideImageWrap {
+    margin-bottom: 28px;
+    padding: 0 4px;
+  }
+
+  .inner2 {
+    padding: 0 12px;
+  }
+
+  .copy {
+    font-size: 9px;
+    max-width: 320px;
+    margin-bottom: 14px;
+  }
+}
+
+/* ── Very small phones (360px - 399px) ── */
+@media (max-width: 399px) {
+  .section {
+    padding: 24px 0;
+  }
+
+  .inner {
+    padding: 0 10px;
+  }
+
+  .heading {
+    font-size: 12px;
+    max-width: 220px;
+    margin-bottom: 16px;
+  }
+
+  .intro {
+    font-size: 8px;
+    max-width: 260px;
+    margin-bottom: 20px;
+  }
+
+  .manWrap {
+    width: 130px;
+    margin-bottom: 12px;
+  }
+
+  .vision {
+    font-size: 8px;
+    max-width: 280px;
+    margin-bottom: 24px;
+    line-height: 1.4;
+  }
+
+  .wideImageWrap {
+    margin-bottom: 24px;
+    padding: 0 4px;
+  }
+
+  .inner2 {
+    padding: 0 10px;
+  }
+
+  .copy {
+    font-size: 8px;
+    max-width: 280px;
+    margin-bottom: 12px;
+  }
+}
+
+/* ── Extra small (320px - 359px) ── */
+@media (max-width: 359px) {
+  .section {
+    padding: 20px 0;
+  }
+
+  .inner {
+    padding: 0 8px;
+  }
+
+  .heading {
+    font-size: 11px;
+    max-width: 200px;
+    margin-bottom: 14px;
+  }
+
+  .intro {
+    font-size: 8px;
+    max-width: 220px;
+    margin-bottom: 16px;
+  }
+
+  .manWrap {
+    width: 110px;
+    margin-bottom: 10px;
+  }
+
+  .vision {
+    font-size: 8px;
+    max-width: 240px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .wideImageWrap {
+    margin-bottom: 20px;
+    padding: 0 4px;
+  }
+
+  .inner2 {
+    padding: 0 8px;
+  }
+
+  .copy {
+    font-size: 8px;
+    max-width: 240px;
+    margin-bottom: 10px;
+  }
+}
+
+/* ── Landscape phones ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .section {
+    padding: 30px 0;
+  }
+
+  .manWrap {
+    width: 150px;
+  }
+
+  .heading {
+    font-size: 14px;
+    margin-left: 40px;
+  }
+
+  .intro {
+    font-size: 10px;
+    margin-left: 40px;
+  }
+
+  .vision {
+    font-size: 10px;
+    margin-left: 40px;
+  }
+}
+
+/* ── Print styles ── */
+@media print {
+  .section {
+    padding: 40px 0;
+    background: #fff;
+  }
+
+  .heading {
+    color: #173946;
+  }
+
+  .vision {
+    color: #173946;
+  }
+
+  .copy {
+    color: #000;
+  }
+
+  .wideImageWrap {
+    page-break-inside: avoid;
+  }
+}

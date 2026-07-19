@@ -1,0 +1,761 @@
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.dropdownItem {
+  position: relative;
+}
+
+.navLinkDropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #173946;
+  min-width: 180px;
+  z-index: 100;
+  padding: 6px 0;
+  list-style: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.dropdownLink {
+  display: block;
+  padding: 10px 18px;
+  color: rgba(255,255,255,0.8);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s, background 0.2s;
+}
+
+.dropdownLink:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+.transparent {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.scrolled {
+  background: #173946;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  max-width: 1200px;
+  height: 72px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 60;
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #fff;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.leftLinks,
+.rightLinks {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 300;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leftLinks {
+  margin-left: 60px;
+}
+
+.navLink {
+  transition: opacity 0.2s ease;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navLink:hover {
+  opacity: 0.8;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  height: 35px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-right: 60px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+}
+
+.iconButton {
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.iconButton:hover {
+  opacity: 0.8;
+}
+
+/* Icons grow + gap tightens when hamburger is open */
+.nav:has(.hamburger.active) .icons {
+  gap: 0px;
+}
+
+.nav:has(.hamburger.active) .icons svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Sidebar Overlay */
+.sidebarOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 55;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebarOverlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  max-width: 80%;
+  height: 100dvh;
+  background: #fff;
+  z-index: 60;
+  padding: 80px 30px 30px;
+  transition: left 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebarLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebarLinks li {
+  border-bottom: 1px solid rgb(0 0 0 / 0.05);
+}
+
+.sidebarLink {
+  color: var(--color-ink, #173946);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 300;
+  transition: color 0.2s ease;
+  display: block;
+  padding: 14px 0;
+}
+
+.sidebarLink:hover {
+  opacity: 0.8;
+}
+
+/* ── Sidebar dropdown items (for mobile) ── */
+.sidebarDropdown {
+  position: relative;
+  border-bottom: 1px solid rgb(0 0 0 / 0.05);
+}
+
+.sidebarDropdownToggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--color-ink, #173946);
+  font-size: 16px;
+  font-weight: 300;
+  padding: 14px 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.sidebarDropdownToggle:hover {
+  opacity: 0.8;
+}
+
+.sidebarDropdownArrow {
+  transition: transform 0.3s ease;
+}
+
+.sidebarDropdownArrow.open {
+  transform: rotate(180deg);
+}
+
+.sidebarDropdownMenu {
+  list-style: none;
+  padding: 0 0 8px 16px;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.sidebarDropdownMenu.open {
+  max-height: 200px;
+  padding: 4px 0 8px 16px;
+}
+
+.sidebarDropdownMenu li {
+  border-bottom: none;
+  padding: 0;
+}
+
+.sidebarDropdownLink {
+  display: block;
+  padding: 10px 0;
+  color: var(--color-ink, #173946);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 300;
+  transition: opacity 0.2s ease;
+  opacity: 0.7;
+}
+
+.sidebarDropdownLink:hover {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE: Optimized logo & icon sizes for all devices      */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ── Large screens (1024px+) ── */
+@media (min-width: 1024px) {
+  .nav {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+/* ── Tablet and below (1023px) ── */
+@media (max-width: 1023px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .leftLinks {
+    display: none;
+  }
+
+  .rightLinks {
+    display: none;
+  }
+
+  .rightGroup {
+    margin-right: 0;
+    gap: 12px;
+  }
+
+  .icons {
+    gap: 8px;
+  }
+
+  .icons svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .iconButton {
+    padding: 4px;
+  }
+
+  .nav {
+    height: 64px;
+    padding: 0 16px;
+  }
+
+  .logoImg {
+    height: 38px;
+  }
+
+  /* Show dropdown in sidebar on mobile */
+  .sidebarDropdown {
+    display: block;
+  }
+}
+
+/* ── Mobile (640px) ── */
+@media (max-width: 640px) {
+  .nav {
+    height: 60px;
+    padding: 0 14px;
+  }
+
+  .logoImg {
+    height: 34px;
+  }
+
+  .rightGroup {
+    gap: 10px;
+  }
+
+  .icons {
+    gap: 6px;
+  }
+
+  .icons svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .iconButton {
+    padding: 3px;
+  }
+
+  .hamburger {
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .hamburger span {
+    width: 20px;
+    height: 2px;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .sidebar {
+    width: 280px;
+    padding: 72px 24px 24px;
+  }
+
+  .sidebarLink {
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  .sidebarDropdownToggle {
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  .sidebarDropdownLink {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+  .sidebarDropdownMenu.open {
+    padding: 2px 0 6px 14px;
+  }
+}
+
+/* ── Small mobile (480px) ── */
+@media (max-width: 480px) {
+  .nav {
+    height: 56px;
+    padding: 0 12px;
+  }
+
+  .logoImg {
+    height: 30px;
+  }
+
+  .rightGroup {
+    gap: 8px;
+  }
+
+  .icons {
+    gap: 5px;
+  }
+
+  .icons svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .iconButton {
+    padding: 3px;
+  }
+
+  .hamburger {
+    gap: 4px;
+    padding: 5px;
+  }
+
+  .hamburger span {
+    width: 18px;
+    height: 2px;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4.5px, 4.5px);
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(4.5px, -4.5px);
+  }
+
+  .sidebar {
+    width: 260px;
+    padding: 64px 20px 20px;
+  }
+
+  .sidebarLink {
+    font-size: 15px;
+    padding: 11px 0;
+  }
+
+  .sidebarDropdownToggle {
+    font-size: 15px;
+    padding: 11px 0;
+  }
+
+  .sidebarDropdownLink {
+    font-size: 13px;
+    padding: 7px 0;
+  }
+
+  .sidebarDropdownMenu.open {
+    padding: 2px 0 4px 12px;
+  }
+}
+
+/* ── Very small mobile (380px) ── */
+@media (max-width: 380px) {
+  .nav {
+    height: 50px;
+    padding: 0 10px;
+  }
+
+  .logoImg {
+    height: 26px;
+  }
+
+  .rightGroup {
+    gap: 6px;
+  }
+
+  .icons {
+    gap: 4px;
+  }
+
+  .icons svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .iconButton {
+    padding: 2px;
+  }
+
+  .hamburger {
+    gap: 3.5px;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    width: 16px;
+    height: 2px;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  .sidebar {
+    width: 220px;
+    padding: 56px 16px 16px;
+  }
+
+  .sidebarLink {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .sidebarDropdownToggle {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .sidebarDropdownLink {
+    font-size: 12px;
+    padding: 6px 0;
+  }
+
+  .sidebarDropdownMenu.open {
+    padding: 1px 0 4px 10px;
+  }
+}
+
+/* ── Extra small (320px) ── */
+@media (max-width: 320px) {
+  .nav {
+    height: 46px;
+    padding: 0 8px;
+  }
+
+  .logoImg {
+    height: 22px;
+  }
+
+  .rightGroup {
+    gap: 4px;
+  }
+
+  .icons {
+    gap: 3px;
+  }
+
+  .icons svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .iconButton {
+    padding: 2px;
+  }
+
+  .hamburger {
+    gap: 3px;
+    padding: 3px;
+  }
+
+  .hamburger span {
+    width: 14px;
+    height: 2px;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(3.5px, 3.5px);
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(3.5px, -3.5px);
+  }
+
+  .sidebar {
+    width: 200px;
+    padding: 48px 14px 14px;
+  }
+
+  .sidebarLink {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+
+  .sidebarDropdownToggle {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+
+  .sidebarDropdownLink {
+    font-size: 12px;
+    padding: 5px 0;
+  }
+
+  .sidebarDropdownMenu.open {
+    padding: 1px 0 3px 8px;
+  }
+}
+
+/* ── Landscape phones ── */
+@media (max-height: 600px) and (orientation: landscape) {
+  .nav {
+    height: 52px;
+  }
+
+  .logoImg {
+    height: 28px;
+  }
+
+  .rightGroup {
+    gap: 10px;
+  }
+
+  .icons svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sidebar {
+    padding: 56px 20px 16px;
+  }
+
+  .sidebarLink {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .sidebarDropdownToggle {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .sidebarDropdownLink {
+    padding: 5px 0;
+    font-size: 12px;
+  }
+
+  .sidebarDropdownMenu.open {
+    padding: 1px 0 4px 12px;
+  }
+}
+
+/* ── Touch devices - no hover ── */
+@media (hover: none) {
+  .navLink:hover {
+    color: var(--color-ink);
+  }
+  
+  .iconButton:hover {
+    color: var(--color-ink);
+  }
+  
+  .sidebarLink:hover {
+    color: var(--color-ink);
+  }
+  
+  .navLink:active {
+    color: #C9A87C;
+  }
+  
+  .iconButton:active {
+    color: #C9A87C;
+  }
+  
+  .sidebarLink:active {
+    color: #C9A87C;
+  }
+}
+
+/* ── Very large screens ── */
+@media (min-width: 1600px) {
+  .nav {
+    max-width: 1400px;
+    padding: 0 60px;
+  }
+
+  .leftLinks {
+    margin-left: 80px;
+  }
+
+  .rightGroup {
+    margin-right: 80px;
+  }
+
+  .leftLinks,
+  .rightLinks {
+    gap: 50px;
+    font-size: 13px;
+  }
+
+  .logoImg {
+    height: 56px;
+  }
+}

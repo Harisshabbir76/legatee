@@ -1,0 +1,360 @@
+/* ─────────────────────────────────────────
+   Dashboard shell + sidebar
+   Layout frame, header (hamburger + title)
+   and the off-canvas drawer behaviour.
+   ───────────────────────────────────────── */
+
+/* ── Layout ── */
+.shell {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #F5FBFF;
+  overflow-x: hidden;
+}
+
+.shellContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.shellHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 20px 32px;
+}
+
+.shellHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.shellTitle {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  color: #173946;
+}
+
+.shellMain {
+  padding: 32px;
+}
+
+/* Hamburger in the header — only on tablet/mobile (<=1023px) */
+.shellHamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  border-radius: 6px;
+  background: #fff;
+  color: #173946;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.shellHamburger:hover {
+  background: #E6F2F8;
+  color: #173946;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  width: 224px;
+  flex-shrink: 0;
+  flex-direction: column;
+  border-right: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  overflow: visible;
+  transition: margin-left 0.25s ease, transform 0.25s ease;
+}
+
+.sidebarBrand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(23, 57, 70, 0.15);
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.sidebarBrandText {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: #173946;
+  text-decoration: none;
+}
+
+/* Toggle Button inside the sidebar */
+.sidebarToggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  border-radius: 6px;
+  background: #fff;
+  color: #173946;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.sidebarToggleBtn:hover {
+  background: #E6F2F8;
+  color: #173946;
+}
+
+.sidebarNav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+}
+
+.sidebarNavList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebarLink {
+  display: block;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #173946;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.sidebarLink:hover {
+  background: #E6F2F8;
+}
+
+.sidebarLinkActive {
+  background: #E6F2F8;
+  font-weight: 500;
+  color: #173946;
+}
+
+.sidebarDropdownBtn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #173946;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.sidebarDropdownBtn:hover {
+  background: #E6F2F8;
+}
+
+.sidebarDropdownBtnActive {
+  background: #E6F2F8;
+  font-weight: 500;
+  color: #173946;
+}
+
+.sidebarChevron {
+  transition: transform 0.2s;
+}
+
+.sidebarChevronOpen {
+  transform: rotate(180deg);
+}
+
+.sidebarSubList {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 12px;
+  list-style: none;
+}
+
+.sidebarSubLink {
+  display: block;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #173946;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.sidebarSubLink:hover {
+  background: #E6F2F8;
+}
+
+.sidebarSubLinkActive {
+  background: #E6F2F8;
+  font-weight: 500;
+  color: #173946;
+}
+
+.sidebarFooter {
+  border-top: 1px solid rgba(23, 57, 70, 0.15);
+  padding: 16px 12px;
+}
+
+/* Overlay is always in the DOM — visibility controlled by data-open attribute
+   so server-rendered HTML always matches the client (prevents hydration errors). */
+.sidebarOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  background: rgba(0, 0, 0, 0.4);
+  /* Hidden by default: invisible + no pointer events */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* Visible only when the mobile drawer is open */
+.sidebarOverlay[data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Responsive ── */
+@media (min-width: 1024px) {
+  /* Always keep overlay invisible on desktop regardless of state */
+  .sidebarOverlay {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .sidebarClosed {
+    margin-left: -224px;
+  }
+}
+
+/* Content spacing scale */
+@media (max-width: 1365px) {
+  .shellMain {
+    padding: 24px;
+  }
+  .shellHeader {
+    padding: 18px 24px;
+  }
+}
+
+/* Sidebar becomes an off-canvas drawer below 1024px */
+@media (max-width: 1023px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    /* default: hidden off-screen on mobile */
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.12);
+    /* cancel the desktop margin-left collapse */
+    margin-left: 0 !important;
+  }
+
+  /* sidebarOpen slides the panel in */
+  .sidebar.sidebarOpen {
+    transform: translateX(0);
+  }
+
+  /* sidebarClosed keeps it hidden (same as default, but explicit) */
+  .sidebar.sidebarClosed {
+    transform: translateX(-100%);
+  }
+
+  .shellMain {
+    padding: 20px;
+  }
+  .shellHeader {
+    padding: 16px 20px;
+  }
+
+  /* Header hamburger takes over on tablet/mobile */
+  .shellHamburger {
+    display: flex;
+  }
+
+  /* Hide the toggle button on mobile (hamburger takes over) */
+  .sidebarToggleBtn {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .shellMain {
+    padding: 16px;
+  }
+  .shellHeader {
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shellHeader {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .shellTitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .shellMain {
+    padding: 12px;
+  }
+  .shellHeader {
+    padding: 12px;
+  }
+}
+
+/* Touch devices: comfortable tap targets */
+@media (pointer: coarse) {
+  .sidebarLink,
+  .sidebarSubLink,
+  .sidebarDropdownBtn {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+}
+
+.sidebarOverlay {
+  display: none; /* Hidden by default */
+  position: fixed;
+  inset: 0;
+  z-index: 65;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* On mobile when sidebar is open, show the overlay */
+@media (max-width: 1023px) {
+  .sidebarOverlay {
+    display: block; /* Will be controlled by inline style */
+  }
+}

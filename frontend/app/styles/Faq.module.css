@@ -1,0 +1,716 @@
+.hero {
+  position: relative;
+  padding: 110px 24px 60px;
+  background: #fff;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  font-weight: 300;
+  color: #173946;
+  margin: 0 145px 32px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumbLink {
+  color: rgba(23, 57, 70, 1);
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.breadcrumbLink:hover {
+  color: #173946;
+}
+
+.breadcrumbSep {
+  color: rgba(23, 57, 70, 1);
+  font-size: 10px;
+}
+
+.breadcrumbCurrent {
+  color: #173946;
+  font-weight: 600;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 300;
+  color: #000000;
+  line-height: 1.5;
+  max-width: 580px;
+  margin: 20px auto 40px;
+}
+
+.title {
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0.06em;
+  margin-top: 60px;
+}
+
+.panel {
+  position: relative;
+  z-index: 1;
+  width: min(690px, 100%);
+  margin: 0 auto;
+  padding: 0;
+  background: #ffffff;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.question {
+  display: flex;
+  width: 100%;
+  min-height: 37px;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid rgba(23,57,70,0.7);
+  background: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 8px 19px 8px 13px;
+  text-align: left;
+}
+
+.question[aria-expanded="true"] {
+  color: #5D8AA3;
+}
+
+.answer {
+  margin-top: -10px;
+  padding: 16px 19px 18px 13px;
+  border: 2px solid rgba(23,57,70,0.7);
+  border-top: none;
+  background: #ffffff;
+  color: #000000;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.plus {
+  flex: 0 0 auto;
+  color: var(--color-maroon);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+  margin-left: 20px;
+}
+
+.help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 24px 60px;
+  text-align: center;
+}
+
+.helpIcon {
+  width: 110px;
+  height: auto;
+  margin-bottom: 70px;
+}
+
+.helpTitle {
+  color: #173946;
+  font-family: var(--font-heading);
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.helpCopy {
+  max-width: 540px;
+  margin: 27px auto 31px;
+  color: var(--color-ink);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.helpButton {
+  display: inline-flex;
+  width: 127px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  background-color: #173946;
+  color: #FFFCF8;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE: All devices                                      */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* ── Large screens (1400px and above) ── */
+@media (min-width: 1400px) {
+  .hero {
+    padding: 130px 40px 80px;
+  }
+
+  .breadcrumb {
+    margin: 0 200px 40px;
+    font-size: 13px;
+  }
+
+  .title {
+    font-size: 38px;
+    margin-top: 80px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    max-width: 650px;
+    margin: 24px auto 48px;
+  }
+
+  .panel {
+    width: min(780px, 100%);
+  }
+
+  .helpTitle {
+    font-size: 30px;
+  }
+
+  .helpCopy {
+    font-size: 13px;
+    max-width: 600px;
+  }
+
+  .helpIcon {
+    width: 130px;
+  }
+}
+
+/* ── Tablets (768px - 1023px) ── */
+@media (max-width: 1023px) {
+  .hero {
+    padding: 90px 20px 50px;
+  }
+
+  .breadcrumb {
+    margin: 0 80px 28px;
+    font-size: 11px;
+    gap: 5px;
+  }
+
+  .breadcrumbSep {
+    font-size: 9px;
+  }
+
+  .title {
+    font-size: 28px;
+    margin-top: 40px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    max-width: 480px;
+    margin: 16px auto 32px;
+  }
+
+  .panel {
+    width: min(620px, 100%);
+  }
+
+  .help {
+    padding: 30px 20px 50px;
+  }
+
+  .helpTitle {
+    font-size: 22px;
+  }
+
+  .helpCopy {
+    font-size: 11px;
+    max-width: 450px;
+    margin: 22px auto 26px;
+  }
+
+  .helpIcon {
+    width: 90px;
+    margin-bottom: 50px;
+  }
+}
+
+/* ── Small tablets and large phones (600px - 767px) ── */
+@media (max-width: 767px) {
+  .hero {
+    padding: 80px 16px 40px;
+  }
+
+  .breadcrumb {
+    margin: 0 40px 24px;
+    font-size: 10px;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumbSep {
+    font-size: 8px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-top: 30px;
+    letter-spacing: 0.04em;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    max-width: 430px;
+    margin: 14px auto 28px;
+  }
+
+  .panel {
+    width: 100%;
+  }
+
+  .list {
+    gap: 10px;
+  }
+
+  .question {
+    font-size: 11px;
+    min-height: 34px;
+    padding: 6px 14px 6px 10px;
+    border-width: 1.5px;
+  }
+
+  .answer {
+    font-size: 11px;
+    padding: 14px 14px 16px 10px;
+    border-width: 1.5px;
+    border-top: none;
+  }
+
+  .plus {
+    font-size: 18px;
+    margin-left: 14px;
+  }
+
+  .help {
+    padding: 24px 16px 40px;
+  }
+
+  .helpTitle {
+    font-size: 20px;
+  }
+
+  .helpCopy {
+    font-size: 10px;
+    max-width: 380px;
+    margin: 18px auto 22px;
+  }
+
+  .helpButton {
+    width: 110px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .helpIcon {
+    width: 76px;
+    margin-bottom: 40px;
+  }
+}
+
+/* ── Mobile portrait (480px - 599px) ── */
+@media (max-width: 599px) {
+  .hero {
+    padding: 70px 14px 32px;
+  }
+
+  .breadcrumb {
+    margin: 10px 20px 20px;
+    font-size: 9px;
+    gap: 3px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumbSep {
+    font-size: 7px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-top: 24px;
+    letter-spacing: 0.03em;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    max-width: 340px;
+    margin: 12px auto 24px;
+  }
+
+  .panel {
+    width: 100%;
+  }
+
+  .list {
+    gap: 8px;
+  }
+
+  .question {
+    font-size: 10px;
+    min-height: 32px;
+    padding: 6px 12px 6px 10px;
+    border-width: 1.5px;
+  }
+
+  .answer {
+    font-size: 10px;
+    padding: 12px 12px 14px 10px;
+    border-width: 1.5px;
+    border-top: none;
+  }
+
+  .plus {
+    font-size: 16px;
+    margin-left: 10px;
+  }
+
+  .help {
+    padding: 20px 14px 32px;
+  }
+
+  .helpTitle {
+    font-size: 17px;
+  }
+
+  .helpCopy {
+    font-size: 10px;
+    max-width: 380px;
+    margin: 16px auto 20px;
+    line-height: 1.5;
+  }
+
+  .helpButton {
+    width: 100px;
+    height: 18px;
+    font-size: 9px;
+  }
+
+  .helpIcon {
+    width: 64px;
+    margin-bottom: 32px;
+  }
+}
+
+/* ── Small phones (400px - 479px) ── */
+@media (max-width: 479px) {
+  .hero {
+    padding: 60px 12px 28px;
+  }
+
+  .breadcrumb {
+    margin: 20px 12px 25px;
+    font-size: 8px;
+    gap: 2px;
+  }
+
+  .breadcrumbSep {
+    font-size: 6px;
+  }
+
+  .title {
+    font-size: 17px;
+    margin-top: 20px;
+    letter-spacing: 0.02em;
+  }
+
+  .subtitle {
+    font-size: 9px;
+    max-width: 360px;
+    margin: 10px auto 20px;
+  }
+
+  .list {
+    gap: 6px;
+  }
+
+  .question {
+    font-size: 9px;
+    min-height: 30px;
+    padding: 5px 10px 5px 8px;
+    border-width: 1.5px;
+  }
+
+  .answer {
+    font-size: 9px;
+    padding: 10px 10px 12px 8px;
+    border-width: 1.5px;
+    border-top: none;
+  }
+
+  .plus {
+    font-size: 14px;
+    margin-left: 8px;
+  }
+
+  .help {
+    padding: 16px 12px 28px;
+  }
+
+  .helpTitle {
+    font-size: 15px;
+  }
+
+  .helpCopy {
+    font-size: 9px;
+    max-width: 350px;
+    margin: 14px auto 18px;
+  }
+
+  .helpButton {
+    width: 90px;
+    height: 18px;
+    font-size: 8px;
+  }
+
+  .helpIcon {
+    width: 56px;
+    margin-bottom: 28px;
+  }
+}
+
+/* ── Very small phones (360px - 399px) ── */
+@media (max-width: 399px) {
+  .hero {
+    padding: 50px 10px 24px;
+  }
+
+  .breadcrumb {
+    margin: 20px 8px 14px;
+    font-size: 7px;
+    gap: 2px;
+    opacity: 1;
+  }
+
+  .breadcrumbSep {
+    font-size: 5px;
+  }
+
+  .title {
+    font-size: 15px;
+    margin-top: 16px;
+    letter-spacing: 0.01em;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    max-width: 330px;
+    margin: 8px auto 16px;
+  }
+
+  .list {
+    gap: 5px;
+  }
+
+  .question {
+    font-size: 10px;
+    min-height: 28px;
+    padding: 4px 8px 4px 6px;
+    border-width: 1px;
+  }
+
+  .answer {
+    font-size: 10px;
+    padding: 8px 8px 10px 6px;
+    border-width: 1px;
+    border-top: none;
+  }
+
+  .plus {
+    font-size: 12px;
+    margin-left: 6px;
+  }
+
+  .help {
+    padding: 14px 10px 24px;
+  }
+
+  .helpTitle {
+    font-size: 15px;
+    max-width: 260px;
+    line-height: 1.5;
+  }
+
+  .helpCopy {
+    font-size: 10px;
+    max-width: 300px;
+    margin: 12px auto 16px;
+  }
+
+  .helpButton {
+    width: 80px;
+    height: 16px;
+    font-size: 7px;
+  }
+
+  .helpIcon {
+    width: 48px;
+    margin-bottom: 24px;
+  }
+}
+
+/* ── Extra small (320px - 359px) ── */
+@media (max-width: 359px) {
+  .hero {
+    padding: 40px 8px 20px;
+  }
+
+  .breadcrumb {
+    margin: 30px 4px 12px;
+    font-size: 6px;
+    gap: 2px;
+  }
+
+  .breadcrumbSep {
+    font-size: 4px;
+  }
+
+  .title {
+    font-size: 14px;
+    line-height: 1.2;
+    margin-top: 14px;
+    letter-spacing: 0;
+  }
+
+  .subtitle {
+    font-size: 7px;
+    max-width: 300px;
+    margin: 6px auto 14px;
+  }
+
+  .question {
+    font-size: 7px;
+    min-height: 24px;
+    padding: 3px 6px 3px 5px;
+    border-width: 1px;
+  }
+
+  .answer {
+    font-size: 7px;
+    padding: 6px 6px 8px 5px;
+    border-width: 1px;
+    border-top: none;
+  }
+
+  .plus {
+    font-size: 10px;
+    margin-left: 4px;
+  }
+
+  .help {
+    padding: 12px 8px 20px;
+  }
+
+  .helpTitle {
+    font-size: 12px;
+  }
+
+  .helpCopy {
+    font-size: 7px;
+    max-width: 200px;
+    margin: 10px auto 14px;
+  }
+
+  .helpButton {
+    width: 70px;
+    height: 14px;
+    font-size: 6px;
+  }
+
+  .helpIcon {
+    width: 40px;
+    margin-bottom: 20px;
+  }
+}
+
+/* ── Landscape phones ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    padding: 60px 20px 30px;
+  }
+
+  .breadcrumb {
+    margin: 0 60px 20px;
+    font-size: 10px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-top: 20px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    margin: 12px auto 20px;
+  }
+
+  .help {
+    padding: 20px 20px 30px;
+  }
+
+  .helpIcon {
+    width: 60px;
+    margin-bottom: 30px;
+  }
+
+  .helpTitle {
+    font-size: 18px;
+  }
+}
+
+/* ── Print styles ── */
+@media print {
+  .hero {
+    padding: 40px 20px;
+  }
+
+  .breadcrumb {
+    margin: 0 40px 20px;
+  }
+
+  .question {
+    border-color: #173946;
+  }
+
+  .answer {
+    border-color: #173946;
+    border-top: none;
+  }
+
+  .helpButton {
+    background: #173946;
+    color: #fff;
+  }
+}

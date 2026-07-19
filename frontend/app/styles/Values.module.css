@@ -1,0 +1,170 @@
+.section {
+  background: #fff;
+  padding: 0px 24px 80px;
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: #173946;
+  margin: -20px 0 56px;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.icon img {
+  width: 56px !important;
+  height: 56px !important;
+  object-fit: contain;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #000000;
+  margin: 0 0 8px;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #000000;
+  margin: 0;
+  max-width: 180px;
+}
+
+/* ── Tablets (768px and below) ── */
+@media (max-width: 768px) {
+  .grid {
+    flex-wrap: wrap;
+    gap: 40px 0;
+  }
+
+  .item {
+    flex: 0 0 50%;
+  }
+}
+
+/* ── Mobile (480px and below) ── */
+/* Shows 2 items per row with the last one centered */
+@media (max-width: 480px) {
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px 20px;
+    max-width: 400px;
+  }
+
+  .item {
+    flex: 0 0 calc(50% - 20px);
+    max-width: 160px;
+    padding: 0 10px;
+  }
+
+  /* Center the last item if it's the only one in the last row */
+  .item:last-child {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* If there are 3 items, center the last one */
+  .item:nth-last-child(1):nth-child(odd) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ── Very small phones (380px and below) ── */
+@media (max-width: 380px) {
+  .grid {
+    gap: 28px 16px;
+    max-width: 340px;
+  }
+
+  .item {
+    flex: 0 0 calc(50% - 16px);
+    max-width: 140px;
+    padding: 0 8px;
+  }
+
+  .description {
+    font-size: 10px;
+    max-width: 140px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
+/* ── Extra small (320px and below) ── */
+@media (max-width: 320px) {
+  .grid {
+    gap: 24px 12px;
+    max-width: 280px;
+  }
+
+  .item {
+    flex: 0 0 calc(50% - 12px);
+    max-width: 120px;
+    padding: 0 6px;
+  }
+
+  .description {
+    font-size: 9px;
+    max-width: 120px;
+  }
+
+  .label {
+    font-size: 10px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}

@@ -1,0 +1,457 @@
+/* ─────────────────────────────────────────
+   Email marketing page
+   Stats grid (cards come from insights),
+   and horizontal Name | Email | Date lists
+   that scroll inside their own panel.
+   Fully responsive with consistent sizing
+   ───────────────────────────────────────── */
+
+.emailPage {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* 24px */
+  padding: 0 0.25rem;
+}
+
+/* ── Stats Grid ── */
+.emailStatsGrid {
+  display: grid;
+  gap: 1rem; /* 16px */
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ── Sections ── */
+.emailSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* 24px */
+}
+
+.sectionTitle {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #173946;
+  margin: 0 0 0.75rem 0;
+}
+
+.sectionHint {
+  font-size: 0.75rem; /* 12px */
+  color: rgba(23, 57, 70, 0.6);
+  margin: -0.5rem 0 0.75rem 0;
+}
+
+/* ── Lists ── */
+.emailListWrap {
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  border-radius: 0.5rem; /* 8px */
+  background: #fff;
+  overflow: hidden;
+}
+
+.emailListHead,
+.emailRow {
+  display: grid;
+  grid-template-columns: minmax(90px, 0.9fr) minmax(0, 1.7fr) 96px;
+  gap: 0.75rem; /* 12px */
+  align-items: center;
+}
+
+.emailListHead {
+  padding: 0.625rem 1rem; /* 10px 16px */
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(23, 57, 70, 0.6);
+  border-bottom: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fafafa;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Scrollable panel */
+.emailScroll {
+  max-height: 340px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.emailRow {
+  padding: 0.6875rem 1rem; /* 11px 16px */
+  border-bottom: 1px solid #E6F2F8;
+  font-size: 0.875rem; /* 14px */
+  transition: background 0.15s ease;
+}
+
+.emailRow:last-child {
+  border-bottom: none;
+}
+
+.emailRow:hover {
+  background: rgba(139, 69, 19, 0.02);
+}
+
+.emailCellName,
+.emailCellEmail {
+  color: #173946;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emailCellName {
+  font-weight: 500;
+}
+
+.emailCellDate {
+  color: rgba(23, 57, 70, 0.6);
+  font-size: 0.75rem; /* 12px */
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ── Empty State ── */
+.emailEmpty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: rgba(23, 57, 70, 0.6);
+  font-size: 0.875rem;
+}
+
+.emailEmpty svg {
+  margin-bottom: 0.75rem;
+  opacity: 0.4;
+}
+
+.emailEmpty h3 {
+  font-size: 1rem;
+  color: #173946;
+  margin: 0 0 0.5rem;
+}
+
+.emailEmpty p {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ── Responsive Breakpoints ── */
+
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
+  .emailStatsGrid {
+    gap: 1.25rem; /* 20px */
+  }
+  
+  .emailListHead,
+  .emailRow {
+    grid-template-columns: minmax(100px, 0.9fr) minmax(0, 1.7fr) 110px;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .emailScroll {
+    max-height: 400px;
+  }
+}
+
+/* Desktop (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .emailScroll {
+    max-height: 360px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+  .emailStatsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.875rem; /* 14px */
+  }
+  
+  .emailListHead,
+  .emailRow {
+    grid-template-columns: minmax(80px, 0.85fr) minmax(0, 1.65fr) 90px;
+    gap: 0.625rem; /* 10px */
+    padding: 0.5625rem 0.875rem; /* 9px 14px */
+  }
+  
+  .emailListHead {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.5rem 0.875rem;
+  }
+  
+  .emailRow {
+    font-size: 0.8125rem; /* 13px */
+  }
+  
+  .emailCellDate {
+    font-size: 0.6875rem; /* 11px */
+  }
+  
+  .emailScroll {
+    max-height: 320px;
+  }
+}
+
+/* Small Tablet / Large Phone (600px - 767px) */
+@media (max-width: 767px) {
+  .emailPage {
+    gap: 1rem;
+  }
+  
+  .emailStatsGrid {
+    gap: 0.75rem; /* 12px */
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .emailSection {
+    gap: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 0.6875rem; /* 11px */
+    margin-bottom: 0.5rem;
+  }
+  
+  .sectionHint {
+    font-size: 0.6875rem;
+    margin: -0.25rem 0 0.5rem 0;
+  }
+  
+  .emailListHead,
+  .emailRow {
+    grid-template-columns: minmax(70px, 0.8fr) minmax(0, 1.6fr) 84px;
+    gap: 0.5rem; /* 8px */
+    padding: 0.5rem 0.75rem; /* 8px 12px */
+  }
+  
+  .emailListHead {
+    font-size: 0.5625rem; /* 9px */
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .emailRow {
+    font-size: 0.75rem; /* 12px */
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .emailCellDate {
+    font-size: 0.625rem; /* 10px */
+  }
+  
+  .emailScroll {
+    max-height: 300px;
+    min-height: 200px;
+  }
+}
+
+/* Mobile (480px - 599px) */
+@media (max-width: 599px) {
+  .emailStatsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem; /* 10px */
+  }
+  
+  .emailListHead,
+  .emailRow {
+    grid-template-columns: minmax(60px, 0.75fr) minmax(0, 1.5fr) 72px;
+    gap: 0.375rem; /* 6px */
+    padding: 0.4375rem 0.625rem; /* 7px 10px */
+  }
+  
+  .emailListHead {
+    font-size: 0.5rem; /* 8px */
+    padding: 0.3125rem 0.625rem;
+    letter-spacing: 0.04em;
+  }
+  
+  .emailRow {
+    font-size: 0.6875rem; /* 11px */
+    padding: 0.4375rem 0.625rem;
+  }
+  
+  .emailCellDate {
+    font-size: 0.5625rem; /* 9px */
+  }
+  
+  .emailScroll {
+    max-height: 280px;
+    min-height: 180px;
+  }
+  
+  .emailEmpty {
+    padding: 2rem 1rem;
+  }
+  
+  .emailEmpty h3 {
+    font-size: 0.875rem;
+  }
+  
+  .emailEmpty p {
+    font-size: 0.75rem;
+  }
+}
+
+/* Small Mobile (380px - 479px) */
+@media (max-width: 479px) {
+  .emailStatsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem; /* 8px */
+  }
+  
+  .emailListHead,
+  .emailRow {
+    grid-template-columns: minmax(50px, 0.7fr) minmax(0, 1.4fr) 64px;
+    gap: 0.3125rem; /* 5px */
+    padding: 0.375rem 0.5rem; /* 6px 8px */
+  }
+  
+  .emailListHead {
+    font-size: 0.4375rem; /* 7px */
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .emailRow {
+    font-size: 0.625rem; /* 10px */
+    padding: 0.375rem 0.5rem;
+  }
+  
+  .emailCellDate {
+    font-size: 0.5rem; /* 8px */
+  }
+  
+  .emailScroll {
+    max-height: 260px;
+    min-height: 160px;
+  }
+  
+  .sectionTitle {
+    font-size: 0.625rem;
+  }
+  
+  .sectionHint {
+    font-size: 0.625rem;
+  }
+}
+
+/* Very Small Mobile (below 380px) */
+@media (max-width: 379px) {
+  .emailStatsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.375rem; /* 6px */
+  }
+  
+  .emailListHead,
+  .emailRow {
+    grid-template-columns: minmax(45px, 0.65fr) minmax(0, 1.3fr) 56px;
+    gap: 0.25rem; /* 4px */
+    padding: 0.3125rem 0.375rem; /* 5px 6px */
+  }
+  
+  .emailListHead {
+    font-size: 0.375rem; /* 6px */
+    padding: 0.1875rem 0.375rem;
+  }
+  
+  .emailRow {
+    font-size: 0.5625rem; /* 9px */
+    padding: 0.3125rem 0.375rem;
+  }
+  
+  .emailCellDate {
+    font-size: 0.4375rem; /* 7px */
+  }
+  
+  .emailScroll {
+    max-height: 240px;
+    min-height: 140px;
+  }
+}
+
+/* ── Touch Device Optimizations ── */
+@media (pointer: coarse) {
+  .emailRow {
+    min-height: 2.75rem; /* 44px */
+  }
+}
+
+/* ── Scrollbar Styling ── */
+.emailScroll::-webkit-scrollbar {
+  width: 0.375rem;
+  height: 0.375rem;
+}
+
+.emailScroll::-webkit-scrollbar-track {
+  background: #E6F2F8;
+  border-radius: 0.25rem;
+}
+
+.emailScroll::-webkit-scrollbar-thumb {
+  background: rgba(23, 57, 70, 0.6);
+  border-radius: 0.25rem;
+}
+
+.emailScroll::-webkit-scrollbar-thumb:hover {
+  background: #173946;
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.emailRow {
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+.emailRow:nth-child(2) {
+  animation-delay: 0.03s;
+}
+.emailRow:nth-child(3) {
+  animation-delay: 0.06s;
+}
+.emailRow:nth-child(4) {
+  animation-delay: 0.09s;
+}
+.emailRow:nth-child(5) {
+  animation-delay: 0.12s;
+}
+.emailRow:nth-child(6) {
+  animation-delay: 0.15s;
+}
+.emailRow:nth-child(7) {
+  animation-delay: 0.18s;
+}
+.emailRow:nth-child(8) {
+  animation-delay: 0.21s;
+}
+.emailRow:nth-child(9) {
+  animation-delay: 0.24s;
+}
+.emailRow:nth-child(10) {
+  animation-delay: 0.27s;
+}
+
+/* ── Hover States (Non-Touch Only) ── */
+@media (hover: hover) {
+  .emailRow:hover {
+    background: rgba(139, 69, 19, 0.02);
+  }
+}
+
+/* ── Accessibility ── */
+@media (prefers-reduced-motion: reduce) {
+  .emailRow {
+    animation: none;
+  }
+}
