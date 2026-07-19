@@ -324,6 +324,8 @@ function PropertiesPanel({ elKey, content, pageKey, onBlock, previewLang, onClos
 
 const DEFAULT: ShopPageData = {
   shop:        { hero: { title: { text: "SHOP", tag: "h1", style: {} }, copy: { text: "A curated collection of scents where tradition meets contemporary elegance.", tag: "p", style: {} } } },
+  perfumes:    { hero: { title: { text: "PERFUMES", tag: "h1", style: {} }, copy: { text: "", tag: "p", style: {} } } },
+  bodyHairMist:{ hero: { title: { text: "BODY & HAIR MIST", tag: "h1", style: {} }, copy: { text: "", tag: "p", style: {} } } },
   signature:   { hero: { title: { text: "SIGNATURE PERFUME", tag: "h1", style: {} }, copy: { text: "Timeless Arabian scent traditions refined for today.", tag: "p", style: {} } } },
   kandora:     { hero: { title: { text: "KANDORA PERFUME", tag: "h1", style: {} }, copy: { text: "Scents inspired by the elegance of the kandora.", tag: "p", style: {} } } },
   allOverSpray:{ hero: { title: { text: "ALL OVER SPRAY", tag: "h1", style: {} }, copy: { text: "A light, refreshing mist designed for all-day wear.", tag: "p", style: {} } } },

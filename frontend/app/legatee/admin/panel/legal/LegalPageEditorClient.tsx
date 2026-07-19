@@ -704,7 +704,7 @@ export default function LegalPageEditorClient({ initialContent, initialFooterCon
         <main ref={canvasRef} className="legatee-legal-editor" style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }} onClickCapture={handleCanvasClick}>
           <LanguageProvider defaultLang={previewLang}>
             <div style={{ pointerEvents: "none" }}><Navbar /></div>
-            <Legal content={content} activeTab={activeTab} onTabChange={(i) => { setActiveTab(i); setSel(null); }} />
+            <Legal />
             <Footer content={footerContent} />
           </LanguageProvider>
         </main>
