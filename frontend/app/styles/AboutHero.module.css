@@ -8,9 +8,7 @@
 .background {
   z-index: -10;
   object-fit: cover;
-  object-position: center 20%;
-  transform: scale(0.85);
-  transform-origin: center top;
+  object-position: center 30%;
 }
 
 .overlay {

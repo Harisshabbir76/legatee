@@ -108,7 +108,7 @@
     margin-top: 60px;
   }
   .copy{
-    font-size: 13px;
+    font-size: 18px;
     
   }
 }
@@ -347,11 +347,4 @@
     padding: 4px 20px;
   }
 
-}
-
-@media (min-width: 1024px) {
-  
-  .copy {
-    font-size: 12px;
-  }
 }
