@@ -108,7 +108,7 @@ function mergeArIntoTabs(tabs: LegalTab[]): LegalTab[] {
     const tabAr = ar.tabsContent[i];
     const tabEn = en.tabsContent[i];
     // build a title→Arabic-section lookup (normalised lowercase for resilient matching)
-    const arByTitle = new Map<string, { title: string; lines: string[] }>();
+    const arByTitle = new Map<string, { title: string; lines: readonly string[] }>();
     (tabAr?.sections ?? []).forEach((sec, si) => {
       const enTitle = tabEn?.sections[si]?.title ?? "";
       arByTitle.set(enTitle.toLowerCase().trim(), sec);
