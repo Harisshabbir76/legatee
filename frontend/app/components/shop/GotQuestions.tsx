@@ -21,11 +21,19 @@ export default function GotQuestions({ content, openItems }: Props) {
   const t = getT(lang);
 
   const faq = content ?? {} as ShopPageData["faq"];
+  const arFaqItems = getT("ar").faq.items;
   const defaultItems = t.faq.items.slice(0, 5).map((d, i) => ({
-    q: { text: `${i + 1}. ${d.q}`, style: {} },
-    a: { text: d.a, style: {} },
+    q: { text: `${i + 1}. ${d.q}`, textAr: `${i + 1}. ${arFaqItems[i]?.q ?? d.q}`, style: {} },
+    a: { text: d.a, textAr: arFaqItems[i]?.a ?? d.a, style: {} },
   }));
-  const items = faq.items?.length ? faq.items : defaultItems;
+  const items = faq.items?.length
+    ? faq.items.map((item, i) => {
+        if (!item.q?.textAr && arFaqItems[i]) {
+          return { ...item, q: { ...item.q, textAr: arFaqItems[i].q }, a: { ...item.a, textAr: arFaqItems[i].a } };
+        }
+        return item;
+      })
+    : defaultItems;
 
   function isOpen(i: number) {
     return isControlled ? openItems!.includes(i) : internalOpen === i;
