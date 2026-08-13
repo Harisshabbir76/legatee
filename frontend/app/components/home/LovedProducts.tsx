@@ -98,7 +98,7 @@ export default function LovedProducts({
                 </div>
                 <div className={styles.cardInfo}>
                   <Link href={href} className={styles.cardName}>
-                    {product.name.toUpperCase()}
+                    {(lang === "ar" && product.nameAr ? product.nameAr : product.name).toUpperCase()}
                   </Link>
                   <span className={styles.cardPrice}>{product.price} AED</span>
                 </div>

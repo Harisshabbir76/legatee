@@ -316,7 +316,8 @@ exports.create = async (req, res, next) => {
           phone:   { $cond: [{ $eq: ["$phone",   ""] }, phone    || "$phone",   "$phone"]   },
           address: { $cond: [{ $eq: ["$address", ""] }, address  || "$address", "$address"] },
           city:    { $cond: [{ $eq: ["$city",    ""] }, city     || "$city",    "$city"]    },
-        }}]
+        }}],
+        { updatePipeline: true }
       );
     }
 
@@ -343,6 +344,25 @@ exports.list = async (req, res, next) => {
   try {
     const orders = await Order.find().sort({ createdAt: -1 });
     res.json({ orders });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.remove = async (req, res, next) => {
+  try {
+    const ids = req.body?.ids;
+    if (Array.isArray(ids) && ids.length > 0) {
+      const validIds = ids.filter((id) => mongoose.Types.ObjectId.isValid(id));
+      await Order.deleteMany({ _id: { $in: validIds } });
+      return res.json({ deleted: validIds.length });
+    }
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(404).json({ message: "Order not found." });
+    }
+    const order = await Order.findByIdAndDelete(req.params.id);
+    if (!order) return res.status(404).json({ message: "Order not found." });
+    res.json({ deleted: 1 });
   } catch (err) {
     next(err);
   }

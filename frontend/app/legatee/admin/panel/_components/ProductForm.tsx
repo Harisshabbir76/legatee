@@ -29,6 +29,8 @@ function initIngredients(product?: Product): IngredientDraft[] {
       id: crypto.randomUUID(),
       name: i.name,
       description: i.description ?? "",
+      nameAr: i.nameAr ?? "",
+      descriptionAr: i.descriptionAr ?? "",
     })) ?? []
   );
 }
@@ -40,9 +42,13 @@ function initImages(product?: Product): ImageSlot[] {
 export default function ProductForm({ product }: { product?: Product }) {
   const router = useRouter();
   const [name, setName] = useState(product?.name ?? "");
+  const [nameAr, setNameAr] = useState(product?.nameAr ?? "");
   const [description, setDescription] = useState(product?.description ?? "");
-const [howToUse, setHowToUse] = useState(product?.howToUse ?? "");
+  const [descriptionAr, setDescriptionAr] = useState(product?.descriptionAr ?? "");
+  const [howToUse, setHowToUse] = useState(product?.howToUse ?? "");
+  const [howToUseAr, setHowToUseAr] = useState(product?.howToUseAr ?? "");
   const [mood, setMood] = useState(product?.mood ?? "");
+  const [moodAr, setMoodAr] = useState(product?.moodAr ?? "");
   const [price, setPrice] = useState(product ? String(product.price) : "");
   const [stock, setStock] = useState(
     product && typeof product.stock === "number" ? String(product.stock) : ""
@@ -69,9 +75,13 @@ const [howToUse, setHowToUse] = useState(product?.howToUse ?? "");
 
     const formData = new FormData();
     formData.set("name", name);
+    formData.set("nameAr", nameAr);
     formData.set("description", description);
+    formData.set("descriptionAr", descriptionAr);
     formData.set("howToUse", howToUse);
+    formData.set("howToUseAr", howToUseAr);
     formData.set("mood", mood);
+    formData.set("moodAr", moodAr);
     formData.set("price", price);
     formData.set("stock", stock);
     formData.set("collection", collection);
@@ -82,7 +92,7 @@ const [howToUse, setHowToUse] = useState(product?.howToUse ?? "");
     );
     formData.set(
       "ingredientsMeta",
-      JSON.stringify(ingredients.map((i) => ({ name: i.name, description: i.description })))
+      JSON.stringify(ingredients.map((i) => ({ name: i.name, description: i.description, nameAr: i.nameAr, descriptionAr: i.descriptionAr })))
     );
     formData.set(
       "existingImages",
@@ -228,6 +238,60 @@ const [howToUse, setHowToUse] = useState(product?.howToUse ?? "");
             <span className={styles.fieldHint}>
               When stock reaches 0 the product shows as &quot;Out of stock&quot; on the website and cannot be purchased.
             </span>
+          </label>
+        </div>
+      </section>
+
+      {/* ── Arabic Details ── */}
+      <section className={styles.card}>
+        <h3 className={styles.cardTitle}>Arabic Details (التفاصيل بالعربية)</h3>
+        <div className={styles.formSection}>
+          <label className={styles.field}>
+            Name (AR) — الاسم
+            <input
+              type="text"
+              value={nameAr}
+              onChange={(e) => setNameAr(e.target.value)}
+              className={styles.input}
+              dir="auto"
+              placeholder="اسم المنتج بالعربية"
+            />
+          </label>
+
+          <label className={styles.field}>
+            Description (AR) — الوصف
+            <textarea
+              rows={4}
+              value={descriptionAr}
+              onChange={(e) => setDescriptionAr(e.target.value)}
+              className={styles.textarea}
+              dir="auto"
+              placeholder="وصف المنتج بالعربية"
+            />
+          </label>
+
+          <label className={styles.field}>
+            How to use (AR) — طريقة الاستخدام
+            <textarea
+              rows={3}
+              value={howToUseAr}
+              onChange={(e) => setHowToUseAr(e.target.value)}
+              className={styles.textarea}
+              dir="auto"
+              placeholder="طريقة استخدام المنتج بالعربية"
+            />
+          </label>
+
+          <label className={styles.field}>
+            Mood (AR) — المزاج
+            <textarea
+              rows={3}
+              value={moodAr}
+              onChange={(e) => setMoodAr(e.target.value)}
+              className={styles.textarea}
+              dir="auto"
+              placeholder="وصف المزاج بالعربية"
+            />
           </label>
         </div>
       </section>

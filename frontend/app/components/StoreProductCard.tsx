@@ -45,6 +45,7 @@ export default function StoreProductCard({
   const href = productPath(product, collectionSlug);
   const outOfStock = product.stock === 0;
   const isWishlisted = wishlistItems.some((w) => w.id === product.id);
+  const displayName = lang === "ar" && product.nameAr ? product.nameAr : product.name;
 
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault();
@@ -70,7 +71,7 @@ export default function StoreProductCard({
           }
         </div>
         <div className={styles.listInfo}>
-          <h3 className={styles.listName}>{product.name}</h3>
+          <h3 className={styles.listName}>{displayName}</h3>
           <p className={styles.listPrice}>{price}</p>
           {outOfStock && <p className={styles.outOfStockText}>{t.product.outOfStockLabel}</p>}
         </div>
@@ -110,7 +111,7 @@ export default function StoreProductCard({
       </div>
 
       <div className={styles.cardInfo}>
-        <Link href={href} className={styles.cardName}>{product.name}</Link>
+        <Link href={href} className={styles.cardName}>{displayName}</Link>
         <span className={styles.cardPrice}>{price}</span>
       </div>
     </div>

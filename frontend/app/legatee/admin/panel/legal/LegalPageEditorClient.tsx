@@ -77,16 +77,56 @@ function setBlock(content: LegalPageData, key: string, block: ContentBlock): Leg
 // -- Defaults ------------------------------------------------------------------
 
 function buildTabsFromTranslations(): LegalTab[] {
-  const t = getT("en").legal;
-  return t.tabs.map((label, i) => {
-    const tabContent = t.tabsContent[i];
+  const en = getT("en").legal;
+  const ar = getT("ar").legal;
+  return en.tabs.map((label, i) => {
+    const tabEn = en.tabsContent[i];
+    const tabAr = ar.tabsContent[i];
     return {
-      label: mkBlock(label, "span"),
+      label: { text: label, textAr: ar.tabs[i] ?? "", tag: "span", style: {} },
       intro: mkBlock(""),
-      sections: (tabContent?.sections ?? []).map((sec) => ({
-        title: mkBlock(sec.title, "h2"),
-        lines: sec.lines.map((l) => mkBlock(l)),
-      })),
+      sections: (tabEn?.sections ?? []).map((sec, si) => {
+        const secAr = tabAr?.sections[si];
+        return {
+          title: { text: sec.title, textAr: secAr?.title ?? "", tag: "h2", style: {} },
+          lines: sec.lines.map((l, li) => ({
+            text: l,
+            textAr: secAr?.lines[li] ?? "",
+            tag: "p",
+            style: {},
+          })),
+        };
+      }),
+    };
+  });
+}
+
+function mergeArIntoTabs(tabs: LegalTab[]): LegalTab[] {
+  const en = getT("en").legal;
+  const ar = getT("ar").legal;
+  return tabs.map((tab, i) => {
+    const tabAr = ar.tabsContent[i];
+    const tabEn = en.tabsContent[i];
+    // build a title→Arabic-section lookup (normalised lowercase for resilient matching)
+    const arByTitle = new Map<string, { title: string; lines: string[] }>();
+    (tabAr?.sections ?? []).forEach((sec, si) => {
+      const enTitle = tabEn?.sections[si]?.title ?? "";
+      arByTitle.set(enTitle.toLowerCase().trim(), sec);
+    });
+    return {
+      ...tab,
+      label: { ...tab.label, textAr: tab.label.textAr || ar.tabs[i] || "" },
+      sections: tab.sections.map((sec) => {
+        const secAr = arByTitle.get(sec.title.text.toLowerCase().trim());
+        return {
+          ...sec,
+          title: { ...sec.title, textAr: sec.title.textAr || secAr?.title || "" },
+          lines: sec.lines.map((line, li) => ({
+            ...line,
+            textAr: line.textAr || secAr?.lines[li] || "",
+          })),
+        };
+      }),
     };
   });
 }
@@ -187,7 +227,7 @@ function PropertiesPanel({ elKey, content, onBlock, extraContent, previewLang, o
   }
 
   const currentEditorVal = block
-    ? (panelLang === "ar" ? (block.textAr ?? getArDefault("legal", elKey)) : block.text)
+    ? (panelLang === "ar" ? (block.textAr || getArDefault("legal", elKey)) : block.text)
     : "";
 
   useEffect(() => {
@@ -348,7 +388,11 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
     return sec.lines.map((l) => txt(l)).join("\n");
   }
   function setLinesFromText(si: number, raw: string) {
-    const lines = raw.split("\n").map((l) => mkBlock(l));
+    const existingLines = content.tabs[activeTab].sections[si].lines;
+    const lines = raw.split("\n").map((l, idx) => {
+      const existing = existingLines[idx] ?? mkBlock("");
+      return setTxt(existing, l);
+    });
     upd((c) => { c.tabs[activeTab].sections[si].lines = lines; });
   }
 
@@ -407,7 +451,7 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
                 style={{ padding: "10px 12px", background: isOpen ? "#eaf3f6" : "#f5f0e8", display: "flex", alignItems: "flex-start", gap: 8, cursor: "pointer", userSelect: "none" }}>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 11, fontWeight: 700, color: "#173946", lineHeight: 1.3 }}>
-                    {txt(sec.title) || `Section ${si + 1}`}
+                    {(panelLang === "ar" ? (sec.title.textAr || sec.title.text) : sec.title.text) || `Section ${si + 1}`}
                   </div>
                   {!isOpen && preview && (
                     <div style={{ fontSize: 10, color: "#999", marginTop: 3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
@@ -427,6 +471,15 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
               {/* Expanded editor */}
               {isOpen && (
                 <div style={{ padding: "12px 12px 14px" }}>
+                  {/* Per-section EN/AR tabs */}
+                  <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
+                    {(["en", "ar"] as const).map((l) => (
+                      <button key={l} onClick={(e) => { e.stopPropagation(); setPanelLang(l); }}
+                        style={{ flex: 1, padding: "4px 0", border: `1px solid ${panelLang === l ? "#173946" : "#d4c5b5"}`, borderRadius: 4, background: panelLang === l ? "#173946" : "#fff", color: panelLang === l ? "#fff" : "#6f6459", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
+                        {l === "en" ? "EN" : "AR"}
+                      </button>
+                    ))}
+                  </div>
                   <label style={lbl}>Section Title</label>
                   <input
                     style={{ ...inpBase, marginBottom: 10, fontWeight: 600 }}
@@ -481,7 +534,7 @@ export default function LegalPageEditorClient({ initialContent, initialFooterCon
         heroTitle:    mergeBlock(initialContent.heroTitle, DEFAULT.heroTitle),
         heroSubtitle: mergeBlock(initialContent.heroSubtitle, DEFAULT.heroSubtitle!),
         heroImage:    initialContent.heroImage ?? "",
-        tabs:         hasRealTabs ? initialContent.tabs : buildTabsFromTranslations(),
+        tabs:         mergeArIntoTabs(hasRealTabs ? initialContent.tabs : buildTabsFromTranslations()),
       }
     : DEFAULT;
 

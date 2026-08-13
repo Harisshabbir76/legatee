@@ -13,9 +13,13 @@ import { getT } from "@/lib/translations";
 const FALLBACK_DESCRIPTION =
   "A captivating blend of juicy litchi, pear, and bergamot opens this fragrance, leading into a heart of Turkish rose, agarwood, and incense. It settles into a warm, sensual base of vanilla, musk, amber, and sandalwood-crafted for lasting elegance and depth.";
 
-function buildFragranceNotes(ingredients: { name: string; description: string }[]): string {
+function buildFragranceNotes(ingredients: { name: string; description: string; nameAr?: string; descriptionAr?: string }[], isAr = false): string {
   if (!ingredients || ingredients.length === 0) return "";
-  return ingredients.map((ing) => ing.description ? `${ing.name}: ${ing.description}` : ing.name).join("\n");
+  return ingredients.map((ing) => {
+    const n = isAr && ing.nameAr ? ing.nameAr : ing.name;
+    const d = isAr && ing.descriptionAr ? ing.descriptionAr : ing.description;
+    return d ? `${n}: ${d}` : n;
+  }).join("\n");
 }
 
 function formatPrice(price: number): string {
@@ -36,6 +40,13 @@ export default function ProductDetailsHero({ product, categoryLabel, categorySlu
   const size = product.sizes[0] ? formatSize(product.sizes[0]) : "30 ml";
   const { lang } = useLanguage();
   const t = getT(lang);
+  const isAr = lang === "ar";
+  const displayName = isAr && product.nameAr ? product.nameAr : product.name;
+  const categoryMap = t.categories as Record<string, string>;
+  const displayCategoryLabel = (categorySlug && categoryMap[categorySlug]) ? categoryMap[categorySlug] : (categoryLabel ?? "Perfumes");
+  const displayDescription = isAr && product.descriptionAr ? product.descriptionAr : (product.description || FALLBACK_DESCRIPTION);
+  const displayMood = isAr && product.moodAr ? product.moodAr : product.mood;
+  const displayHowToUse = isAr && product.howToUseAr ? product.howToUseAr : product.howToUse;
 
   function scrollSlider(dir: "left" | "right") {
     if (!sliderRef.current) return;
@@ -48,10 +59,10 @@ export default function ProductDetailsHero({ product, categoryLabel, categorySlu
         <Link href="/" className={styles.breadcrumbLink}>{t.product.breadcrumbHome}</Link>
         <span className={styles.breadcrumbSep}>&gt;</span>
         <Link href={categorySlug ? `/${categorySlug}` : "/shop"} className={styles.breadcrumbLink}>
-          {categoryLabel ?? "Perfumes"}
+          {displayCategoryLabel}
         </Link>
         <span className={styles.breadcrumbSep}>&gt;</span>
-        <strong className={styles.breadcrumbCurrent}>{product.name}</strong>
+        <strong className={styles.breadcrumbCurrent}>{displayName}</strong>
       </div>
 
       <div className={styles.heroSection}>
@@ -107,20 +118,20 @@ export default function ProductDetailsHero({ product, categoryLabel, categorySlu
         <div className={styles.summary}>
           <p className={styles.category}>{product.category?.name ?? "PERFUME"}</p>
           <div className={styles.nameRow}>
-            <h1>{product.name}</h1>
+            <h1>{displayName}</h1>
             <span className={styles.price}>{formatPrice(product.price)}</span>
           </div>
           <p className={styles.stars} aria-label="Five star rating">
             {t.product.stars}
           </p>
-          <p className={styles.description}>{product.description || FALLBACK_DESCRIPTION}</p>
+          <p className={styles.description}>{displayDescription}</p>
           <p className={styles.size}>{t.product.size}: {size}</p>
 
           <ProductAccordion items={[
-            ...(product.mood ? [{ title: t.product.mood, body: product.mood }] : []),
-            { title: t.product.productDetails, body: product.description || FALLBACK_DESCRIPTION },
-            ...(product.ingredients?.length ? [{ title: t.product.fragranceNotes, body: buildFragranceNotes(product.ingredients) }] : []),
-            ...(product.howToUse ? [{ title: t.product.waysToUse, body: product.howToUse }] : []),
+            ...(displayMood ? [{ title: t.product.mood, body: displayMood }] : []),
+            { title: t.product.productDetails, body: displayDescription },
+            ...(product.ingredients?.length ? [{ title: t.product.fragranceNotes, body: buildFragranceNotes(product.ingredients, isAr) }] : []),
+            ...(displayHowToUse ? [{ title: t.product.waysToUse, body: displayHowToUse }] : []),
           ]} />
 
           <ProductActions product={product} />

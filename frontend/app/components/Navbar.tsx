@@ -111,7 +111,7 @@ export default function Navbar({ solid }: { solid?: boolean } = {}) {
   return (
     <>
       <header className={`${styles.header} ${(solid || scrolled) ? styles.scrolled : styles.transparent}`}>
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} ${lang === "ar" ? styles.navRtl : ""}`}>
           {/* Hamburger */}
           <button 
             className={`${styles.hamburger} ${isOpen ? styles.active : ""}`} 

@@ -10,6 +10,8 @@ export interface IngredientDraft {
   id: string;
   name: string;
   description: string;
+  nameAr: string;
+  descriptionAr: string;
 }
 
 interface IngredientsSectionProps {
@@ -19,7 +21,7 @@ interface IngredientsSectionProps {
 
 export default function IngredientsSection({ rows, onChange }: IngredientsSectionProps) {
   function addRow() {
-    onChange([...rows, { id: crypto.randomUUID(), name: "", description: "" }]);
+    onChange([...rows, { id: crypto.randomUUID(), name: "", description: "", nameAr: "", descriptionAr: "" }]);
   }
 
   function updateRow(id: string, patch: Partial<IngredientDraft>) {
@@ -46,18 +48,34 @@ export default function IngredientsSection({ rows, onChange }: IngredientsSectio
           <div key={row.id} className={styles.ingredientRow}>
             <input
               type="text"
-              placeholder="Ingredient name"
+              placeholder="Ingredient name (EN)"
               value={row.name}
               onChange={(e) => updateRow(row.id, { name: e.target.value })}
               className={styles.ingredientInput}
             />
             <input
               type="text"
-              placeholder="Description"
+              placeholder="Description (EN)"
               required
               value={row.description}
               onChange={(e) => updateRow(row.id, { description: e.target.value })}
               className={styles.ingredientInput}
+            />
+            <input
+              type="text"
+              placeholder="اسم المكون (AR)"
+              value={row.nameAr}
+              onChange={(e) => updateRow(row.id, { nameAr: e.target.value })}
+              className={styles.ingredientInput}
+              dir="auto"
+            />
+            <input
+              type="text"
+              placeholder="الوصف (AR)"
+              value={row.descriptionAr}
+              onChange={(e) => updateRow(row.id, { descriptionAr: e.target.value })}
+              className={styles.ingredientInput}
+              dir="auto"
             />
             <button
               type="button"

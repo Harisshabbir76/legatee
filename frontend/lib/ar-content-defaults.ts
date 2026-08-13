@@ -46,20 +46,16 @@ const SHOP: Record<string, string> = {
 };
 
 const ABOUT: Record<string, string> = {
-  "heroTitle":        ar.ourStory.heroTitle,
-  "foundedHeading":   ar.ourStory.foundedHeading,
-  "foundedIntro":     ar.ourStory.foundedIntro,
-  "visionLabel":      ar.ourStory.visionLabel,
-  "visionText":       ar.ourStory.visionText,
-  "copy1":            ar.ourStory.copy1,
-  "copy2":            ar.ourStory.copy2,
-  "copy3":            ar.ourStory.copy3,
-  "missionText":      ar.ourStory.missionText,
-  "visionBig":        ar.ourStory.visionBig,
-  "valuesHeading":    ar.ourStory.valuesHeading,
-  "footer.signatureTitle": ar.footer.signatureTitle,
-  "footer.signatureCopy":  ar.footer.signatureCopy,
-  "footer.buttonText":     ar.footer.buttonText,
+  "hero.title":             ar.ourStory.heroTitle,
+  "story.heading":          ar.ourStory.foundedHeading,
+  "story.intro":            ar.ourStory.foundedIntro,
+  "story.copy":             ar.ourStory.copy1,
+  "story.philosophy":       ar.ourStory.missionText,
+  "story.philosophyStrong": ar.ourStory.visionBig,
+  "story.tagline":          ar.ourStory.valuesHeading,
+  "footer.signatureTitle":  ar.footer.signatureTitle,
+  "footer.signatureCopy":   ar.footer.signatureCopy,
+  "footer.buttonText":      ar.footer.buttonText,
 };
 
 const FAQ: Record<string, string> = {

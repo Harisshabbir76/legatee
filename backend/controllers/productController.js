@@ -26,15 +26,21 @@ function buildIngredients(metaRaw) {
     .map((item) => ({
       name: String(item?.name ?? "").trim(),
       description: String(item?.description ?? "").trim(),
+      nameAr: String(item?.nameAr ?? "").trim() || undefined,
+      descriptionAr: String(item?.descriptionAr ?? "").trim() || undefined,
     }))
     .filter((item) => item.name && item.description);
 }
 
 function parseProductFields(req) {
   const name = String(req.body.name ?? "").trim();
+  const nameAr = String(req.body.nameAr ?? "").trim() || undefined;
   const description = String(req.body.description ?? "").trim();
-const howToUse = String(req.body.howToUse ?? "").trim() || undefined;
+  const descriptionAr = String(req.body.descriptionAr ?? "").trim() || undefined;
+  const howToUse = String(req.body.howToUse ?? "").trim() || undefined;
+  const howToUseAr = String(req.body.howToUseAr ?? "").trim() || undefined;
   const mood = String(req.body.mood ?? "").trim() || undefined;
+  const moodAr = String(req.body.moodAr ?? "").trim() || undefined;
   const price = Number(req.body.price);
   const stock = Number(req.body.stock);
   const category = String(req.body.category ?? "").trim() || undefined;
@@ -53,7 +59,7 @@ const howToUse = String(req.body.howToUse ?? "").trim() || undefined;
 
   const showOnHomepage = req.body.showOnHomepage === "true" || req.body.showOnHomepage === true;
 
-  return { name, description, howToUse, mood, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug: productSlug(name) };
+  return { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug: productSlug(name) };
 }
 
 async function resolveIngredientsImage(req, currentImage) {
@@ -124,7 +130,7 @@ exports.getOne = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
   try {
-    const { name, description, howToUse, mood, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug } =
+    const { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug } =
       parseProductFields(req);
 
     if (!name || !description) {
@@ -148,9 +154,13 @@ exports.create = async (req, res, next) => {
 
     const product = await Product.create({
       name,
+      nameAr,
       description,
+      descriptionAr,
       howToUse,
+      howToUseAr,
       mood,
+      moodAr,
       price,
       stock,
       category: categoryId,
@@ -178,7 +188,7 @@ exports.update = async (req, res, next) => {
       return res.status(404).json({ message: "Product not found." });
     }
 
-    const { name, description, howToUse, mood, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug } =
+    const { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug } =
       parseProductFields(req);
 
     if (!name || !description) {
@@ -201,10 +211,14 @@ exports.update = async (req, res, next) => {
     ]);
 
     product.name = name;
+    product.nameAr = nameAr;
     product.slug = slug;
     product.description = description;
+    product.descriptionAr = descriptionAr;
     product.howToUse = howToUse;
+    product.howToUseAr = howToUseAr;
     product.mood = mood;
+    product.moodAr = moodAr;
     product.price = price;
     product.stock = stock;
     product.category = categoryId;

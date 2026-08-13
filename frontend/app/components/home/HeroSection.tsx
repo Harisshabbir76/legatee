@@ -28,11 +28,11 @@ export default function HeroSection({ content }: { content?: HomepageData["hero"
       }
       <div className={styles.overlay} />
       <div className={styles.content}>
-        <h1 className={styles.title} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.title, lang) as React.CSSProperties) }} data-editable="hero.title"
+        <h1 suppressHydrationWarning className={styles.title} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.title, lang) as React.CSSProperties) }} data-editable="hero.title"
           dangerouslySetInnerHTML={{ __html: resolveText(hero.title, lang) || t.home.heroTitle }} />
-        <p className={styles.copy} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.copy, lang) as React.CSSProperties) }} data-editable="hero.copy"
+        <p suppressHydrationWarning className={styles.copy} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.copy, lang) as React.CSSProperties) }} data-editable="hero.copy"
           dangerouslySetInnerHTML={{ __html: resolveText(hero.copy, lang) || t.home.heroCopy }} />
-        <Link href={hero.buttonLink || "/shop"} className={styles.button} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.buttonText, lang) as React.CSSProperties) }} data-editable="hero.buttonText"
+        <Link suppressHydrationWarning href={hero.buttonLink || "/shop"} className={styles.button} style={{ whiteSpace: "pre-wrap", ...omitCssOverrides(resolveStyle(hero.buttonText, lang) as React.CSSProperties) }} data-editable="hero.buttonText"
           dangerouslySetInnerHTML={{ __html: resolveText(hero.buttonText, lang) || t.home.heroButton }} />
       </div>
     </section>

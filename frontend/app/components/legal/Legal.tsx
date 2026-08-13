@@ -50,29 +50,42 @@ export default function Legal({ content }: Props = {}) {
 
       <div className={styles.layout}>
         <div className={styles.sidebar}>
-          {t.legal.tabs.map((_, i) => (
-            <button
-              key={i}
-              className={`${styles.tab} ${activeTab === i ? styles.activeTab : ""}`}
-              onClick={() => setActiveTab(i)}
-              type="button"
-              data-legal-tab={i}
-            >
-              {t.legal.tabs[i]}
-              <span className={`${styles.tabArrow} no-rtl`}>{activeTab === i ? "▼" : "▶"}</span>
-            </button>
-          ))}
+          {t.legal.tabs.map((_, i) => {
+            const tabLabel = content?.tabs?.[i]?.label
+              ? (resolveText(content.tabs[i].label, lang) || t.legal.tabs[i])
+              : t.legal.tabs[i];
+            return (
+              <button
+                key={i}
+                className={`${styles.tab} ${activeTab === i ? styles.activeTab : ""}`}
+                onClick={() => setActiveTab(i)}
+                type="button"
+                data-legal-tab={i}
+              >
+                {tabLabel}
+                <span className={`${styles.tabArrow} no-rtl`}>{activeTab === i ? "▼" : "▶"}</span>
+              </button>
+            );
+          })}
         </div>
 
         <div className={styles.content}>
-          {t.legal.tabsContent[activeTab]?.sections.map((sec, si) => (
-            <div className={styles.policyBlock} key={si}>
-              <h2 className={styles.policyTitle}>{sec.title}</h2>
-              {sec.lines.map((line, li) => (
-                <p className={styles.policyLine} key={li}>{line}</p>
-              ))}
-            </div>
-          ))}
+          {(content?.tabs?.[activeTab]?.sections ?? t.legal.tabsContent[activeTab]?.sections.map((sec) => ({
+            title: { text: sec.title, tag: "h2", style: {} },
+            lines: sec.lines.map((l) => ({ text: l, tag: "p", style: {} })),
+          }))).map((sec, si) => {
+            const fallbackSec = t.legal.tabsContent[activeTab]?.sections[si];
+            const titleText = resolveText(sec.title, lang) || fallbackSec?.title || "";
+            return (
+              <div className={styles.policyBlock} key={si}>
+                <h2 className={styles.policyTitle}>{titleText}</h2>
+                {sec.lines.map((line, li) => {
+                  const lineText = resolveText(line, lang) || fallbackSec?.lines[li] || "";
+                  return <p className={styles.policyLine} key={li}>{lineText}</p>;
+                })}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

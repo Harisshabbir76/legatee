@@ -33,11 +33,11 @@ export default function FaqHelp({ content }: Props) {
         }
       </span>
       <h2 id="faq-help-heading" className={styles.helpTitle} data-editable="helpTitle" style={{ whiteSpace: "pre-wrap", ...resolveStyle(helpTitle, lang) as React.CSSProperties }}
-        dangerouslySetInnerHTML={{ __html: resolveText(helpTitle, lang) }} />
+        dangerouslySetInnerHTML={{ __html: resolveText(helpTitle, lang) || t.faq.helpTitle }} />
       <p className={styles.helpCopy} data-editable="helpCopy" style={{ whiteSpace: "pre-wrap", ...resolveStyle(helpCopy, lang) as React.CSSProperties }}
-        dangerouslySetInnerHTML={{ __html: resolveText(helpCopy, lang) }} />
+        dangerouslySetInnerHTML={{ __html: resolveText(helpCopy, lang) || t.faq.helpCopy }} />
       <Link href={helpButtonLink} className={styles.helpButton} data-editable="helpButtonText" style={{ whiteSpace: "pre-wrap", ...resolveStyle(helpButtonText, lang) as React.CSSProperties }}
-        dangerouslySetInnerHTML={{ __html: resolveText(helpButtonText, lang) }} />
+        dangerouslySetInnerHTML={{ __html: resolveText(helpButtonText, lang) || t.faq.helpButton }} />
     </section>
   );
 }

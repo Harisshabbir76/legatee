@@ -123,6 +123,24 @@
   margin-top: 1px;
 }
 
+.questionRtl {
+  direction: rtl;
+  text-align: right;
+  padding: 10px 13px 10px 19px;
+}
+
+.questionRtl .plus,
+.plusRtl {
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+.answerRtl {
+  direction: rtl;
+  text-align: right;
+  padding: 16px 13px 18px 19px;
+}
+
 .help {
   display: flex;
   flex-direction: column;

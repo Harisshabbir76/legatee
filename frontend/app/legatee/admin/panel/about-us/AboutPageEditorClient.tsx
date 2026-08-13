@@ -196,7 +196,7 @@ function PropertiesPanel({ elKey, content, onBlock, previewLang, onClose }: {
   }
 
   const currentEditorVal = block
-    ? (panelLang === "ar" ? (block.textAr ?? getArDefault("about", elKey)) : block.text)
+    ? (panelLang === "ar" ? (block.textAr || getArDefault("about", elKey)) : block.text)
     : "";
 
   useEffect(() => {

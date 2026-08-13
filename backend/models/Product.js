@@ -11,6 +11,8 @@ const ingredientSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
+    nameAr: { type: String, trim: true },
+    descriptionAr: { type: String, trim: true },
   },
   { toJSON: { transform: idTransform } }
 );
@@ -26,9 +28,13 @@ const variantSchema = new mongoose.Schema(
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
+    nameAr: { type: String, trim: true },
     description: { type: String, required: true, trim: true },
+    descriptionAr: { type: String, trim: true },
     howToUse: { type: String, trim: true },
+    howToUseAr: { type: String, trim: true },
     mood: { type: String, trim: true },
+    moodAr: { type: String, trim: true },
     price: { type: Number, required: true, min: 0 },
     /* No default on purpose: products created before stock tracking stay
        undefined (treated as not tracked) until the admin edits them. */

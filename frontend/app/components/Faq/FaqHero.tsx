@@ -22,7 +22,13 @@ export default function FaqHero({ content, openItems }: Props) {
 
   const hasRealItems = content?.items && content.items.length > 0 && content.items.some((i) => i.q?.text?.trim());
   const items = hasRealItems
-    ? content!.items
+    ? content!.items.map((item, i) => {
+        if (lang === "ar" && !item.q?.textAr) {
+          const fallback = t.faq.items[i];
+          if (fallback) return { q: { ...item.q, textAr: fallback.q }, a: { ...item.a, textAr: fallback.a } };
+        }
+        return item;
+      })
     : t.faq.items.map((item) => ({ q: b(item.q, "span"), a: b(item.a) }));
 
   function isOpen(i: number) {
@@ -54,15 +60,15 @@ export default function FaqHero({ content, openItems }: Props) {
             const open = isOpen(index);
             return (
               <div className={styles.item} key={index}>
-                <button className={styles.question} type="button" aria-expanded={open} onClick={() => toggle(index)} data-faq-toggle={String(index)}>
+                <button className={`${styles.question} ${lang === "ar" ? styles.questionRtl : ""}`} type="button" aria-expanded={open} onClick={() => toggle(index)} data-faq-toggle={String(index)}>
                   <span data-editable={`items.${index}.q`} style={{ whiteSpace: "pre-wrap", ...resolveStyle(item.q, lang) as React.CSSProperties }}
                     dangerouslySetInnerHTML={{ __html: `${index + 1}. ` + (resolveText(item.q, lang) || "Question text") }} />
-                  <span className={`${styles.plus} no-rtl`} aria-hidden="true" data-faq-toggle={String(index)}>
+                  <span className={`${styles.plus} ${lang === "ar" ? styles.plusRtl : ""} no-rtl`} aria-hidden="true" data-faq-toggle={String(index)}>
                     {open ? "−" : "+"}
                   </span>
                 </button>
                 {open && (
-                  <p className={styles.answer} data-editable={`items.${index}.a`} style={{ whiteSpace: "pre-wrap", ...resolveStyle(item.a, lang) as React.CSSProperties }}
+                  <p className={`${styles.answer} ${lang === "ar" ? styles.answerRtl : ""}`} data-editable={`items.${index}.a`} style={{ whiteSpace: "pre-wrap", ...resolveStyle(item.a, lang) as React.CSSProperties }}
                     dangerouslySetInnerHTML={{ __html: resolveText(item.a, lang) || "Answer text" }} />
                 )}
               </div>

@@ -14,6 +14,7 @@ export default function ProductIngredients({ product }: { product: Product }) {
   const { lang } = useLanguage();
   const t = getT(lang);
 
+  const isAr = lang === "ar";
   const ingredients = product.ingredients ?? [];
   if (ingredients.length === 0) return null;
 
@@ -57,11 +58,11 @@ export default function ProductIngredients({ product }: { product: Product }) {
                   aria-expanded={openIndex === i}
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 >
-                  {ingredient.name.toUpperCase()}
+                  {(isAr && ingredient.nameAr ? ingredient.nameAr : ingredient.name).toUpperCase()}
                 </button>
                 {openIndex === i && (
                   <div className={styles.noteBody}>
-                    <p>{ingredient.description}</p>
+                    <p>{isAr && ingredient.descriptionAr ? ingredient.descriptionAr : ingredient.description}</p>
                   </div>
                 )}
               </div>

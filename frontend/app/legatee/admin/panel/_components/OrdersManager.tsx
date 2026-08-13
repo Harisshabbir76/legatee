@@ -154,6 +154,33 @@ export default function OrdersManager({ initialOrders }: { initialOrders: Order[
     setSelected(new Set());
   }
 
+  async function deleteOrders(ids: string[]) {
+    if (ids.length === 0) return;
+    const label = ids.length === 1 ? "this order" : `these ${ids.length} orders`;
+    if (!confirm(`Permanently delete ${label}? This cannot be undone.`)) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await adminFetch(`${API_URL}/api/orders/bulk`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json", ...adminAuthHeader() },
+        body: JSON.stringify({ ids }),
+      });
+      if (!res.ok) throw new Error("Delete failed.");
+      setOrders((prev) => prev.filter((o) => !ids.includes(o.id)));
+      setSelected((prev) => {
+        const next = new Set(prev);
+        ids.forEach((id) => next.delete(id));
+        return next;
+      });
+      if (detailsId && ids.includes(detailsId)) setDetailsId(null);
+    } catch {
+      setError("Could not delete. Is the backend running?");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <div className={styles.ordersPage}>
       {/* ── Date filters (on top) ── */}
@@ -192,6 +219,14 @@ export default function OrdersManager({ initialOrders }: { initialOrders: Order[
           </select>
           <button type="button" onClick={applyBulk} disabled={busy} className={styles.btnPrimary}>
             {busy ? "Updating..." : "Apply status"}
+          </button>
+          <button
+            type="button"
+            onClick={() => deleteOrders([...selected])}
+            disabled={busy}
+            className={styles.btnDanger}
+          >
+            {busy ? "Deleting..." : "Delete selected"}
           </button>
           <button
             type="button"
@@ -272,13 +307,23 @@ export default function OrdersManager({ initialOrders }: { initialOrders: Order[
                     </select>
                   </td>
                   <td data-label="Details" className={styles.td}>
-                    <button
-                      type="button"
-                      onClick={() => setDetailsId(order.id)}
-                      className={styles.btnOutline}
-                    >
-                      View details
-                    </button>
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      <button
+                        type="button"
+                        onClick={() => setDetailsId(order.id)}
+                        className={styles.btnOutline}
+                      >
+                        View details
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => deleteOrders([order.id])}
+                        disabled={busy}
+                        className={styles.btnDanger}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

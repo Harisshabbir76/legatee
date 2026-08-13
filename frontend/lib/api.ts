@@ -6,6 +6,8 @@ export interface Ingredient {
   id: string;
   name: string;
   description: string;
+  nameAr?: string;
+  descriptionAr?: string;
 }
 
 export interface VariantOption {
@@ -31,9 +33,13 @@ export interface Collection {
 export interface Product {
   id: string;
   name: string;
+  nameAr?: string;
   description: string;
+  descriptionAr?: string;
   howToUse?: string;
+  howToUseAr?: string;
   mood?: string;
+  moodAr?: string;
   price: number;
   /** Products created before stock tracking have no stock value (not tracked). */
   stock?: number;
@@ -132,7 +138,7 @@ export async function fetchHomepageProducts(): Promise<Product[]> {
 export async function fetchProduct(id: string): Promise<Product | null> {
   try {
     const res = await fetch(`${API_URL}/api/products/${id}`, {
-      next: { revalidate: 30 },
+      cache: "no-store",
     });
     if (!res.ok) return null;
     const data = await res.json();

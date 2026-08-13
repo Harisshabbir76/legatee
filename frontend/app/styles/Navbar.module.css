@@ -73,6 +73,27 @@
   padding: 0 24px;
 }
 
+/* Arabic RTL layout — swap left/right groups */
+.navRtl {
+  flex-direction: row-reverse;
+}
+
+.navRtl .leftLinks {
+  margin-left: 0;
+  margin-right: 60px;
+}
+
+.navRtl .rightGroup {
+  margin-right: 0;
+  margin-left: 60px;
+  flex-direction: row-reverse;
+}
+
+.navRtl .dropdown {
+  left: auto;
+  right: 0;
+}
+
 /* Hamburger button */
 .hamburger {
   display: none;
@@ -745,8 +766,18 @@
     margin-left: 80px;
   }
 
+  .navRtl .leftLinks {
+    margin-left: 0;
+    margin-right: 80px;
+  }
+
   .rightGroup {
     margin-right: 80px;
+  }
+
+  .navRtl .rightGroup {
+    margin-right: 0;
+    margin-left: 80px;
   }
 
   .leftLinks,

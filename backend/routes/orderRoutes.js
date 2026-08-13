@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const requireAuth = require("../middleware/requireAuth");
-const { create, list, getOne, updateStatus } = require("../controllers/orderController");
+const { create, list, getOne, updateStatus, remove } = require("../controllers/orderController");
 
 // Public — customers place orders from the storefront checkout.
 router.post("/", create);
@@ -12,5 +12,7 @@ router.get("/", requireAuth, list);
 router.get("/:id", getOne);
 
 router.patch("/:id", requireAuth, updateStatus);
+router.delete("/bulk", requireAuth, remove);
+router.delete("/:id", requireAuth, remove);
 
 module.exports = router;
