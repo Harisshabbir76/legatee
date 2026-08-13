@@ -24,7 +24,7 @@ export default async function SignaturePerfumePage() {
     <main className={styles.main}>
       <CollectionShopHero collectionId="signature" content={shopContent?.signature?.hero} />
       <ShopProducts products={products} collections={[]} collectionSlug="signature-perfume" />
-      <GotQuestions />
+      <GotQuestions content={shopContent?.faq} />
       <WhyLegatee />
       <Marquee />
     </main>

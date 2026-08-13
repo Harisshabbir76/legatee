@@ -24,7 +24,7 @@ export default async function KandoraPerfumePage() {
     <main className={styles.main}>
       <CollectionShopHero collectionId="kandora" content={shopContent?.kandora?.hero} />
       <ShopProducts products={products} collections={[]} collectionSlug="kandora-perfume" />
-      <GotQuestions />
+      <GotQuestions content={shopContent?.faq} />
       <WhyLegatee />
       <Marquee />
     </main>

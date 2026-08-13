@@ -6,7 +6,7 @@ import styles from "../../components/product-description/ProductDescription.modu
 import LovedProducts from "../../components/home/LovedProducts";
 import GotQuestions from "../../components/shop/GotQuestions";
 import Whylegatee from "../../components/home/WhyLegatee"; 
-import { fetchProductBySlug, fetchHomepageProducts } from "@/lib/api";
+import { fetchProductBySlug, fetchHomepageProducts, fetchShopPageContent } from "@/lib/api";
 
 function slugToLabel(slug: string): string {
   return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -18,9 +18,10 @@ export default async function ProductDetailPage({
   params: Promise<{ category: string; slug: string }>;
 }) {
   const { category, slug } = await params;
-  const [product, homepageProducts] = await Promise.all([
+  const [product, homepageProducts, shopContent] = await Promise.all([
     fetchProductBySlug(slug),
     fetchHomepageProducts(),
+    fetchShopPageContent(),
   ]);
 
   if (!product) {
@@ -33,7 +34,7 @@ export default async function ProductDetailPage({
     <main className={styles.page}>
       <ProductDetailsHero product={product} categoryLabel={categoryLabel} categorySlug={category} />
       <LovedProducts products={homepageProducts} />
-      <GotQuestions />
+      <GotQuestions content={shopContent?.faq} />
       <Whylegatee />
     </main>
   );

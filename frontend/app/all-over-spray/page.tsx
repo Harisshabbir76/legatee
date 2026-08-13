@@ -26,7 +26,7 @@ export default async function AllOverSprayPage() {
     <main className={styles.main}>
       <CollectionShopHero collectionId="spray" content={shopContent?.allOverSpray?.hero} />
       <ShopProducts products={products} collections={[]} collectionSlug="all-over-spray" />
-      <GotQuestions />
+      <GotQuestions content={shopContent?.faq} />
       <WhyLegatee />
       <Marquee />
     </main>
