@@ -231,7 +231,7 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, extraContent, previe
 
   return (
     <div style={{ width: 290, flexShrink: 0, borderLeft: "1px solid #cdbfae", background: "#fff", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
-      <div style={{ padding: "12px 16px", background: "#3B1814", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+      <div style={{ padding: "12px 16px", background: "#173946", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
         <div>
           <div style={{ fontSize: 9, color: "#b89080", textTransform: "uppercase", letterSpacing: "0.07em" }}>{getSection(elKey)}</div>
           <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginTop: 2 }}>{getLabel(elKey)}</div>
@@ -245,7 +245,7 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, extraContent, previe
           <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
             {(["en", "ar"] as const).map((l) => (
               <button key={l} onClick={() => setPanelLang(l)}
-                style={{ flex: 1, padding: "5px 0", border: `1px solid ${panelLang === l ? "#3B1814" : "#d4c5b5"}`, borderRadius: 4, background: panelLang === l ? "#3B1814" : "#fff", color: panelLang === l ? "#fff" : "#6f6459", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
+                style={{ flex: 1, padding: "5px 0", border: `1px solid ${panelLang === l ? "#173946" : "#d4c5b5"}`, borderRadius: 4, background: panelLang === l ? "#173946" : "#fff", color: panelLang === l ? "#fff" : "#6f6459", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
                 {l === "en" ? "EN" : "AR"}
               </button>
             ))}
@@ -269,7 +269,7 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, extraContent, previe
               { l: "U", cmd: "underline" },
             ] as const).map(({ l, cmd }) => (
               <button key={l} onClick={() => applyFormat(cmd)}
-                style={{ width: 30, height: 30, border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: "#3B1814", fontSize: 12, cursor: "pointer" }}>
+                style={{ width: 30, height: 30, border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: "#173946", fontSize: 12, cursor: "pointer" }}>
                 {l}
               </button>
             ))}
@@ -277,7 +277,7 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, extraContent, previe
               const a = style.textAlign === v;
               return (
                 <button key={v} onClick={() => us("textAlign", a ? "" : v)}
-                  style={{ width: 30, height: 30, border: `1px solid ${a ? "#3B1814" : "#d4c5b5"}`, borderRadius: 4, background: a ? "#3B1814" : "#fff", color: a ? "#fff" : "#3B1814", fontSize: 10, fontWeight: 700, cursor: "pointer" }}>
+                  style={{ width: 30, height: 30, border: `1px solid ${a ? "#173946" : "#d4c5b5"}`, borderRadius: 4, background: a ? "#173946" : "#fff", color: a ? "#fff" : "#173946", fontSize: 10, fontWeight: 700, cursor: "pointer" }}>
                   {l}
                 </button>
               );
@@ -302,8 +302,8 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, extraContent, previe
           </div>
           <PF label="Color">
             <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-              <input type="color" value={style.color || "#3B1814"} onChange={(e) => us("color", e.target.value)} style={{ width: 32, height: 28, border: "1px solid #d4c5b5", borderRadius: 4, padding: 2, cursor: "pointer", flexShrink: 0 }} />
-              <PI value={style.color ?? ""} onChange={(v) => us("color", v)} placeholder="#3B1814" />
+              <input type="color" value={style.color || "#173946"} onChange={(e) => us("color", e.target.value)} style={{ width: 32, height: 28, border: "1px solid #d4c5b5", borderRadius: 4, padding: 2, cursor: "pointer", flexShrink: 0 }} />
+              <PI value={style.color ?? ""} onChange={(v) => us("color", v)} placeholder="#173946" />
             </div>
           </PF>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
@@ -593,11 +593,11 @@ export default function FaqPageEditorClient({ initialContent, initialFooterConte
     <div>
       <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
         <button onClick={() => moveItem(itemIdx, -1)} disabled={itemIdx === 0}
-          style={{ flex: 1, padding: "7px 0", border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: itemIdx === 0 ? "#ccc" : "#3B1814", fontSize: 11, cursor: itemIdx === 0 ? "default" : "pointer" }}>
+          style={{ flex: 1, padding: "7px 0", border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: itemIdx === 0 ? "#ccc" : "#173946", fontSize: 11, cursor: itemIdx === 0 ? "default" : "pointer" }}>
           ? Move up
         </button>
         <button onClick={() => moveItem(itemIdx, 1)} disabled={itemIdx === content.items.length - 1}
-          style={{ flex: 1, padding: "7px 0", border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: itemIdx === content.items.length - 1 ? "#ccc" : "#3B1814", fontSize: 11, cursor: itemIdx === content.items.length - 1 ? "default" : "pointer" }}>
+          style={{ flex: 1, padding: "7px 0", border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: itemIdx === content.items.length - 1 ? "#ccc" : "#173946", fontSize: 11, cursor: itemIdx === content.items.length - 1 ? "default" : "pointer" }}>
           ? Move down
         </button>
       </div>
@@ -615,7 +615,7 @@ export default function FaqPageEditorClient({ initialContent, initialFooterConte
 
   const listPanel = (
     <div style={{ width: 290, flexShrink: 0, borderLeft: "1px solid #cdbfae", background: "#fff", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
-      <div style={{ padding: "12px 16px", background: "#3B1814", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+      <div style={{ padding: "12px 16px", background: "#173946", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: "#fff" }}>{showNewForm ? "New Question" : "All Questions"}</div>
         <button onClick={() => { setShowNewForm((v) => !v); setSel(null); setSelImg(null); }}
           style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", cursor: "pointer", fontSize: 11, padding: "2px 10px", borderRadius: 4 }}>
@@ -637,7 +637,7 @@ export default function FaqPageEditorClient({ initialContent, initialFooterConte
                 rows={5} style={{ width: "100%", border: "1px solid #d4c5b5", borderRadius: 4, padding: "6px 8px", fontSize: 12, outline: "none", resize: "vertical", boxSizing: "border-box", lineHeight: 1.5, fontFamily: "inherit" }} />
             </div>
             <button onClick={addItem} disabled={!newQ.trim()}
-              style={{ width: "100%", padding: "11px 0", background: newQ.trim() ? "#3B1814" : "#e8e0d5", color: newQ.trim() ? "#fff" : "#aaa", border: "none", borderRadius: 6, fontSize: 13, fontWeight: 700, cursor: newQ.trim() ? "pointer" : "not-allowed" }}>
+              style={{ width: "100%", padding: "11px 0", background: newQ.trim() ? "#173946" : "#e8e0d5", color: newQ.trim() ? "#fff" : "#aaa", border: "none", borderRadius: 6, fontSize: 13, fontWeight: 700, cursor: newQ.trim() ? "pointer" : "not-allowed" }}>
               Add Question
             </button>
           </div>
@@ -654,7 +654,7 @@ export default function FaqPageEditorClient({ initialContent, initialFooterConte
                 style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "9px 8px", marginBottom: 4, background: "#faf7f1", borderRadius: 6, cursor: "pointer", border: "1px solid #ede5d8", userSelect: "none" }}>
                 <span style={{ fontSize: 16, color: "#c0aa92", cursor: "grab", flexShrink: 0, marginTop: 1 }}>☰</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: "#3B1814", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: "#173946", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                     {i + 1}. {item.q.text || <em style={{ color: "#aaa" }}>No question</em>}
                   </div>
                   {item.a.text && <div style={{ fontSize: 11, color: "#6f6459", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", marginTop: 2 }}>{item.a.text}</div>}
@@ -677,7 +677,7 @@ export default function FaqPageEditorClient({ initialContent, initialFooterConte
 
   const imagePanel = selImg ? (
     <div style={{ width: 290, flexShrink: 0, borderLeft: "1px solid #cdbfae", background: "#fff", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
-      <div style={{ padding: "12px 16px", background: "#3B1814", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+      <div style={{ padding: "12px 16px", background: "#173946", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
         <div>
           <div style={{ fontSize: 9, color: "#b89080", textTransform: "uppercase", letterSpacing: "0.07em" }}>Image</div>
           <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginTop: 2 }}>{IMAGE_LABELS[selImg] ?? "Image"}</div>
@@ -692,7 +692,7 @@ export default function FaqPageEditorClient({ initialContent, initialFooterConte
           }
         </div>
         <button onClick={() => fileInputRef.current?.click()} disabled={uploading}
-          style={{ width: "100%", padding: "11px 0", background: uploading ? "#e8e0d5" : "#3B1814", color: uploading ? "#aaa" : "#fff", border: "none", borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: uploading ? "not-allowed" : "pointer" }}>
+          style={{ width: "100%", padding: "11px 0", background: uploading ? "#e8e0d5" : "#173946", color: uploading ? "#aaa" : "#fff", border: "none", borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: uploading ? "not-allowed" : "pointer" }}>
           {uploading ? "Uploading…" : "?  Replace image"}
         </button>
         {imgUrl && (
@@ -721,16 +721,16 @@ export default function FaqPageEditorClient({ initialContent, initialFooterConte
       />
 
       {/* Top bar */}
-      <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", minHeight: 40, background: "#3B1814", flexShrink: 0, zIndex: 9999, gap: 6, flexWrap: "nowrap", overflowX: "auto" }}>
+      <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", minHeight: 40, background: "#173946", flexShrink: 0, zIndex: 9999, gap: 6, flexWrap: "nowrap", overflowX: "auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
-          <Link href="/legatee/admin/panel" style={{ color: "#c9a89a", fontSize: 11, textDecoration: "none", whiteSpace: "nowrap" }}>← Admin</Link>
-          <span style={{ color: "#6b3329", fontSize: 11 }}>|</span>
+          <Link href="/legatee/admin/panel" style={{ color: "rgba(255,255,255,0.65)", fontSize: 11, textDecoration: "none", whiteSpace: "nowrap" }}>← Admin</Link>
+          <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 11 }}>|</span>
           <span style={{ color: "#fff", fontSize: 12, fontWeight: 600, whiteSpace: "nowrap" }}>FAQ Editor</span>
         </div>
         <div style={{ display: "flex", gap: 4, flexShrink: 0 }}>
           {(["en", "ar"] as const).map((l) => (
             <button key={l} onClick={() => setPreviewLang(l)}
-              style={{ padding: "3px 10px", border: `1px solid ${previewLang === l ? "#fff" : "#6b3329"}`, borderRadius: 4, background: previewLang === l ? "#fff" : "transparent", color: previewLang === l ? "#3B1814" : "#c9a89a", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
+              style={{ padding: "3px 10px", border: `1px solid ${previewLang === l ? "#fff" : "rgba(255,255,255,0.2)"}`, borderRadius: 4, background: previewLang === l ? "#fff" : "transparent", color: previewLang === l ? "#173946" : "rgba(255,255,255,0.65)", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
               {l === "en" ? "EN" : "AR"}
             </button>
           ))}
@@ -742,11 +742,11 @@ export default function FaqPageEditorClient({ initialContent, initialFooterConte
             style={{ padding: "3px 10px", background: "rgba(255,255,255,0.15)", color: "#fff", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 4, fontSize: 10, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
             + Add Q
           </button>
-          <Link href="/faq" target="_blank" style={{ padding: "3px 8px", border: "1px solid #6b3329", borderRadius: 4, color: "#c9a89a", fontSize: 10, textDecoration: "none", whiteSpace: "nowrap" }}>
+          <Link href="/faq" target="_blank" style={{ padding: "3px 8px", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 4, color: "rgba(255,255,255,0.65)", fontSize: 10, textDecoration: "none", whiteSpace: "nowrap" }}>
             View live →
           </Link>
           <button onClick={save} disabled={saving}
-            style={{ padding: "4px 10px", background: saving ? "#6b3329" : "#fff", color: "#3B1814", border: "none", borderRadius: 4, fontSize: 10, fontWeight: 700, cursor: saving ? "not-allowed" : "pointer", whiteSpace: "nowrap" }}>
+            style={{ padding: "4px 10px", background: saving ? "rgba(23,57,70,0.5)" : "#fff", color: "#173946", border: "none", borderRadius: 4, fontSize: 10, fontWeight: 700, cursor: saving ? "not-allowed" : "pointer", whiteSpace: "nowrap" }}>
             {saving ? "Saving…" : "Save Changes"}
           </button>
         </div>

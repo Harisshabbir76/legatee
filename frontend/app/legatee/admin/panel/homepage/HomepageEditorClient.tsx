@@ -259,7 +259,7 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, previewLang, onClose
   return (
     <div style={{ width: 290, flexShrink: 0, borderLeft: "1px solid #cdbfae", background: "#fff", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
       {/* Header */}
-      <div style={{ padding: "12px 16px", background: "#3B1814", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+      <div style={{ padding: "12px 16px", background: "#173946", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
         <div>
           <div style={{ fontSize: 9, color: "#b89080", textTransform: "uppercase", letterSpacing: "0.07em" }}>{getSection(elKey)}</div>
           <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginTop: 2 }}>{getLabel(elKey)}</div>
@@ -284,7 +284,7 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, previewLang, onClose
               <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
                 {(["en", "ar"] as const).map((l) => (
                   <button key={l} onClick={() => setPanelLang(l)}
-                    style={{ flex: 1, padding: "5px 0", border: `1px solid ${panelLang === l ? "#3B1814" : "#d4c5b5"}`, borderRadius: 4, background: panelLang === l ? "#3B1814" : "#fff", color: panelLang === l ? "#fff" : "#6f6459", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
+                    style={{ flex: 1, padding: "5px 0", border: `1px solid ${panelLang === l ? "#173946" : "#d4c5b5"}`, borderRadius: 4, background: panelLang === l ? "#173946" : "#fff", color: panelLang === l ? "#fff" : "#6f6459", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
                     {l === "en" ? "EN" : "AR"}
                   </button>
                 ))}
@@ -307,7 +307,7 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, previewLang, onClose
                   { l: "U", cmd: "underline", extra: { textDecoration: "underline" as const } },
                 ] as const).map(({ l, cmd, extra }) => (
                   <button key={l} onClick={() => applyFormat(cmd)}
-                    style={{ width: 30, height: 30, border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: "#3B1814", fontSize: 12, cursor: "pointer", ...extra }}>
+                    style={{ width: 30, height: 30, border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: "#173946", fontSize: 12, cursor: "pointer", ...extra }}>
                     {l}
                   </button>
                 ))}
@@ -315,7 +315,7 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, previewLang, onClose
                   const a = style.textAlign === v;
                   return (
                     <button key={v} onClick={() => us("textAlign", a ? "" : v)}
-                      style={{ width: 30, height: 30, border: `1px solid ${a ? "#3B1814" : "#d4c5b5"}`, borderRadius: 4, background: a ? "#3B1814" : "#fff", color: a ? "#fff" : "#3B1814", fontSize: 10, fontWeight: 700, cursor: "pointer" }}>
+                      style={{ width: 30, height: 30, border: `1px solid ${a ? "#173946" : "#d4c5b5"}`, borderRadius: 4, background: a ? "#173946" : "#fff", color: a ? "#fff" : "#173946", fontSize: 10, fontWeight: 700, cursor: "pointer" }}>
                       {l}
                     </button>
                   );
@@ -333,8 +333,8 @@ function PropertiesPanel({ elKey, content, onBlock, onLink, previewLang, onClose
               </div>
               <PF label="Color">
                 <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-                  <input type="color" value={style.color || "#3B1814"} onChange={(e) => us("color", e.target.value)} style={{ width: 32, height: 28, border: "1px solid #d4c5b5", borderRadius: 4, padding: 2, cursor: "pointer", flexShrink: 0 }} />
-                  <PI value={style.color ?? ""} onChange={(v) => us("color", v)} placeholder="#3B1814" />
+                  <input type="color" value={style.color || "#173946"} onChange={(e) => us("color", e.target.value)} style={{ width: 32, height: 28, border: "1px solid #d4c5b5", borderRadius: 4, padding: 2, cursor: "pointer", flexShrink: 0 }} />
+                  <PI value={style.color ?? ""} onChange={(v) => us("color", v)} placeholder="#173946" />
                 </div>
               </PF>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
@@ -640,7 +640,7 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
   padding: "0 16px", 
   minHeight: "40px",
   height: "auto",
-  background: "#3B1814", 
+  background: "#173946", 
   flexShrink: 0, 
   zIndex: 9999,
   gap: "6px",
@@ -658,7 +658,7 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
     <Link 
       href="/legatee/admin/panel" 
       style={{ 
-        color: "#c9a89a", 
+        color: "rgba(255,255,255,0.65)", 
         fontSize: "11px", 
         textDecoration: "none",
         whiteSpace: "nowrap",
@@ -667,7 +667,7 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
     >
       ← Admin
     </Link>
-    <span style={{ color: "#6b3329", flexShrink: 0, fontSize: "11px" }}>|</span>
+    <span style={{ color: "rgba(255,255,255,0.25)", flexShrink: 0, fontSize: "11px" }}>|</span>
     <span style={{ 
       color: "#fff", 
       fontSize: "12px", 
@@ -682,7 +682,7 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
   <div style={{ display: "flex", gap: 4, flexShrink: 0 }}>
     {(["en", "ar"] as const).map((l) => (
       <button key={l} onClick={() => setPreviewLang(l)}
-        style={{ padding: "3px 10px", border: `1px solid ${previewLang === l ? "#fff" : "#6b3329"}`, borderRadius: 4, background: previewLang === l ? "#fff" : "transparent", color: previewLang === l ? "#3B1814" : "#c9a89a", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
+        style={{ padding: "3px 10px", border: `1px solid ${previewLang === l ? "#fff" : "rgba(255,255,255,0.2)"}`, borderRadius: 4, background: previewLang === l ? "#fff" : "transparent", color: previewLang === l ? "#173946" : "rgba(255,255,255,0.65)", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
         {l === "en" ? "EN" : "AR"}
       </button>
     ))}
@@ -707,9 +707,9 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
       target="_blank"
       style={{ 
         padding: "3px 8px", 
-        border: "1px solid #6b3329", 
+        border: "1px solid rgba(255,255,255,0.2)", 
         borderRadius: "4px", 
-        color: "#c9a89a", 
+        color: "rgba(255,255,255,0.65)", 
         fontSize: "10px", 
         textDecoration: "none",
         whiteSpace: "nowrap",
@@ -724,8 +724,8 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
       disabled={saving}
       style={{ 
         padding: "4px 10px", 
-        background: saving ? "#6b3329" : "#fff", 
-        color: "#3B1814", 
+        background: saving ? "rgba(23,57,70,0.5)" : "#fff", 
+        color: "#173946", 
         border: "none", 
         borderRadius: "4px", 
         fontSize: "10px", 
@@ -825,7 +825,7 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
 
           return (
             <div style={{ width: 290, flexShrink: 0, borderLeft: "1px solid #cdbfae", background: "#fff", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
-              <div style={{ padding: "12px 16px", background: "#3B1814", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+              <div style={{ padding: "12px 16px", background: "#173946", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
                 <div>
                   <div style={{ fontSize: 9, color: "#b89080", textTransform: "uppercase", letterSpacing: "0.07em" }}>{arrowPos ? "Arrow" : "Image"}</div>
                   <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginTop: 2 }}>{getImageLabel(selImg)}</div>
@@ -849,7 +849,7 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploading}
                   style={{
-                    width: "100%", padding: "12px 0", background: uploading ? "#e8e0d5" : "#3B1814",
+                    width: "100%", padding: "12px 0", background: uploading ? "#e8e0d5" : "#173946",
                     color: uploading ? "#aaa" : "#fff", border: "none", borderRadius: 6,
                     fontSize: 13, fontWeight: 600, cursor: uploading ? "not-allowed" : "pointer",
                     display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
@@ -873,7 +873,7 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
                 {arrowPos && (
                   <>
                     <div style={{ margin: "20px 0 12px", borderTop: "1px solid #e8e0d8", paddingTop: 16 }}>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "#3B1814", marginBottom: 12 }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: "#173946", marginBottom: 12 }}>
                         {ARROW_POSITION_LABELS[arrowPos]} — Size &amp; Spacing
                       </div>
                       {numInput("Arrow width", "width")}
@@ -893,7 +893,7 @@ export default function HomepageEditorClient({ initialContent, initialFooterCont
                 )}
 
                 <div style={{ marginTop: 16, padding: 12, background: "#faf7f1", borderRadius: 6, fontSize: 11, color: "#6f6459", lineHeight: 1.7 }}>
-                  <strong style={{ color: "#3B1814" }}>Tip:</strong> Click <strong>Save Changes</strong> to publish.
+                  <strong style={{ color: "#173946" }}>Tip:</strong> Click <strong>Save Changes</strong> to publish.
                 </div>
               </div>
             </div>

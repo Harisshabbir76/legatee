@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useTransition, useRef } from "react";
 import { useRouter } from "next/navigation";
@@ -153,7 +153,7 @@ export default function CollectionManager({ collections }: { collections: Collec
 
       {/* ── Create form ── */}
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14, background: "#faf7f1", padding: 20, borderRadius: 8 }}>
-        <h3 style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#3B1814" }}>Add New Collection</h3>
+        <h3 style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#173946" }}>Add New Collection</h3>
 
         <label className={styles.categoryFormField}>
           Name *
@@ -244,7 +244,7 @@ export default function CollectionManager({ collections }: { collections: Collec
                   </div>
 
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontWeight: 600, fontSize: 13, color: "#3B1814" }}>{col.name}</div>
+                    <div style={{ fontWeight: 600, fontSize: 13, color: "#173946" }}>{col.name}</div>
                     {col.description && <div style={{ fontSize: 11, color: "#888", marginTop: 2, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{col.description}</div>}
                   </div>
 

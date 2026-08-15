@@ -52,7 +52,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "LEGATEE — Rooted in Heritage. Crafted for Today.",
+  title: "LEGATEE — A Modern Fragrance House",
   description:
     "A modern fragrance house inspired by timeless Arabian scent traditions.",
   icons: {

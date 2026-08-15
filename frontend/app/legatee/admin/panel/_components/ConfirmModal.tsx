@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 
@@ -99,7 +99,7 @@ export default function ConfirmModal({
             style={{
               flex: 1, padding: "10px 0",
               border: "1px solid #d4c5b5", borderRadius: 7,
-              background: "#fff", color: "#3B1814",
+              background: "#fff", color: "#173946",
               fontSize: 13, fontWeight: 600, cursor: "pointer",
               fontFamily: "inherit",
               transition: "background 0.12s",
@@ -114,7 +114,7 @@ export default function ConfirmModal({
             style={{
               flex: 1, padding: "10px 0",
               border: "none", borderRadius: 7,
-              background: danger ? "#dc2626" : "#3B1814",
+              background: danger ? "#dc2626" : "#173946",
               color: "#fff",
               fontSize: 13, fontWeight: 600, cursor: "pointer",
               fontFamily: "inherit",

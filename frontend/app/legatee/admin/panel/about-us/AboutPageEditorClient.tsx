@@ -222,7 +222,7 @@ function PropertiesPanel({ elKey, content, onBlock, previewLang, onClose }: {
 
   return (
     <div style={{ width: 290, flexShrink: 0, borderLeft: "1px solid #cdbfae", background: "#fff", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
-      <div style={{ padding: "12px 16px", background: "#3B1814", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+      <div style={{ padding: "12px 16px", background: "#173946", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
         <div>
           <div style={{ fontSize: 9, color: "#b89080", textTransform: "uppercase", letterSpacing: "0.07em" }}>{getSection(elKey)}</div>
           <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginTop: 2 }}>{LABELS[elKey] ?? elKey.split(".").pop()}</div>
@@ -236,7 +236,7 @@ function PropertiesPanel({ elKey, content, onBlock, previewLang, onClose }: {
           <div style={{ display: "flex", gap: 4, marginBottom: 10 }}>
             {(["en", "ar"] as const).map((l) => (
               <button key={l} onClick={() => setPanelLang(l)}
-                style={{ flex: 1, padding: "5px 0", border: `1px solid ${panelLang === l ? "#3B1814" : "#d4c5b5"}`, borderRadius: 4, background: panelLang === l ? "#3B1814" : "#fff", color: panelLang === l ? "#fff" : "#6f6459", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
+                style={{ flex: 1, padding: "5px 0", border: `1px solid ${panelLang === l ? "#173946" : "#d4c5b5"}`, borderRadius: 4, background: panelLang === l ? "#173946" : "#fff", color: panelLang === l ? "#fff" : "#6f6459", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
                 {l === "en" ? "EN" : "AR"}
               </button>
             ))}
@@ -258,7 +258,7 @@ function PropertiesPanel({ elKey, content, onBlock, previewLang, onClose }: {
               { l: "U", cmd: "underline" },
             ] as const).map(({ l, cmd }) => (
               <button key={l} onClick={() => applyFormat(cmd)}
-                style={{ width: 30, height: 30, border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: "#3B1814", fontSize: 12, cursor: "pointer" }}>
+                style={{ width: 30, height: 30, border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: "#173946", fontSize: 12, cursor: "pointer" }}>
                 {l}
               </button>
             ))}
@@ -266,7 +266,7 @@ function PropertiesPanel({ elKey, content, onBlock, previewLang, onClose }: {
               const a = style.textAlign === v;
               return (
                 <button key={v} onClick={() => us("textAlign", a ? "" : v)}
-                  style={{ width: 30, height: 30, border: `1px solid ${a ? "#3B1814" : "#d4c5b5"}`, borderRadius: 4, background: a ? "#3B1814" : "#fff", color: a ? "#fff" : "#3B1814", fontSize: 10, fontWeight: 700, cursor: "pointer" }}>
+                  style={{ width: 30, height: 30, border: `1px solid ${a ? "#173946" : "#d4c5b5"}`, borderRadius: 4, background: a ? "#173946" : "#fff", color: a ? "#fff" : "#173946", fontSize: 10, fontWeight: 700, cursor: "pointer" }}>
                   {l}
                 </button>
               );
@@ -284,8 +284,8 @@ function PropertiesPanel({ elKey, content, onBlock, previewLang, onClose }: {
           </div>
           <PF label="Color">
             <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-              <input type="color" value={style.color || "#3B1814"} onChange={(e) => us("color", e.target.value)} style={{ width: 32, height: 28, border: "1px solid #d4c5b5", borderRadius: 4, padding: 2, cursor: "pointer", flexShrink: 0 }} />
-              <PI value={style.color ?? ""} onChange={(v) => us("color", v)} placeholder="#3B1814" />
+              <input type="color" value={style.color || "#173946"} onChange={(e) => us("color", e.target.value)} style={{ width: 32, height: 28, border: "1px solid #d4c5b5", borderRadius: 4, padding: 2, cursor: "pointer", flexShrink: 0 }} />
+              <PI value={style.color ?? ""} onChange={(v) => us("color", v)} placeholder="#173946" />
             </div>
           </PF>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
@@ -486,16 +486,16 @@ export default function AboutPageEditorClient({ initialContent, initialFooterCon
       <input ref={fileInputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
 
       {/* Top bar */}
-      <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", minHeight: 40, background: "#3B1814", flexShrink: 0, zIndex: 9999, gap: 6, flexWrap: "nowrap", overflowX: "auto" }}>
+      <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", minHeight: 40, background: "#173946", flexShrink: 0, zIndex: 9999, gap: 6, flexWrap: "nowrap", overflowX: "auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
-          <Link href="/legatee/admin/panel" style={{ color: "#c9a89a", fontSize: 11, textDecoration: "none", whiteSpace: "nowrap" }}>← Admin</Link>
-          <span style={{ color: "#6b3329", fontSize: 11 }}>|</span>
+          <Link href="/legatee/admin/panel" style={{ color: "rgba(255,255,255,0.65)", fontSize: 11, textDecoration: "none", whiteSpace: "nowrap" }}>← Admin</Link>
+          <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 11 }}>|</span>
           <span style={{ color: "#fff", fontSize: 12, fontWeight: 600, whiteSpace: "nowrap" }}>Our Story Editor</span>
         </div>
         <div style={{ display: "flex", gap: 4, flexShrink: 0 }}>
           {(["en", "ar"] as const).map((l) => (
             <button key={l} onClick={() => setPreviewLang(l)}
-              style={{ padding: "3px 10px", border: `1px solid ${previewLang === l ? "#fff" : "#6b3329"}`, borderRadius: 4, background: previewLang === l ? "#fff" : "transparent", color: previewLang === l ? "#3B1814" : "#c9a89a", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
+              style={{ padding: "3px 10px", border: `1px solid ${previewLang === l ? "#fff" : "rgba(255,255,255,0.2)"}`, borderRadius: 4, background: previewLang === l ? "#fff" : "transparent", color: previewLang === l ? "#173946" : "rgba(255,255,255,0.65)", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
               {l === "en" ? "EN" : "AR"}
             </button>
           ))}
@@ -503,11 +503,11 @@ export default function AboutPageEditorClient({ initialContent, initialFooterCon
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
           {status === "saved" && <span style={{ color: "#86efac", fontSize: 10 }}>✓ Saved</span>}
           {status === "error" && <span style={{ color: "#fca5a5", fontSize: 10 }}>✕ Save failed</span>}
-          <Link href="/our-story" target="_blank" style={{ padding: "3px 8px", border: "1px solid #6b3329", borderRadius: 4, color: "#c9a89a", fontSize: 10, textDecoration: "none", whiteSpace: "nowrap" }}>
+          <Link href="/our-story" target="_blank" style={{ padding: "3px 8px", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 4, color: "rgba(255,255,255,0.65)", fontSize: 10, textDecoration: "none", whiteSpace: "nowrap" }}>
             View live →
           </Link>
           <button onClick={save} disabled={saving}
-            style={{ padding: "4px 10px", background: saving ? "#6b3329" : "#fff", color: "#3B1814", border: "none", borderRadius: 4, fontSize: 10, fontWeight: 700, cursor: saving ? "not-allowed" : "pointer", whiteSpace: "nowrap" }}>
+            style={{ padding: "4px 10px", background: saving ? "rgba(23,57,70,0.5)" : "#fff", color: "#173946", border: "none", borderRadius: 4, fontSize: 10, fontWeight: 700, cursor: saving ? "not-allowed" : "pointer", whiteSpace: "nowrap" }}>
             {saving ? "Saving…" : "Save Changes"}
           </button>
         </div>
@@ -551,7 +551,7 @@ export default function AboutPageEditorClient({ initialContent, initialFooterCon
         {/* Marquee words panel */}
         {selMarquee && (
           <div style={{ width: 290, flexShrink: 0, borderLeft: "1px solid #cdbfae", background: "#fff", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
-            <div style={{ padding: "12px 16px", background: "#3B1814", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+            <div style={{ padding: "12px 16px", background: "#173946", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
               <div>
                 <div style={{ fontSize: 9, color: "#b89080", textTransform: "uppercase", letterSpacing: "0.07em" }}>Marquee</div>
                 <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginTop: 2 }}>Scrolling Words</div>
@@ -602,7 +602,7 @@ export default function AboutPageEditorClient({ initialContent, initialFooterCon
         {/* Image properties panel */}
         {selImg && (
           <div style={{ width: 290, flexShrink: 0, borderLeft: "1px solid #cdbfae", background: "#fff", display: "flex", flexDirection: "column", height: "100%", overflow: "hidden" }}>
-            <div style={{ padding: "12px 16px", background: "#3B1814", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+            <div style={{ padding: "12px 16px", background: "#173946", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
               <div>
                 <div style={{ fontSize: 9, color: "#b89080", textTransform: "uppercase", letterSpacing: "0.07em" }}>Image</div>
                 <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginTop: 2 }}>{IMAGE_LABELS[selImg] ?? "Image"}</div>
@@ -620,7 +620,7 @@ export default function AboutPageEditorClient({ initialContent, initialFooterCon
               </div>
 
               <button onClick={() => fileInputRef.current?.click()} disabled={uploading}
-                style={{ width: "100%", padding: "12px 0", background: uploading ? "#e8e0d5" : "#3B1814", color: uploading ? "#aaa" : "#fff", border: "none", borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: uploading ? "not-allowed" : "pointer" }}>
+                style={{ width: "100%", padding: "12px 0", background: uploading ? "#e8e0d5" : "#173946", color: uploading ? "#aaa" : "#fff", border: "none", borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: uploading ? "not-allowed" : "pointer" }}>
                 {uploading ? "Uploading…" : "?  Replace image"}
               </button>
 
@@ -636,7 +636,7 @@ export default function AboutPageEditorClient({ initialContent, initialFooterCon
               )}
 
               <div style={{ marginTop: 20, padding: 12, background: "#faf7f1", borderRadius: 6, fontSize: 11, color: "#6f6459", lineHeight: 1.7 }}>
-                <strong style={{ color: "#3B1814" }}>Tip:</strong> After uploading, click <strong>Save Changes</strong> to publish to the live site.
+                <strong style={{ color: "#173946" }}>Tip:</strong> After uploading, click <strong>Save Changes</strong> to publish to the live site.
               </div>
             </div>
           </div>
