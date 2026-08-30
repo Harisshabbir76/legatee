@@ -51,7 +51,7 @@
 .copy {
   margin-top: 45px;
   color: rgba(255, 255, 255, 0.88);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 300;
   line-height: 1.7;
   max-width: 580px;
@@ -108,7 +108,7 @@
     margin-top: 60px;
   }
   .copy{
-    font-size: 18px;
+    font-size: 12px;
     
   }
 }

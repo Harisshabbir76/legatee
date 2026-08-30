@@ -54,7 +54,7 @@ const productSchema = new mongoose.Schema(
       },
     },
     showOnHomepage: { type: Boolean, default: false },
-    slug: { type: String, trim: true, index: true },
+    slug: { type: String, trim: true, unique: true, sparse: true },
   },
   { timestamps: true, toJSON: { transform: idTransform } }
 );

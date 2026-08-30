@@ -3,6 +3,18 @@ const Category = require("../models/Category");
 const { uploadBuffer } = require("../config/cloudinary");
 const { productSlug } = require("../utils/productSlug");
 
+async function uniqueSlug(base, excludeId = null) {
+  let candidate = base;
+  let n = 2;
+  while (true) {
+    const query = { slug: candidate };
+    if (excludeId) query._id = { $ne: excludeId };
+    const exists = await Product.findOne(query).select("_id").lean();
+    if (!exists) return candidate;
+    candidate = `${base}-${n++}`;
+  }
+}
+
 async function resolveCategoryId(name) {
   if (!name) return undefined;
   const doc = await Category.findOneAndUpdate(
@@ -146,10 +158,11 @@ exports.create = async (req, res, next) => {
     }
 
     const ingredients = buildIngredients(req.body.ingredientsMeta);
-    const [ingredientsImage, images, categoryId] = await Promise.all([
+    const [ingredientsImage, images, categoryId, resolvedSlug] = await Promise.all([
       resolveIngredientsImage(req, undefined),
       buildProductImages(req),
       resolveCategoryId(category),
+      uniqueSlug(slug),
     ]);
 
     const product = await Product.create({
@@ -171,7 +184,7 @@ exports.create = async (req, res, next) => {
       ingredientsImage,
       images,
       showOnHomepage,
-      slug,
+      slug: resolvedSlug,
     });
 
     await product.populate("category"); await product.populate("collection");
@@ -204,15 +217,16 @@ exports.update = async (req, res, next) => {
     }
 
     const ingredients = buildIngredients(req.body.ingredientsMeta);
-    const [ingredientsImage, images, categoryId] = await Promise.all([
+    const [ingredientsImage, images, categoryId, resolvedSlug] = await Promise.all([
       resolveIngredientsImage(req, product.ingredientsImage),
       buildProductImages(req),
       resolveCategoryId(category),
+      uniqueSlug(slug, product._id),
     ]);
 
     product.name = name;
     product.nameAr = nameAr;
-    product.slug = slug;
+    product.slug = resolvedSlug;
     product.description = description;
     product.descriptionAr = descriptionAr;
     product.howToUse = howToUse;

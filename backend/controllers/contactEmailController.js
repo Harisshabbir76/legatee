@@ -1,4 +1,5 @@
 ﻿const nodemailer = require("nodemailer");
+const ContactMessage = require("../models/ContactMessage");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -16,6 +17,10 @@ exports.sendContactEmail = async (req, res) => {
   }
 
   res.json({ success: true });
+
+  ContactMessage.create({ name, email, phone: phone || "", message }).catch((err) =>
+    console.error("Contact message save error:", err)
+  );
 
   const year = new Date().getFullYear();
 

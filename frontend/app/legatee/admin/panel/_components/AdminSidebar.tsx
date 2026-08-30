@@ -20,6 +20,7 @@ const pageLinks = [
 
 const navItems = [
   { label: "Orders",           href: "/legatee/admin/panel/orders" },
+  { label: "Messages",         href: "/legatee/admin/panel/messages" },
   { label: "Catalog",          href: "/legatee/admin/panel/products" },
   { label: "Add Product",      href: "/legatee/admin/panel/products/new" },
   { label: "Collections",      href: "/legatee/admin/panel/collections" },

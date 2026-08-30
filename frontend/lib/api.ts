@@ -501,6 +501,38 @@ export async function fetchShippingPrice(): Promise<number> {
   }
 }
 
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+}
+
+export async function fetchContactMessages(): Promise<ContactMessage[]> {
+  try {
+    const res = await fetch(`${API_URL}/api/contactpage/messages`, {
+      headers: await adminBearerHeader(),
+      cache: "no-store",
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.messages as Array<Record<string, unknown>>).map((m) => ({
+      id: String(m._id),
+      name: String(m.name),
+      email: String(m.email),
+      phone: String(m.phone ?? ""),
+      message: String(m.message),
+      read: Boolean(m.read),
+      createdAt: String(m.createdAt),
+    }));
+  } catch {
+    return [];
+  }
+}
+
 export async function fetchInsights(): Promise<Insights> {
   const fallback: Insights = { totalProducts: 0, totalOrders: 0, monthlyIncome: 0 };
   try {
