@@ -137,7 +137,7 @@ exports.createPaymentIntent = async (req, res) => {
       success_url: `${frontendUrl}/checkout/success?payment_intent_id={PAYMENT_INTENT_ID}`,
       cancel_url: `${frontendUrl}/checkout/cancel`,
       failure_url: `${frontendUrl}/checkout/failure`,
-      test: false,
+      test: true,
       allow_tips: false,
       operation_id,
     };
