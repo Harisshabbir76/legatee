@@ -55,7 +55,7 @@ export default function CheckoutPage() {
   const [form, setForm] = useState<CustomerForm>(EMPTY_FORM);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState<"card" | "cod">("cod");
+  const [selectedPayment, setSelectedPayment] = useState<"card" | "cod" | "ziina">("cod");
 
   // Flat shipping price set by the admin (0 = free shipping)
   const [shippingPrice, setShippingPrice] = useState(0);
@@ -84,23 +84,48 @@ export default function CheckoutPage() {
     const cityWithEmirate = `${form.city}, ${form.emirate}`;
 
     try {
+      const cartItems = items.map((item) => ({
+        productId: item.productId,
+        quantity: item.quantity,
+        size: item.size,
+        variants: item.variants,
+      }));
+      const customerPayload = {
+        name,
+        email: form.email,
+        phone: form.phone,
+        address: fullAddress,
+        city: cityWithEmirate,
+      };
+
+      if (selectedPayment === "ziina") {
+        const operationId =
+          typeof window !== "undefined" && window.crypto?.randomUUID
+            ? window.crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+        const intentRes = await fetch(`${API_URL}/api/ziina/create-intent`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: cartItems,
+            customer: customerPayload,
+            operation_id: operationId,
+            ...(user?.id ? { userId: user.id } : {}),
+          }),
+        });
+        const intentData = await intentRes.json();
+        if (!intentRes.ok) throw new Error(intentData.message || "Failed to initiate Ziina payment.");
+        window.location.href = intentData.redirect_url;
+        return;
+      }
+
       const orderRes = await fetch(`${API_URL}/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          items: items.map((item) => ({
-            productId: item.productId,
-            quantity: item.quantity,
-            size: item.size,
-            variants: item.variants,
-          })),
-          customer: {
-            name,
-            email: form.email,
-            phone: form.phone,
-            address: fullAddress,
-            city: cityWithEmirate,
-          },
+          items: cartItems,
+          customer: customerPayload,
           payment: {
             method: selectedPayment === "cod" ? "Cash on Delivery" : "Card",
             status: "pending",
@@ -298,6 +323,30 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
+                {/* Ziina */}
+                <div
+                  className={`border rounded-sm cursor-pointer transition ${selectedPayment === "ziina" ? "border-black" : "border-gray-300 hover:border-black"}`}
+                  onClick={() => setSelectedPayment("ziina")}
+                >
+                  <div className="flex items-center justify-between p-3.5">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="radio"
+                        name="payment-method"
+                        value="ziina"
+                        checked={selectedPayment === "ziina"}
+                        onChange={() => setSelectedPayment("ziina")}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                      <div>
+                        <p className="text-xs font-semibold" style={{color:"#000"}}>Pay with Ziina</p>
+                        <p className="text-3xs" style={{color:"#000"}}>Secure card &amp; digital wallet payment</p>
+                      </div>
+                    </div>
+                    <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded" style={{background:"#5b4ee8", color:"#fff", letterSpacing:"0.04em"}}>ziina</span>
+                  </div>
+                </div>
+
                 {/* Card Payment */}
                 <div
                   className={`border rounded-sm cursor-pointer transition ${selectedPayment === "card" ? "border-black" : "border-gray-300 hover:border-black"}`}
@@ -420,7 +469,13 @@ export default function CheckoutPage() {
                 className="w-full py-4 text-xs font-semibold text-white tracking-widest uppercase hover:opacity-95 transition disabled:opacity-65 cursor-pointer mt-4"
                 style={{backgroundColor:"#173946"}}
               >
-                {submitting ? t.checkout.placingOrder : items.length === 0 ? t.checkout.addItems : t.checkout.payNow}
+                {submitting
+                  ? t.checkout.placingOrder
+                  : items.length === 0
+                  ? t.checkout.addItems
+                  : selectedPayment === "ziina"
+                  ? "Continue to Ziina"
+                  : t.checkout.payNow}
               </button>
             </form>
           </div>

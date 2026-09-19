@@ -7,14 +7,23 @@ exports.getInsights = async (req, res, next) => {
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
 
+    // Exclude Ziina orders that were initiated but never paid (abandoned)
+    const confirmedPaymentFilter = {
+      $or: [
+        { "payment.method": { $ne: "Ziina" } },
+        { "payment.status": "paid" },
+      ],
+    };
+
     const [totalProducts, totalOrders, incomeResult] = await Promise.all([
       Product.countDocuments(),
-      Order.countDocuments(),
+      Order.countDocuments(confirmedPaymentFilter),
       Order.aggregate([
         {
           $match: {
             status: { $ne: "cancelled" },
             createdAt: { $gte: startOfMonth, $lt: startOfNextMonth },
+            ...confirmedPaymentFilter,
           },
         },
         { $group: { _id: null, total: { $sum: "$total" } } },

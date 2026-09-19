@@ -368,6 +368,8 @@ exports.remove = async (req, res, next) => {
   }
 };
 
+exports.sendOrderEmail = sendOrderEmail;
+
 exports.updateStatus = async (req, res, next) => {
   try {
     const { status } = req.body ?? {};

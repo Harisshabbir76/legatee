@@ -51,6 +51,7 @@ const PAYMENT_LABELS: Record<string, string> = {
   tabby: "Tabby (Pay in 4)",
   tamara: "Tamara",
   card: "Card",
+  Ziina: "Ziina",
 };
 
 function paymentMethodLabel(order: Order): string {
@@ -293,7 +294,26 @@ export default function OrdersManager({ initialOrders }: { initialOrders: Order[
                       </div>
                     ))}
                   </td>
-                  <td data-label="Total" className={styles.td}>{formatCurrency(order.total)}</td>
+                  <td data-label="Total" className={styles.td}>
+                    <div>{formatCurrency(order.total)}</div>
+                    {order.payment?.method && (
+                      <div style={{ fontSize: 11, marginTop: 3, display: "flex", alignItems: "center", gap: 4 }}>
+                        <span style={{ color: "#888" }}>{paymentMethodLabel(order)}</span>
+                        {order.payment.status && (
+                          <span style={{
+                            fontSize: 10,
+                            padding: "1px 6px",
+                            borderRadius: 10,
+                            fontWeight: 600,
+                            background: order.payment.status === "paid" ? "#dcfce7" : order.payment.status === "failed" ? "#fee2e2" : "#fef9c3",
+                            color: order.payment.status === "paid" ? "#166534" : order.payment.status === "failed" ? "#991b1b" : "#854d0e",
+                          }}>
+                            {order.payment.status}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </td>
                   <td data-label="Status" className={styles.td}>
                     <select
                       value={order.status}

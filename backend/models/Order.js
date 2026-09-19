@@ -48,6 +48,7 @@ const orderSchema = new mongoose.Schema(
       default: "pending",
     },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
+    ziinaPaymentIntentId: { type: String, default: null },
   },
   { timestamps: true, toJSON: { transform: idTransform } }
 );
@@ -55,5 +56,6 @@ const orderSchema = new mongoose.Schema(
 orderSchema.index({ userId: 1 });
 orderSchema.index({ status: 1 });
 orderSchema.index({ createdAt: -1 });
+orderSchema.index({ ziinaPaymentIntentId: 1 }, { sparse: true });
 
 module.exports = mongoose.model("Order", orderSchema);
