@@ -61,9 +61,7 @@ exports.createPaymentIntent = async (req, res) => {
     if (!customer?.email) {
       return res.status(400).json({ message: 'Customer email is required.' });
     }
-    if (!operation_id) {
-      return res.status(400).json({ message: 'operation_id is required.' });
-    }
+    
 
     const productIds = items.map((i) => i.productId);
     if (productIds.some((id) => !mongoose.Types.ObjectId.isValid(id))) {
@@ -139,7 +137,6 @@ exports.createPaymentIntent = async (req, res) => {
       failure_url: `${frontendUrl}/checkout/failure`,
       test: true,
       allow_tips: false,
-      operation_id,
     };
 
     const response = await fetch('https://api-v2.ziina.com/api/payment_intent', {
