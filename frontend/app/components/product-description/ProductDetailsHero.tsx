@@ -9,6 +9,7 @@ import styles from "./ProductDescription.module.css";
 import { optimizeImage } from "@/lib/cloudinary";
 import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
+import PriceTag from "../PriceTag";
 
 const FALLBACK_DESCRIPTION =
   "A captivating blend of juicy litchi, pear, and bergamot opens this fragrance, leading into a heart of Turkish rose, agarwood, and incense. It settles into a warm, sensual base of vanilla, musk, amber, and sandalwood-crafted for lasting elegance and depth.";
@@ -119,7 +120,7 @@ export default function ProductDetailsHero({ product, categoryLabel, categorySlu
           <p className={styles.category}>{product.category?.name ?? "PERFUME"}</p>
           <div className={styles.nameRow}>
             <h1>{displayName}</h1>
-            <span className={styles.price}>{formatPrice(product.price)}</span>
+            <PriceTag product={product} className={styles.price} format={formatPrice} />
           </div>
           <p className={styles.stars} aria-label="Five star rating">
             {t.product.stars}

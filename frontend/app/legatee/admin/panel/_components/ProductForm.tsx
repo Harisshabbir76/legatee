@@ -50,6 +50,9 @@ export default function ProductForm({ product }: { product?: Product }) {
   const [mood, setMood] = useState(product?.mood ?? "");
   const [moodAr, setMoodAr] = useState(product?.moodAr ?? "");
   const [price, setPrice] = useState(product ? String(product.price) : "");
+  const [discountedPrice, setDiscountedPrice] = useState(
+    product && typeof product.discountedPrice === "number" ? String(product.discountedPrice) : ""
+  );
   const [stock, setStock] = useState(
     product && typeof product.stock === "number" ? String(product.stock) : ""
   );
@@ -73,6 +76,11 @@ export default function ProductForm({ product }: { product?: Product }) {
     e.preventDefault();
     setError(null);
 
+    if (discountedPrice.trim() !== "" && Number(discountedPrice) >= Number(price)) {
+      setError("Discounted price must be lower than the original price.");
+      return;
+    }
+
     const formData = new FormData();
     formData.set("name", name);
     formData.set("nameAr", nameAr);
@@ -83,6 +91,7 @@ export default function ProductForm({ product }: { product?: Product }) {
     formData.set("mood", mood);
     formData.set("moodAr", moodAr);
     formData.set("price", price);
+    formData.set("discountedPrice", discountedPrice.trim());
     formData.set("stock", stock);
     formData.set("collection", collection);
     formData.set("showOnHomepage", String(showOnHomepage));
@@ -205,20 +214,39 @@ export default function ProductForm({ product }: { product?: Product }) {
             />
           </label>
 
-          {/* Price */}
-          <label className={styles.field}>
-            Price (AED)
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              required
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              className={styles.inputSm}
-              style={{ borderRadius: 6, border: "1px solid var(--color-line)", padding: "8px 12px", fontSize: 14, outline: "none", fontFamily: "inherit" }}
-            />
-          </label>
+          {/* Original price + optional discounted price */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+            <label className={styles.field}>
+              Original price (AED)
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                required
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className={styles.inputSm}
+                style={{ borderRadius: 6, border: "1px solid var(--color-line)", padding: "8px 12px", fontSize: 14, outline: "none", fontFamily: "inherit" }}
+              />
+            </label>
+
+            <label className={styles.field}>
+              Discounted price (AED) — optional
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                value={discountedPrice}
+                onChange={(e) => setDiscountedPrice(e.target.value)}
+                placeholder="Leave empty for no discount"
+                className={styles.inputSm}
+                style={{ borderRadius: 6, border: "1px solid var(--color-line)", padding: "8px 12px", fontSize: 14, outline: "none", fontFamily: "inherit" }}
+              />
+            </label>
+          </div>
+          <span className={styles.fieldHint} style={{ marginTop: -8 }}>
+            When a discounted price is set, the website shows the original price crossed out and charges the discounted price.
+          </span>
 
           {/* Stock */}
           <label className={styles.field}>

@@ -24,6 +24,8 @@ interface Order {
   total: number;
   tax: number;
   shipping: number;
+  discount?: number;
+  couponCode?: string;
   payment?: { method: string; status: string };
   status: string;
   createdAt: string;
@@ -251,6 +253,12 @@ export default function CheckoutSuccessPage() {
                         <span>Tax (5%)</span>
                         <span>AED {order.tax.toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>
                       </div>
+                      {(order.discount ?? 0) > 0 && (
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, marginTop: -6, color: "#2a7a8c" }}>
+                          <span>Discount{order.couponCode ? ` (${order.couponCode})` : ""}</span>
+                          <span>- AED {(order.discount ?? 0).toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>
+                        </div>
+                      )}
                       <div style={{ display: "flex", justifyContent: "space-between", fontSize: 16, fontWeight: 700, color: "#173946", paddingTop: 10, borderTop: "1px solid #e8e0d5" }}>
                         <span>Total</span>
                         <span>AED {order.total.toLocaleString("en-US", { minimumFractionDigits: 2 })}</span>

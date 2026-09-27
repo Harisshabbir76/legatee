@@ -3,6 +3,7 @@ import type { Product } from "@/lib/api";
 import DeleteProductButton from "./DeleteProductButton";
 import catalogStyles from "@/app/styles/dashboard styling/catalog.module.css";
 import sharedStyles from "@/app/styles/dashboard styling/shared.module.css";
+import PriceTag from "@/app/components/PriceTag";
 
 // Merge both style objects so existing JSX (styles.xxx) keeps working
 const styles = { ...catalogStyles, ...sharedStyles };
@@ -34,7 +35,7 @@ export default function ProductCatalog({ products }: { products: Product[] }) {
             </div>
             <div className={styles.productInfo}>
               <h3 className={styles.productName}>{product.name}</h3>
-              <p className={styles.productPrice}>{product.price.toLocaleString("en-US")} AED</p>
+              <p className={styles.productPrice}><PriceTag product={product} /></p>
               {typeof product.stock === "number" && (
                 <p className={outOfStock ? styles.stockOut : styles.stockCount}>
                   {outOfStock ? "Out of stock" : `Stock: ${product.stock}`}

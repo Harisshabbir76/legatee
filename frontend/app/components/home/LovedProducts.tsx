@@ -10,6 +10,8 @@ import { useWishlist } from "../WishlistContext";
 import { useCart } from "../CartContext";
 import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
+import PriceTag from "../PriceTag";
+import { effectivePrice } from "@/lib/pricing";
 
 const DEFAULTS = {
   title: "MOST LOVED PRODUCTS",
@@ -89,7 +91,7 @@ export default function LovedProducts({
                       productId: product.id,
                       name: product.name,
                       image: product.images?.[0],
-                      price: product.price,
+                      price: effectivePrice(product),
                       size: product.sizes?.[0] || undefined,
                       variants: [],
                       quantity: 1,
@@ -100,7 +102,7 @@ export default function LovedProducts({
                   <Link href={href} className={styles.cardName}>
                     {(lang === "ar" && product.nameAr ? product.nameAr : product.name).toUpperCase()}
                   </Link>
-                  <span className={styles.cardPrice}>{product.price} AED</span>
+                  <PriceTag product={product} className={styles.cardPrice} format={(n) => `${n} AED`} />
                 </div>
               </div>
             );

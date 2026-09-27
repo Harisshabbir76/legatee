@@ -25,6 +25,7 @@ const navItems = [
   { label: "Add Product",      href: "/legatee/admin/panel/products/new" },
   { label: "Collections",      href: "/legatee/admin/panel/collections" },
   { label: "Shipping",         href: "/legatee/admin/panel/shipping" },
+  { label: "Coupons",          href: "/legatee/admin/panel/coupons" },
   { label: "Email Marketing",  href: "/legatee/admin/panel/email-marketing" },
 ];
 

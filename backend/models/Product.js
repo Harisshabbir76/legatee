@@ -36,6 +36,9 @@ const productSchema = new mongoose.Schema(
     mood: { type: String, trim: true },
     moodAr: { type: String, trim: true },
     price: { type: Number, required: true, min: 0 },
+    /* Optional sale price. When set (and lower than price) the storefront
+       strikes through price and charges discountedPrice instead. */
+    discountedPrice: { type: Number, min: 0 },
     /* No default on purpose: products created before stock tracking stay
        undefined (treated as not tracked) until the admin edits them. */
     stock: { type: Number, min: 0 },

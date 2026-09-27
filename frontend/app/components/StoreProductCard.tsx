@@ -9,6 +9,8 @@ import { useWishlist } from "./WishlistContext";
 import { useCart } from "./CartContext";
 import { useLanguage } from "./LanguageContext";
 import { getT } from "@/lib/translations";
+import PriceTag from "./PriceTag";
+import { effectivePrice } from "@/lib/pricing";
 
 function EyeIcon() {
   return (
@@ -41,7 +43,6 @@ export default function StoreProductCard({
   const { lang } = useLanguage();
   const t = getT(lang);
   const image = optimizeImage(product.images[0], 600);
-  const price = `${product.price.toLocaleString("en-US")} AED`;
   const href = productPath(product, collectionSlug);
   const outOfStock = product.stock === 0;
   const isWishlisted = wishlistItems.some((w) => w.id === product.id);
@@ -53,7 +54,7 @@ export default function StoreProductCard({
       productId: product.id,
       name: product.name,
       image: product.images?.[0],
-      price: product.price,
+      price: effectivePrice(product),
       size: product.sizes?.[0] || undefined,
       variants: [],
       quantity: 1,
@@ -72,7 +73,7 @@ export default function StoreProductCard({
         </div>
         <div className={styles.listInfo}>
           <h3 className={styles.listName}>{displayName}</h3>
-          <p className={styles.listPrice}>{price}</p>
+          <p className={styles.listPrice}><PriceTag product={product} /></p>
           {outOfStock && <p className={styles.outOfStockText}>{t.product.outOfStockLabel}</p>}
         </div>
       </Link>
@@ -112,7 +113,7 @@ export default function StoreProductCard({
 
       <div className={styles.cardInfo}>
         <Link href={href} className={styles.cardName}>{displayName}</Link>
-        <span className={styles.cardPrice}>{price}</span>
+        <PriceTag product={product} className={styles.cardPrice} />
       </div>
     </div>
   );

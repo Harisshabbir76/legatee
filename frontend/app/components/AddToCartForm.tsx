@@ -6,6 +6,7 @@ import { useCart } from "./CartContext";
 import type { Product } from "@/lib/api";
 import { useLanguage } from "./LanguageContext";
 import { getT } from "@/lib/translations";
+import { effectivePrice } from "@/lib/pricing";
 
 function splitValues(values: string): string[] {
   return values
@@ -37,7 +38,7 @@ export default function AddToCartForm({ product }: { product: Product }) {
       productId: product.id,
       name: product.name,
       image: product.images[0],
-      price: product.price,
+      price: effectivePrice(product),
       size: size || undefined,
       variants: Object.entries(variantSelections).map(([name, value]) => ({ name, value })),
       quantity,

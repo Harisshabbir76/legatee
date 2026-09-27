@@ -1,0 +1,166 @@
+/* ─────────────────────────────────────────
+   Coupons page
+   Create-coupon form + list of coupons.
+   ───────────────────────────────────────── */
+
+.couponPage {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* 24px */
+  max-width: 56rem; /* 896px */
+}
+
+.couponCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 1.5rem;
+}
+
+.couponTitle {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #173946;
+}
+
+.couponHint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: rgba(23, 57, 70, 0.6);
+  line-height: 1.6;
+}
+
+.couponRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.couponField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #173946;
+}
+
+.couponInput {
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(23, 57, 70, 0.15);
+  background: #fff;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+  color: #173946;
+}
+
+.couponInput:focus {
+  border-color: #173946;
+}
+
+.couponSaved {
+  font-size: 0.8125rem;
+  color: #16a34a;
+}
+
+.couponActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ── Coupon list ── */
+.couponTableWrap {
+  overflow-x: auto;
+}
+
+.couponTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  color: #173946;
+}
+
+.couponTable th {
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(23, 57, 70, 0.6);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #E6F2F8;
+  white-space: nowrap;
+}
+
+.couponTable td {
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid #E6F2F8;
+  white-space: nowrap;
+}
+
+.couponCode {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.couponCellActions {
+  text-align: right;
+}
+
+.badgeActive,
+.badgeScheduled,
+.badgeExpired {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.badgeActive {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badgeScheduled {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badgeExpired {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .couponRow {
+    grid-template-columns: 1fr;
+  }
+  .couponTitle {
+    font-size: 1rem;
+  }
+  .couponActions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .couponCard {
+    padding: 1rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .couponInput {
+    min-height: 44px;
+  }
+}

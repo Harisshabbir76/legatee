@@ -54,6 +54,8 @@ function parseProductFields(req) {
   const mood = String(req.body.mood ?? "").trim() || undefined;
   const moodAr = String(req.body.moodAr ?? "").trim() || undefined;
   const price = Number(req.body.price);
+  const discountedRaw = String(req.body.discountedPrice ?? "").trim();
+  const discountedPrice = discountedRaw === "" ? undefined : Number(discountedRaw);
   const stock = Number(req.body.stock);
   const category = String(req.body.category ?? "").trim() || undefined;
   const collectionId = String(req.body.collection ?? "").trim() || undefined;
@@ -71,7 +73,7 @@ function parseProductFields(req) {
 
   const showOnHomepage = req.body.showOnHomepage === "true" || req.body.showOnHomepage === true;
 
-  return { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug: productSlug(name) };
+  return { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, discountedPrice, stock, category, collectionId, sizes, variants, showOnHomepage, slug: productSlug(name) };
 }
 
 async function resolveIngredientsImage(req, currentImage) {
@@ -142,7 +144,7 @@ exports.getOne = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
   try {
-    const { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug } =
+    const { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, discountedPrice, stock, category, collectionId, sizes, variants, showOnHomepage, slug } =
       parseProductFields(req);
 
     if (!name || !description) {
@@ -155,6 +157,10 @@ exports.create = async (req, res, next) => {
 
     if (!Number.isInteger(stock) || stock < 0) {
       return res.status(400).json({ message: "A valid stock quantity is required." });
+    }
+
+    if (discountedPrice !== undefined && (!Number.isFinite(discountedPrice) || discountedPrice < 0 || discountedPrice >= price)) {
+      return res.status(400).json({ message: "Discounted price must be lower than the original price." });
     }
 
     const ingredients = buildIngredients(req.body.ingredientsMeta);
@@ -175,6 +181,7 @@ exports.create = async (req, res, next) => {
       mood,
       moodAr,
       price,
+      discountedPrice,
       stock,
       category: categoryId,
       collection: collectionId || undefined,
@@ -201,7 +208,7 @@ exports.update = async (req, res, next) => {
       return res.status(404).json({ message: "Product not found." });
     }
 
-    const { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, stock, category, collectionId, sizes, variants, showOnHomepage, slug } =
+    const { name, nameAr, description, descriptionAr, howToUse, howToUseAr, mood, moodAr, price, discountedPrice, stock, category, collectionId, sizes, variants, showOnHomepage, slug } =
       parseProductFields(req);
 
     if (!name || !description) {
@@ -214,6 +221,10 @@ exports.update = async (req, res, next) => {
 
     if (!Number.isInteger(stock) || stock < 0) {
       return res.status(400).json({ message: "A valid stock quantity is required." });
+    }
+
+    if (discountedPrice !== undefined && (!Number.isFinite(discountedPrice) || discountedPrice < 0 || discountedPrice >= price)) {
+      return res.status(400).json({ message: "Discounted price must be lower than the original price." });
     }
 
     const ingredients = buildIngredients(req.body.ingredientsMeta);
@@ -234,6 +245,7 @@ exports.update = async (req, res, next) => {
     product.mood = mood;
     product.moodAr = moodAr;
     product.price = price;
+    product.discountedPrice = discountedPrice;
     product.stock = stock;
     product.category = categoryId;
     product.collection = collectionId || undefined;

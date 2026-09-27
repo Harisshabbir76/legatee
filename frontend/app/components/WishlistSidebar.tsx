@@ -7,6 +7,8 @@ import { optimizeImage } from "@/lib/cloudinary";
 import { productPath } from "@/lib/product-slug";
 import { useLanguage } from "./LanguageContext";
 import { getT } from "@/lib/translations";
+import PriceTag from "./PriceTag";
+import { effectivePrice } from "@/lib/pricing";
 
 function TrashIcon() {
   return (
@@ -100,7 +102,7 @@ export default function WishlistSidebar() {
                       {product.name}
                     </Link>
                     <p className="mt-1 text-s font-semibold" style={{color:"#000"}}>
-                      {product.price.toLocaleString("en-US")} AED
+                      <PriceTag product={product} />
                     </p>
 
                     {/* Action Row */}
@@ -112,7 +114,7 @@ export default function WishlistSidebar() {
                             productId: product.id,
                             name: product.name,
                             image: product.images?.[0],
-                            price: product.price,
+                            price: effectivePrice(product),
                             size: product.sizes?.[0] || undefined,
                             variants: [],
                             quantity: 1,

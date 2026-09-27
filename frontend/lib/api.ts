@@ -40,7 +40,10 @@ export interface Product {
   howToUseAr?: string;
   mood?: string;
   moodAr?: string;
+  /** Original price — always set. */
   price: number;
+  /** Optional sale price; when lower than `price` it is what the customer pays. */
+  discountedPrice?: number;
   /** Products created before stock tracking have no stock value (not tracked). */
   stock?: number;
   category?: Category | null;
@@ -80,6 +83,8 @@ export interface Order {
   total: number;
   tax?: number;
   shipping?: number;
+  discount?: number;
+  couponCode?: string;
   payment?: {
     method?: string;
     status?: string;
@@ -498,6 +503,29 @@ export async function fetchShippingPrice(): Promise<number> {
     return Number(data.price) || 0;
   } catch {
     return 0;
+  }
+}
+
+export interface Coupon {
+  id: string;
+  code: string;
+  discountPercent: number;
+  startsAt?: string;
+  expiresAt: string;
+  createdAt: string;
+}
+
+export async function fetchCoupons(): Promise<Coupon[]> {
+  try {
+    const res = await fetch(`${API_URL}/api/coupons`, {
+      headers: await adminBearerHeader(),
+      cache: "no-store",
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.coupons as Coupon[];
+  } catch {
+    return [];
   }
 }
 

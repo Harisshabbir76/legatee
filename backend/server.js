@@ -24,6 +24,7 @@ const userRoutes           = require("./routes/userRoutes");
 const emailMarketingRoutes = require("./routes/emailMarketingRoutes");
 const footerRoutes         = require("./routes/footerRoutes");
 const collectionRoutes     = require("./routes/collectionRoutes");
+const couponRoutes         = require("./routes/couponRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -80,6 +81,7 @@ app.use("/api/shipping",      shippingRoutes);
 app.use("/api/insights",      insightsRoutes);
 app.use("/api/categories",    categoryRoutes);
 app.use("/api/collections",   collectionRoutes);
+app.use("/api/coupons",       couponRoutes);
 // app.use("/api/tabby",         tabbyRoutes);
 // app.use("/api/tamara",        tamaraRoutes);
 // app.use("/api/dhl",           dhlRoutes);

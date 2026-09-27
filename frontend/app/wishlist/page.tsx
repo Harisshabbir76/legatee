@@ -8,6 +8,8 @@ import cardStyles from "../styles/ProductCard.module.css";
 import styles from "../styles/Wishlist.module.css";
 import { useLanguage } from "../components/LanguageContext";
 import { getT } from "@/lib/translations";
+import PriceTag from "../components/PriceTag";
+import { effectivePrice } from "@/lib/pricing";
 
 export default function WishlistPage() {
   const { wishlistItems, toggleWishlist } = useWishlist();
@@ -30,7 +32,6 @@ export default function WishlistPage() {
         <div className={styles.grid}>
           {wishlistItems.map((product) => {
             const image = product.images?.[0];
-            const price = `${product.price.toLocaleString("en-US")} AED`;
             const href = productPath(product);
 
             return (
@@ -50,7 +51,7 @@ export default function WishlistPage() {
                     )}
                   </div>
                   <h3 className={cardStyles.name}>{product.name}</h3>
-                  <p className={cardStyles.price}>{price}</p>
+                  <p className={cardStyles.price}><PriceTag product={product} /></p>
                 </Link>
 
                 <div className={styles.actions}>
@@ -61,7 +62,7 @@ export default function WishlistPage() {
                         productId: product.id,
                         name: product.name,
                         image: product.images?.[0],
-                        price: product.price,
+                        price: effectivePrice(product),
                         size: product.sizes?.[0] || undefined,
                         variants: [],
                         quantity: 1,

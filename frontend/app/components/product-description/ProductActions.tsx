@@ -10,6 +10,7 @@ import styles from "./ProductDescription.module.css";
 // import TamaraPromoWidget from "../TamaraPromoWidget";
 import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
+import { effectivePrice } from "@/lib/pricing";
 
 export default function ProductActions({ product }: { product: Product }) {
   const router = useRouter();
@@ -23,7 +24,7 @@ export default function ProductActions({ product }: { product: Product }) {
       productId: product.id,
       name: product.name,
       image: product.images[0],
-      price: product.price,
+      price: effectivePrice(product),
       size,
       variants: [],
       quantity: qty,
@@ -85,8 +86,8 @@ export default function ProductActions({ product }: { product: Product }) {
       </button>
 
       {/* Tabby & Tamara installment promo widgets — commented out
-      <TabbyPromoWidget price={product.price} currency="AED" />
-      <TamaraPromoWidget price={product.price} currency="AED" />
+      <TabbyPromoWidget price={effectivePrice(product)} currency="AED" />
+      <TamaraPromoWidget price={effectivePrice(product)} currency="AED" />
       */}
     </div>
   );

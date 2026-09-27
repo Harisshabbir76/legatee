@@ -6,6 +6,7 @@ import type { Product, Collection } from "@/lib/api";
 import styles from "../../styles/ShopProducts.module.css";
 import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
+import { effectivePrice } from "@/lib/pricing";
 
 function SortIcon() {
   return (
@@ -91,7 +92,7 @@ export default function ShopProducts({
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
   const [availability, setAvailability] = useState<Availability>("all");
 
-  const prices = products.map((p) => p.price);
+  const prices = products.map((p) => effectivePrice(p));
   const sliderMin = 0;
   const sliderMax = prices.length ? Math.max(...prices) : 1000;
   const [priceRange, setPriceRange] = useState<[number, number]>([sliderMin, sliderMax]);
@@ -120,12 +121,12 @@ export default function ShopProducts({
       list = list.filter((p) => (p.stock ?? 0) === 0);
     }
 
-    list = list.filter((p) => p.price >= priceRange[0] && p.price <= priceRange[1]);
+    list = list.filter((p) => effectivePrice(p) >= priceRange[0] && effectivePrice(p) <= priceRange[1]);
 
 
     switch (sort) {
-      case "price-asc":  list.sort((a, b) => a.price - b.price); break;
-      case "price-desc": list.sort((a, b) => b.price - a.price); break;
+      case "price-asc":  list.sort((a, b) => effectivePrice(a) - effectivePrice(b)); break;
+      case "price-desc": list.sort((a, b) => effectivePrice(b) - effectivePrice(a)); break;
       case "name-asc":   list.sort((a, b) => a.name.localeCompare(b.name)); break;
       case "name-desc":  list.sort((a, b) => b.name.localeCompare(a.name)); break;
       default:           list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());

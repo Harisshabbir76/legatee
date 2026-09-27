@@ -51,6 +51,8 @@ const EMPTY_FORM: CustomerForm = {
 export default function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
   const { user } = useUser();
+  const { lang } = useLanguage();
+  const t = getT(lang);
   const router = useRouter();
   const [form, setForm] = useState<CustomerForm>(EMPTY_FORM);
   const [error, setError] = useState<string | null>(null);
@@ -66,9 +68,50 @@ export default function CheckoutPage() {
       .catch(() => {});
   }, []);
 
+  // Coupon — validated against the backend, which re-checks it when the order is placed.
+  const [couponInput, setCouponInput] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discountPercent: number } | null>(null);
+  const [couponError, setCouponError] = useState<string | null>(null);
+  const [couponLoading, setCouponLoading] = useState(false);
+
   const shippingTotal = items.length > 0 ? shippingPrice : 0;
   const tax = Math.round((subtotal + shippingTotal) * 0.05 * 100) / 100;
-  const grandTotal = subtotal + shippingTotal + tax;
+  const totalBeforeDiscount = subtotal + shippingTotal + tax;
+  const discount = appliedCoupon
+    ? Math.round(totalBeforeDiscount * (appliedCoupon.discountPercent / 100) * 100) / 100
+    : 0;
+  const grandTotal = Math.max(0, Math.round((totalBeforeDiscount - discount) * 100) / 100);
+
+  async function applyCoupon() {
+    const code = couponInput.trim();
+    if (!code) return;
+    setCouponLoading(true);
+    setCouponError(null);
+    try {
+      const res = await fetch(`${API_URL}/api/coupons/validate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setAppliedCoupon(null);
+        setCouponError(t.checkout.couponInvalid);
+        return;
+      }
+      setAppliedCoupon({ code: data.code, discountPercent: Number(data.discountPercent) });
+      setCouponInput("");
+    } catch {
+      setCouponError(t.checkout.couponInvalid);
+    } finally {
+      setCouponLoading(false);
+    }
+  }
+
+  function removeCoupon() {
+    setAppliedCoupon(null);
+    setCouponError(null);
+  }
 
   function updateField<K extends keyof CustomerForm>(field: K, value: CustomerForm[K]) {
     setForm((f) => ({ ...f, [field]: value }));
@@ -111,6 +154,7 @@ export default function CheckoutPage() {
             items: cartItems,
             customer: customerPayload,
             operation_id: operationId,
+            ...(appliedCoupon ? { couponCode: appliedCoupon.code } : {}),
             ...(user?.id ? { userId: user.id } : {}),
           }),
         });
@@ -126,6 +170,7 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           items: cartItems,
           customer: customerPayload,
+          ...(appliedCoupon ? { couponCode: appliedCoupon.code } : {}),
           payment: {
             method: selectedPayment === "cod" ? "Cash on Delivery" : "Card",
             status: "pending",
@@ -147,8 +192,6 @@ export default function CheckoutPage() {
     }
   }
 
-  const { lang } = useLanguage();
-  const t = getT(lang);
   const inputCls = "w-full border rounded-sm px-3.5 py-3 text-sm outline-none transition text-[16px] sm:text-sm text-black placeholder:text-gray-500";
   const inputStyle = { backgroundColor: "#fff", color: "#000", borderColor: "#000" } as React.CSSProperties;
 
@@ -521,6 +564,42 @@ export default function CheckoutPage() {
                   ))}
                 </div>
 
+                {/* Coupon */}
+                <div className="border-t border-gray-200 pt-6 flex flex-col gap-2">
+                  {appliedCoupon ? (
+                    <div className="flex items-center justify-between rounded-sm border border-black bg-white px-3.5 py-2.5 text-xs" style={{color:"#000"}}>
+                      <span className="font-semibold tracking-wider">
+                        {appliedCoupon.code} <span className="font-normal">(-{appliedCoupon.discountPercent}%)</span>
+                      </span>
+                      <button type="button" onClick={removeCoupon} className="text-xs font-medium hover:underline cursor-pointer" style={{color:"#173946"}}>
+                        {t.checkout.removeCoupon}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder={t.checkout.couponPlaceholder}
+                        value={couponInput}
+                        onChange={(e) => { setCouponInput(e.target.value); setCouponError(null); }}
+                        onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); applyCoupon(); } }}
+                        className={`${inputCls} flex-1 min-w-0`}
+                        style={inputStyle}
+                      />
+                      <button
+                        type="button"
+                        onClick={applyCoupon}
+                        disabled={couponLoading || !couponInput.trim()}
+                        className="px-5 text-xs font-semibold text-white tracking-widest uppercase rounded-sm transition disabled:opacity-50 cursor-pointer"
+                        style={{backgroundColor:"#173946"}}
+                      >
+                        {couponLoading ? "..." : t.checkout.applyCoupon}
+                      </button>
+                    </div>
+                  )}
+                  {couponError && <p className="text-3xs text-red-600" role="alert">{couponError}</p>}
+                </div>
+
                 <div className="border-t border-gray-200 pt-6 flex flex-col gap-3">
                   <div className="flex justify-between text-xs font-medium" style={{color:"#000"}}>
                     <span>{t.checkout.subtotal}</span>
@@ -538,6 +617,12 @@ export default function CheckoutPage() {
                     <span>{t.checkout.tax}</span>
                     <span>{tax.toLocaleString("en-US", { minimumFractionDigits: 2 })} AED</span>
                   </div>
+                  {appliedCoupon && discount > 0 && (
+                    <div className="flex justify-between text-xs font-medium" style={{color:"#2a7a8c"}}>
+                      <span>{t.checkout.discount} ({appliedCoupon.code})</span>
+                      <span>- {discount.toLocaleString("en-US", { minimumFractionDigits: 2 })} AED</span>
+                    </div>
+                  )}
                   <div className="flex justify-between items-center border-t border-gray-200 mt-2 pt-4 text-lg font-bold" style={{color:"#000"}}>
                     <span>{t.checkout.total}</span>
                     <span>

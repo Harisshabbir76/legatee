@@ -4,6 +4,7 @@ const Order    = require("../models/Order");
 const Product  = require("../models/Product");
 const User     = require("../models/User");
 const ShippingSetting = require("../models/ShippingSetting");
+const { effectivePrice, findValidCoupon, computeTotals } = require("../utils/pricing");
 
 const mailer = nodemailer.createTransport({
   service: "gmail",
@@ -90,7 +91,7 @@ function itemsTable(items) {
     </table>`;
 }
 
-function totalsBlock(shipping, tax, total) {
+function totalsBlock(shipping, tax, total, discount = 0, couponCode = "") {
   const shippingLine = shipping > 0
     ? `<tr><td style="padding:5px 14px;font-family:Arial,sans-serif;font-size:12px;color:#4a6570;">Shipping</td><td style="padding:5px 14px;font-family:Arial,sans-serif;font-size:12px;color:#4a6570;text-align:right;">AED ${shipping.toFixed(2)}</td></tr>`
     : `<tr><td style="padding:5px 14px;font-family:Arial,sans-serif;font-size:12px;color:#4a6570;">Shipping</td><td style="padding:5px 14px;font-family:Arial,sans-serif;font-size:12px;color:#4a6570;text-align:right;">Free</td></tr>`;
@@ -98,6 +99,7 @@ function totalsBlock(shipping, tax, total) {
     <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:4px;">
       ${shippingLine}
       <tr><td style="padding:5px 14px;font-family:Arial,sans-serif;font-size:12px;color:#4a6570;">Tax (5%)</td><td style="padding:5px 14px;font-family:Arial,sans-serif;font-size:12px;color:#4a6570;text-align:right;">AED ${tax.toFixed(2)}</td></tr>
+      ${discount > 0 ? `<tr><td style="padding:5px 14px;font-family:Arial,sans-serif;font-size:12px;color:#2a7a8c;">Discount${couponCode ? ` (${couponCode})` : ""}</td><td style="padding:5px 14px;font-family:Arial,sans-serif;font-size:12px;color:#2a7a8c;text-align:right;">- AED ${discount.toFixed(2)}</td></tr>` : ""}
       <tr style="background:#f0f5f6;">
         <td style="padding:10px 14px;font-family:Georgia,serif;font-size:14px;font-weight:600;color:#173946;">Total</td>
         <td style="padding:10px 14px;font-family:Georgia,serif;font-size:14px;font-weight:600;color:#173946;text-align:right;">AED ${total.toFixed(2)}</td>
@@ -123,7 +125,7 @@ function buildAdminOrderHtml(order, year) {
       ${labelRow("Payment", order.payment?.method || "â€”")}
       ${sectionTitle("Order Items")}
       ${itemsTable(order.items)}
-      ${totalsBlock(order.shipping || 0, order.tax || 0, order.total || 0)}
+      ${totalsBlock(order.shipping || 0, order.tax || 0, order.total || 0, order.discount || 0, order.couponCode || "")}
     </td></tr>`;
   return emailWrapper(body, year);
 }
@@ -149,7 +151,7 @@ function buildCustomerOrderHtml(order, year) {
       ${labelRow("Payment", order.payment?.method || "â€”")}
       ${sectionTitle("Your Items")}
       ${itemsTable(order.items)}
-      ${totalsBlock(order.shipping || 0, order.tax || 0, order.total || 0)}
+      ${totalsBlock(order.shipping || 0, order.tax || 0, order.total || 0, order.discount || 0, order.couponCode || "")}
       <p style="margin:28px 0 0;color:#4a6570;font-family:Arial,sans-serif;font-size:11px;line-height:1.7;text-align:center;">
         Questions? Contact us at <a href="mailto:${process.env.BUSINESS_EMAIL || ""}" style="color:#173946;text-decoration:none;">${process.env.BUSINESS_EMAIL || ""}</a>
       </p>
@@ -248,7 +250,7 @@ exports.create = async (req, res, next) => {
               .filter((v) => v?.name && v?.value)
               .map((v) => ({ name: String(v.name), value: String(v.value) }))
           : [],
-        price: product.price,
+        price: effectivePrice(product),
         quantity: item.quantity,
       });
     }
@@ -258,8 +260,15 @@ exports.create = async (req, res, next) => {
     // Flat shipping price set by the admin (0 when never configured)
     const shippingSetting = await ShippingSetting.findOne();
     const shipping = shippingSetting ? shippingSetting.price : 0;
-    const tax = Math.round((itemsTotal + shipping) * 0.05 * 100) / 100;
-    const total = itemsTotal + shipping + tax;
+
+    let coupon = null;
+    if (String(req.body?.couponCode ?? "").trim()) {
+      coupon = await findValidCoupon(req.body.couponCode);
+      if (!coupon) {
+        return res.status(400).json({ message: "This coupon is invalid or has expired." });
+      }
+    }
+    const { tax, discount, total } = computeTotals(itemsTotal, shipping, coupon);
 
     const payment = req.body?.payment ?? {};
 
@@ -275,6 +284,8 @@ exports.create = async (req, res, next) => {
       total,
       tax,
       shipping,
+      discount,
+      couponCode: coupon ? coupon.code : undefined,
       payment: {
         method: String(payment.method ?? "").trim().slice(0, 40),
         status: String(payment.status ?? "").trim().slice(0, 40),

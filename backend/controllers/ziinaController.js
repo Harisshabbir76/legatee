@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 const ShippingSetting = require('../models/ShippingSetting');
+const { effectivePrice, findValidCoupon, computeTotals } = require('../utils/pricing');
 const { sendOrderEmail } = require('./orderController');
 
 const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
@@ -97,7 +98,7 @@ exports.createPaymentIntent = async (req, res) => {
               .filter((v) => v?.name && v?.value)
               .map((v) => ({ name: String(v.name), value: String(v.value) }))
           : [],
-        price: product.price,
+        price: effectivePrice(product),
         quantity,
       });
     }
@@ -105,8 +106,15 @@ exports.createPaymentIntent = async (req, res) => {
     const itemsTotal = orderItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
     const shippingSetting = await ShippingSetting.findOne();
     const shipping = shippingSetting ? shippingSetting.price : 0;
-    const tax = Math.round((itemsTotal + shipping) * 0.05 * 100) / 100;
-    const total = itemsTotal + shipping + tax;
+
+    let coupon = null;
+    if (String(req.body?.couponCode ?? '').trim()) {
+      coupon = await findValidCoupon(req.body.couponCode);
+      if (!coupon) {
+        return res.status(400).json({ message: 'This coupon is invalid or has expired.' });
+      }
+    }
+    const { tax, discount, total } = computeTotals(itemsTotal, shipping, coupon);
 
     const orderData = {
       items: orderItems,
@@ -120,6 +128,8 @@ exports.createPaymentIntent = async (req, res) => {
       total,
       tax,
       shipping,
+      discount,
+      couponCode: coupon ? coupon.code : undefined,
       payment: { method: 'Ziina', status: 'pending' },
     };
     if (userId && mongoose.Types.ObjectId.isValid(userId)) {
