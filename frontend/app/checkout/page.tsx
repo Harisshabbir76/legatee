@@ -57,7 +57,7 @@ export default function CheckoutPage() {
   const [form, setForm] = useState<CustomerForm>(EMPTY_FORM);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState<"card" | "cod" | "ziina">("cod");
+  const [selectedPayment, setSelectedPayment] = useState<"card" | "cod">("cod");
 
   // Flat shipping price set by the admin (0 = free shipping)
   const [shippingPrice, setShippingPrice] = useState(0);
@@ -141,7 +141,7 @@ export default function CheckoutPage() {
         city: cityWithEmirate,
       };
 
-      if (selectedPayment === "ziina") {
+      if (selectedPayment === "card") {
         const operationId =
           typeof window !== "undefined" && window.crypto?.randomUUID
             ? window.crypto.randomUUID()
@@ -159,7 +159,7 @@ export default function CheckoutPage() {
           }),
         });
         const intentData = await intentRes.json();
-        if (!intentRes.ok) throw new Error(intentData.message || "Failed to initiate Ziina payment.");
+        if (!intentRes.ok) throw new Error(intentData.message || "Failed to initiate payment.");
         window.location.href = intentData.redirect_url;
         return;
       }
@@ -366,30 +366,6 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                {/* Ziina */}
-                <div
-                  className={`border rounded-sm cursor-pointer transition ${selectedPayment === "ziina" ? "border-black" : "border-gray-300 hover:border-black"}`}
-                  onClick={() => setSelectedPayment("ziina")}
-                >
-                  <div className="flex items-center justify-between p-3.5">
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="radio"
-                        name="payment-method"
-                        value="ziina"
-                        checked={selectedPayment === "ziina"}
-                        onChange={() => setSelectedPayment("ziina")}
-                        onClick={(e) => e.stopPropagation()}
-                      />
-                      <div>
-                        <p className="text-xs font-semibold" style={{color:"#000"}}>Pay with Ziina</p>
-                        <p className="text-3xs" style={{color:"#000"}}>Secure card &amp; digital wallet payment</p>
-                      </div>
-                    </div>
-                    <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded" style={{background:"#5b4ee8", color:"#fff", letterSpacing:"0.04em"}}>ziina</span>
-                  </div>
-                </div>
-
                 {/* Card Payment */}
                 <div
                   className={`border rounded-sm cursor-pointer transition ${selectedPayment === "card" ? "border-black" : "border-gray-300 hover:border-black"}`}
@@ -456,7 +432,7 @@ export default function CheckoutPage() {
                         onChange={(e) => updateField("cardName", e.target.value)}
                         className="w-full px-3.5 py-3 text-[16px] sm:text-sm outline-none text-black bg-white"
                       />
-                      <p className="px-3.5 pb-3 text-3xs text-gray-400">Card payment integration coming soon. Use Cash on Delivery for now.</p>
+                      <p className="px-3.5 pb-3 text-3xs text-gray-400">You will be redirected to a secure payment page to complete your payment.</p>
                     </div>
                   )}
                 </div>
@@ -516,8 +492,8 @@ export default function CheckoutPage() {
                   ? t.checkout.placingOrder
                   : items.length === 0
                   ? t.checkout.addItems
-                  : selectedPayment === "ziina"
-                  ? "Continue to Ziina"
+                  : selectedPayment === "card"
+                  ? "Continue to Payment"
                   : t.checkout.payNow}
               </button>
             </form>
