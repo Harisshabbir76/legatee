@@ -176,14 +176,17 @@ const FONT_OPTS   = [{ label: "Default", value: "" }, { label: "Ivy Bodoni Conde
 const WEIGHT_OPTS = ["","300","400","500","600","700","800"].map((w) => ({ label: w || "Default", value: w }));
 const ALIGN_OPTS  = ["","left","center","right","justify"].map((a) => ({ label: a || "Default", value: a }));
 
-function PropertiesPanel({ elKey, content, pageKey, onBlock, previewLang, onClose }: {
+function PropertiesPanel({ elKey, content, pageKey, onBlock, previewLang, onClose, onDeleteFaqItem }: {
   elKey: string; content: ShopPageData; pageKey: PageKey;
   onBlock: (k: string, b: ContentBlock) => void;
   previewLang: "en" | "ar";
   onClose: () => void;
+  onDeleteFaqItem?: (index: number) => void;
 }) {
   const [panelLang, setPanelLang] = useState<"en" | "ar">(previewLang);
   useEffect(() => setPanelLang(previewLang), [previewLang]);
+  const faqItemMatch = elKey.match(/^faq\.items\.(\d+)\.(q|a)$/);
+  const faqItemIndex = faqItemMatch ? parseInt(faqItemMatch[1]) : -1;
   const block = getBlock(content, elKey);
   const style = (panelLang === "ar" ? (block?.styleAr ?? {}) : (block?.style ?? {})) as StyleRecord;
   const editorRef = useRef<HTMLDivElement>(null);
@@ -314,6 +317,12 @@ function PropertiesPanel({ elKey, content, pageKey, onBlock, previewLang, onClos
             style={{ marginTop: 14, width: "100%", padding: "7px 0", border: "1px solid #d4c5b5", borderRadius: 4, background: "#fff", color: "#6f6459", fontSize: 11, cursor: "pointer" }}>
             Reset {panelLang === "ar" ? "Arabic" : "English"} styles
           </button>
+          {faqItemIndex >= 0 && onDeleteFaqItem && (
+            <button onClick={() => { onDeleteFaqItem(faqItemIndex); }}
+              style={{ marginTop: 8, width: "100%", padding: "7px 0", border: "1px solid #fca5a5", borderRadius: 4, background: "#fff8f8", color: "#dc2626", fontSize: 11, cursor: "pointer", fontWeight: 600 }}>
+              Delete FAQ item {faqItemIndex + 1}
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -333,11 +342,9 @@ const DEFAULT: ShopPageData = {
     title: { text: "GOT QUESTIONS?", tag: "h2", style: {} },
     copy:  { text: "Discover everything you need to know about our fragrances, craftsmanship, and how to make the most of your scent journey.", tag: "p", style: {} },
     items: [
-      { q: { text: "1. What makes LEGATEE fragrances unique?", tag: "p", style: {} }, a: { text: "LEGATEE blends timeless Arabian scent traditions with refined, modern composition techniques — creating fragrances that feel both nostalgic and contemporary.", tag: "p", style: {} } },
-      { q: { text: "2. Are LEGATEE fragrances suitable for both men and women?", tag: "p", style: {} }, a: { text: "Yes. Our scents are designed as expressive, character-rich profiles that can be worn and enjoyed by anyone, regardless of gender.", tag: "p", style: {} } },
-      { q: { text: "3. What is the difference between Sadeem and Smoke of Arabia?", tag: "p", style: {} }, a: { text: "Sadeem is a warm, elegant composition with soft amber depth, while Smoke of Arabia is bolder and smokier — built around rich, resinous oud-inspired notes.", tag: "p", style: {} } },
-      { q: { text: "4. What is VELOURA Body & Hair Mist?", tag: "p", style: {} }, a: { text: "VELOURA is a lightweight body and hair mist that delivers a gentle, lingering scent — perfect for refreshing throughout the day.", tag: "p", style: {} } },
-      { q: { text: "5. How long do LEGATEE perfumes last?", tag: "p", style: {} }, a: { text: "Our eau de parfum concentrations are crafted for longevity, typically lasting 6–8 hours on skin depending on application and conditions.", tag: "p", style: {} } },
+      { q: { text: "1. What makes LEGATEE fragrances unique?", tag: "p", style: {}, textAr: "١. ما الذي يجعل عطور LEGATEE مميزة؟" }, a: { text: "LEGATEE is built around a distinctive international positioning, combining refined branding, a strong visual identity, and fragrances designed to make a lasting impression. Each scent is created to feel modern, elevated, and effortlessly unisex, with longevity that carries you throughout the day.", tag: "p", style: {}, textAr: "تقوم LEGATEE على مكانة دولية مميزة، تجمع بين العلامة التجارية الراقية والهوية البصرية القوية، وعطور مصممة لتترك أثراً لا يُنسى. كل عطر مصمم ليشعرك بالحداثة والرقي، مع طول أمد يرافقك طوال اليوم." } },
+      { q: { text: "2. Are LEGATEE fragrances suitable for both men and women?", tag: "p", style: {}, textAr: "٢. هل عطور LEGATEE مناسبة للرجال والنساء؟" }, a: { text: "Absolutely. LEGATEE fragrances are unisex, created to be worn and enjoyed by everyone. Each scent is designed to complement different personalities and styles rather than being limited by gender.", tag: "p", style: {}, textAr: "بالتأكيد. عطور LEGATEE هي عطور للجنسين، مصممة لتُرتدى وتُستمتع بها من الجميع. كل عطر مصمم ليتناسب مع الشخصيات والأساليب المختلفة دون أن يكون مقيداً بالجنس." } },
+      { q: { text: "3. How long do LEGATEE perfumes last?", tag: "p", style: {}, textAr: "٣. كم تدوم عطور LEGATEE؟" }, a: { text: "LEGATEE fragrances are designed for long-lasting wear, with longevity ranging from approximately 8–9 hours and extending up to 15–16 hours, depending on the fragrance, skin type, and application.", tag: "p", style: {}, textAr: "صُممت عطور LEGATEE لتدوم طويلاً، حيث تتراوح مدة بقاء العطر من 8 إلى 9 ساعات تقريباً، وقد تمتد حتى 15 إلى 16 ساعة، وذلك حسب العطر ونوع البشرة وطريقة التطبيق." } },
     ],
   },
 };
@@ -444,6 +451,16 @@ export default function ShopPageEditorClient({ pageKey, initialContent, initialP
     }
 
     setSel(null); setSelImg(null); setFooterSel(null); setFooterSelImg(null);
+  }
+
+  function deleteFaqItem(index: number) {
+    setContent((prev) => {
+      const clone = JSON.parse(JSON.stringify(prev)) as ShopPageData;
+      clone.faq.items = (clone.faq.items ?? []).filter((_, i) => i !== index);
+      return clone;
+    });
+    setSel(null);
+    setStatus(null);
   }
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -650,6 +667,7 @@ export default function ShopPageEditorClient({ pageKey, initialContent, initialP
             onBlock={onBlock}
             previewLang={previewLang}
             onClose={() => setSel(null)}
+            onDeleteFaqItem={deleteFaqItem}
           />
         )}
 

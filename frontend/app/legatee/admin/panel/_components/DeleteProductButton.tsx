@@ -8,15 +8,31 @@ import { adminFetch } from "@/lib/admin-fetch";
 import ConfirmModal from "./ConfirmModal";
 import styles from "@/app/styles/dashboard styling/shared.module.css";
 
-export default function DeleteProductButton({ id }: { id: string }) {
+export default function DeleteProductButton({
+  id,
+  onDeleting,
+  onDeleteFailed,
+}: {
+  id: string;
+  onDeleting?: () => void;
+  onDeleteFailed?: () => void;
+}) {
   const router = useRouter();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   function handleDelete() {
     setConfirmOpen(false);
+    onDeleting?.();
     startTransition(async () => {
-      await adminFetch(`${API_URL}/api/products/${id}`, { method: "DELETE", headers: adminAuthHeader() });
+      try {
+        const res = await adminFetch(`${API_URL}/api/products/${id}`, { method: "DELETE", headers: adminAuthHeader() });
+        if (!res.ok) throw new Error(`Delete failed (${res.status})`);
+      } catch {
+        onDeleteFailed?.();
+        alert("Could not delete the product. Please try again.");
+        return;
+      }
       router.refresh();
     });
   }

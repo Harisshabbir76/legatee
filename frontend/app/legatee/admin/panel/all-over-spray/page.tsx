@@ -18,7 +18,7 @@ export default async function AllOverSprayEditorPage() {
     if (footerRes.ok) initialFooterContent = (await footerRes.json()).content;
   } catch {}
 
-  const products = await fetchProducts();
+  const products = await fetchProducts({ fresh: true });
 
   return <ShopPageEditorClient pageKey="allOverSpray" initialContent={initialContent} initialProducts={products} initialFooterContent={initialFooterContent} />;
 }

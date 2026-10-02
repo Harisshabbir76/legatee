@@ -10,6 +10,7 @@ import CartSidebar from "./components/CartSidebar";
 import WishlistSidebar from "./components/WishlistSidebar";
 import Shell from "./components/Shell";
 import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
 import HtmlDir from "./components/HtmlDir";
 import { fetchFooterContent } from "@/lib/api";
 
@@ -90,6 +91,7 @@ export default async function RootLayout({
                 <Shell footerContent={footerContent}>{children}</Shell>
                 <CartSidebar />
                 <WishlistSidebar />
+                <WhatsAppButton />
               </WishlistProvider>
             </CartProvider>
           </UserProvider>

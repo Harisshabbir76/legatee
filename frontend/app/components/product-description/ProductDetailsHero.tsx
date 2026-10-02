@@ -130,7 +130,6 @@ export default function ProductDetailsHero({ product, categoryLabel, categorySlu
 
           <ProductAccordion items={[
             ...(displayMood ? [{ title: t.product.mood, body: displayMood }] : []),
-            { title: t.product.productDetails, body: displayDescription },
             ...(product.ingredients?.length ? [{ title: t.product.fragranceNotes, body: buildFragranceNotes(product.ingredients, isAr) }] : []),
             ...(displayHowToUse ? [{ title: t.product.waysToUse, body: displayHowToUse }] : []),
           ]} />

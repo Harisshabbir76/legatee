@@ -22,7 +22,7 @@ export default function GotQuestions({ content, openItems }: Props) {
 
   const faq = content ?? {} as ShopPageData["faq"];
   const arFaqItems = getT("ar").faq.items;
-  const defaultItems = t.faq.items.slice(0, 5).map((d, i) => ({
+  const defaultItems = t.faq.items.slice(0, 3).map((d, i) => ({
     q: { text: `${i + 1}. ${d.q}`, textAr: `${i + 1}. ${arFaqItems[i]?.q ?? d.q}`, style: {} },
     a: { text: d.a, textAr: arFaqItems[i]?.a ?? d.a, style: {} },
   }));

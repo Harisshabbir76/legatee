@@ -9,7 +9,7 @@ export default async function ProductCatalogPage() {
     redirect("/legatee/admin/panel");
   }
 
-  const products = await fetchProducts();
+  const products = await fetchProducts({ fresh: true });
 
   return (
     <AdminShell

@@ -114,11 +114,14 @@ export async function checkAuth(): Promise<boolean> {
   }
 }
 
-export async function fetchProducts(): Promise<Product[]> {
+// Pass `fresh: true` from admin pages so edits/deletes show up immediately
+// instead of waiting out the 30s storefront cache.
+export async function fetchProducts({ fresh = false }: { fresh?: boolean } = {}): Promise<Product[]> {
   try {
-    const res = await fetch(`${API_URL}/api/products`, {
-      next: { revalidate: 30 },
-    });
+    const res = await fetch(
+      `${API_URL}/api/products`,
+      fresh ? { cache: "no-store" } : { next: { revalidate: 30 } },
+    );
     if (!res.ok) return [];
     const data = await res.json();
     return data.products as Product[];

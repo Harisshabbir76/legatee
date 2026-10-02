@@ -3,21 +3,9 @@ const FaqPageContent = require("../models/FaqPageContent");
 const b = (text, tag = "p") => ({ text, tag, style: {} });
 
 const DEFAULT_ITEMS = [
-  { q: b("What makes LEGATEE fragrances unique?", "span"),        a: b("LEGATEE blends timeless Arabian scent traditions with refined, modern composition techniques — creating fragrances that feel both nostalgic and contemporary.") },
-  { q: b("Are LEGATEE fragrances suitable for both men and women?", "span"), a: b("Yes. Our scents are designed as expressive, character-rich profiles that can be worn and enjoyed by anyone, regardless of gender.") },
-  { q: b("What is the difference between Sadeem and Smoke of Arabia?", "span"), a: b("Sadeem is a warm, elegant composition with soft amber depth, while Smoke of Arabia is bolder and smokier — built around rich, resinous oud-inspired notes.") },
-  { q: b("What is VELOURA Body & Hair Mist?", "span"),           a: b("VELOURA is a lightweight body and hair mist that delivers a gentle, lingering scent — perfect for refreshing throughout the day.") },
-  { q: b("How long do LEGATEE perfumes last?", "span"),           a: b("Our eau de parfum concentrations are crafted for longevity, typically lasting 6–8 hours on skin depending on application and conditions.") },
-  { q: b("How should I apply perfume for the best results?", "span"), a: b("Apply to pulse points such as the wrists, neck, and behind the ears where body heat helps the fragrance bloom throughout the day.") },
-  { q: b("Are LEGATEE fragrances suitable for daily wear?", "span"), a: b("Absolutely. Our fragrances are designed to be versatile enough for everyday wear while still feeling special for evenings and occasions.") },
-  { q: b("How should I store my fragrance?", "span"),            a: b("Store your fragrance in a cool, dry place away from direct sunlight and heat to preserve its scent and longevity.") },
-  { q: b("Do you offer gifting options?", "span"),               a: b("Yes, LEGATEE offers elegant gift packaging for special occasions — perfect for surprising someone with a signature scent.") },
-  { q: b("Where can I purchase LEGATEE products?", "span"),       a: b("You can purchase LEGATEE fragrances directly through our online store, with more stockists being added soon.") },
-  { q: b("Do you offer nationwide or international shipping?", "span"), a: b("We currently ship nationwide across the UAE, with international shipping options expanding soon.") },
-  { q: b("How long will my order take to arrive?", "span"),      a: b("Orders are typically processed within 1–2 business days and delivered within 3–5 business days, depending on your location.") },
-  { q: b("How can I track my order?", "span"),                   a: b("Once your order ships, you'll receive a tracking link via email or SMS to follow its journey to your doorstep.") },
-  { q: b("Can I return or exchange my fragrance?", "span"),      a: b("Yes, unopened and unused items can be returned or exchanged within 14 days of delivery. Please see our return policy for full details.") },
-  { q: b("What should I do if my order arrives damaged or incorrect?", "span"), a: b("Please contact our support team within 48 hours of delivery with photos of the issue, and we'll arrange a replacement or refund promptly.") },
+  { q: { ...b("What makes LEGATEE fragrances unique?", "span"), textAr: "ما الذي يجعل عطور LEGATEE مميزة؟" }, a: { ...b("LEGATEE is built around a distinctive international positioning, combining refined branding, a strong visual identity, and fragrances designed to make a lasting impression. Each scent is created to feel modern, elevated, and effortlessly unisex, with longevity that carries you throughout the day."), textAr: "تقوم LEGATEE على مكانة دولية مميزة، تجمع بين العلامة التجارية الراقية والهوية البصرية القوية، وعطور مصممة لتترك أثراً لا يُنسى. كل عطر مصمم ليشعرك بالحداثة والرقي، مع طول أمد يرافقك طوال اليوم." } },
+  { q: { ...b("Are LEGATEE fragrances suitable for both men and women?", "span"), textAr: "هل عطور LEGATEE مناسبة للرجال والنساء؟" }, a: { ...b("Absolutely. LEGATEE fragrances are unisex, created to be worn and enjoyed by everyone. Each scent is designed to complement different personalities and styles rather than being limited by gender."), textAr: "بالتأكيد. عطور LEGATEE هي عطور للجنسين، مصممة لتُرتدى وتُستمتع بها من الجميع. كل عطر مصمم ليتناسب مع الشخصيات والأساليب المختلفة دون أن يكون مقيداً بالجنس." } },
+  { q: { ...b("How long do LEGATEE perfumes last?", "span"), textAr: "كم تدوم عطور LEGATEE؟" }, a: { ...b("LEGATEE fragrances are designed for long-lasting wear, with longevity ranging from approximately 8–9 hours and extending up to 15–16 hours, depending on the fragrance, skin type, and application."), textAr: "صُممت عطور LEGATEE لتدوم طويلاً، حيث تتراوح مدة بقاء العطر من 8 إلى 9 ساعات تقريباً، وقد تمتد حتى 15 إلى 16 ساعة، وذلك حسب العطر ونوع البشرة وطريقة التطبيق." } },
 ];
 
 const DEFAULT_CONTENT = {

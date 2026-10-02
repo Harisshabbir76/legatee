@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/api";
 import DeleteProductButton from "./DeleteProductButton";
@@ -8,7 +11,20 @@ import PriceTag from "@/app/components/PriceTag";
 // Merge both style objects so existing JSX (styles.xxx) keeps working
 const styles = { ...catalogStyles, ...sharedStyles };
 
-export default function ProductCatalog({ products }: { products: Product[] }) {
+export default function ProductCatalog({ products: allProducts }: { products: Product[] }) {
+  // Hide deleted products right away rather than waiting for the server refresh
+  const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
+  const products = allProducts.filter((p) => !removedIds.has(p.id));
+
+  function setRemoved(id: string, removed: boolean) {
+    setRemovedIds((prev) => {
+      const next = new Set(prev);
+      if (removed) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  }
+
   if (products.length === 0) {
     return (
       <p className={styles.empty}>
@@ -45,7 +61,11 @@ export default function ProductCatalog({ products }: { products: Product[] }) {
                 <Link href={`/legatee/admin/panel/products/${product.id}/edit`} className={styles.btnOutline}>
                   Edit
                 </Link>
-                <DeleteProductButton id={product.id} />
+                <DeleteProductButton
+                  id={product.id}
+                  onDeleting={() => setRemoved(product.id, true)}
+                  onDeleteFailed={() => setRemoved(product.id, false)}
+                />
               </div>
             </div>
           </div>
