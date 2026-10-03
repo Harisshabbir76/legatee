@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import styles from "../../styles/Legal.module.css";
 import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
@@ -12,8 +11,40 @@ interface Props {
   content?: LegalPageData | null;
 }
 
+const LEGAL_INTRO =
+  "By accessing or purchasing from the LEGATEE website, you agree to the following terms, which are governed by the applicable laws of the United Arab Emirates.";
+
+const LEGAL_SECTIONS = [
+  {
+    title: "Website & Intellectual Property",
+    text: "All content on this website, including the LEGATEE name, logo, images, product photography, designs, and written content, belongs to LEGATEE and may not be copied or used without prior written permission.",
+  },
+  {
+    title: "Products & Orders",
+    text: "We aim to ensure that all product descriptions, images, prices, and availability are accurate. Prices are displayed in AED and may be updated when necessary. An order is confirmed once payment has been successfully received.",
+  },
+  {
+    title: "Delivery",
+    text: "Customers are responsible for providing accurate delivery details. Delivery times may vary depending on location and circumstances beyond our control.",
+  },
+  {
+    title: "Returns & Exchanges",
+    text: "Due to the nature of fragrance products, opened or used products may not be eligible for return or exchange. Any request will be handled according to LEGATEE’s Return & Exchange Policy and applicable UAE consumer-protection laws.",
+  },
+  {
+    title: "Privacy",
+    text: "Customer information is collected and used only where necessary to process orders, arrange delivery, provide customer support, and operate our services, in accordance with applicable UAE privacy laws.",
+  },
+  {
+    title: "Governing Law",
+    text: "These terms are governed by the laws of the United Arab Emirates. Any disputes shall be subject to the jurisdiction of the competent UAE courts.",
+  },
+];
+
+const LEGAL_OUTRO =
+  "For any questions, please contact LEGATEE through the contact details provided on our website.";
+
 export default function Legal({ content }: Props = {}) {
-  const [activeTab, setActiveTab] = useState(0);
   const { lang } = useLanguage();
   const t = getT(lang);
 
@@ -48,45 +79,15 @@ export default function Legal({ content }: Props = {}) {
 
       <div className={styles.dividerLine} />
 
-      <div className={styles.layout}>
-        <div className={styles.sidebar}>
-          {t.legal.tabs.map((_, i) => {
-            const tabLabel = content?.tabs?.[i]?.label
-              ? (resolveText(content.tabs[i].label, lang) || t.legal.tabs[i])
-              : t.legal.tabs[i];
-            return (
-              <button
-                key={i}
-                className={`${styles.tab} ${activeTab === i ? styles.activeTab : ""}`}
-                onClick={() => setActiveTab(i)}
-                type="button"
-                data-legal-tab={i}
-              >
-                {tabLabel}
-                <span className={`${styles.tabArrow} no-rtl`}>{activeTab === i ? "▼" : "▶"}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className={styles.content}>
-          {(content?.tabs?.[activeTab]?.sections ?? t.legal.tabsContent[activeTab]?.sections.map((sec) => ({
-            title: { text: sec.title, tag: "h2", style: {} },
-            lines: sec.lines.map((l) => ({ text: l, tag: "p", style: {} })),
-          }))).map((sec, si) => {
-            const fallbackSec = t.legal.tabsContent[activeTab]?.sections[si];
-            const titleText = resolveText(sec.title, lang) || fallbackSec?.title || "";
-            return (
-              <div className={styles.policyBlock} key={si}>
-                <h2 className={styles.policyTitle}>{titleText}</h2>
-                {sec.lines.map((line, li) => {
-                  const lineText = resolveText(line, lang) || fallbackSec?.lines[li] || "";
-                  return <p className={styles.policyLine} key={li}>{lineText}</p>;
-                })}
-              </div>
-            );
-          })}
-        </div>
+      <div className={styles.content}>
+        <p className={styles.policyLine}>{LEGAL_INTRO}</p>
+        {LEGAL_SECTIONS.map((sec) => (
+          <div className={styles.policyBlock} key={sec.title}>
+            <h2 className={styles.policyTitle}>{sec.title}</h2>
+            <p className={styles.policyLine}>{sec.text}</p>
+          </div>
+        ))}
+        <p className={styles.policyLine}>{LEGAL_OUTRO}</p>
       </div>
     </section>
   );

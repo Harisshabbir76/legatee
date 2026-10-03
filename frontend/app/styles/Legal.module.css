@@ -114,13 +114,18 @@
 }
 
 .content {
-  flex: 1;
-  padding: 40px 0 0 48px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 0 0;
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 300;
   color: #000000;
   line-height: 1.75;
+}
+
+.content > .policyLine {
+  margin-bottom: 28px;
 }
 
 .policyBlock {
