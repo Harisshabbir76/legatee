@@ -6,43 +6,11 @@ import { useLanguage } from "../LanguageContext";
 import { getT } from "@/lib/translations";
 import { resolveText, resolveStyle } from "@/lib/resolve-text"; // resolveStyle used for hero blocks
 import type { LegalPageData } from "@/lib/api";
+import { LEGAL_DEFAULT_INTRO, LEGAL_DEFAULT_SECTIONS, LEGAL_DEFAULT_OUTRO } from "@/lib/legal-defaults";
 
 interface Props {
   content?: LegalPageData | null;
 }
-
-const LEGAL_INTRO =
-  "By accessing or purchasing from the LEGATEE website, you agree to the following terms, which are governed by the applicable laws of the United Arab Emirates.";
-
-const LEGAL_SECTIONS = [
-  {
-    title: "Website & Intellectual Property",
-    text: "All content on this website, including the LEGATEE name, logo, images, product photography, designs, and written content, belongs to LEGATEE and may not be copied or used without prior written permission.",
-  },
-  {
-    title: "Products & Orders",
-    text: "We aim to ensure that all product descriptions, images, prices, and availability are accurate. Prices are displayed in AED and may be updated when necessary. An order is confirmed once payment has been successfully received.",
-  },
-  {
-    title: "Delivery",
-    text: "Customers are responsible for providing accurate delivery details. Delivery times may vary depending on location and circumstances beyond our control.",
-  },
-  {
-    title: "Returns & Exchanges",
-    text: "Due to the nature of fragrance products, opened or used products may not be eligible for return or exchange. Any request will be handled according to LEGATEE’s Return & Exchange Policy and applicable UAE consumer-protection laws.",
-  },
-  {
-    title: "Privacy",
-    text: "Customer information is collected and used only where necessary to process orders, arrange delivery, provide customer support, and operate our services, in accordance with applicable UAE privacy laws.",
-  },
-  {
-    title: "Governing Law",
-    text: "These terms are governed by the laws of the United Arab Emirates. Any disputes shall be subject to the jurisdiction of the competent UAE courts.",
-  },
-];
-
-const LEGAL_OUTRO =
-  "For any questions, please contact LEGATEE through the contact details provided on our website.";
 
 export default function Legal({ content }: Props = {}) {
   const { lang } = useLanguage();
@@ -52,6 +20,14 @@ export default function Legal({ content }: Props = {}) {
   const titleStyle = content?.heroTitle ? resolveStyle(content.heroTitle, lang) as React.CSSProperties : {};
   const subText    = content?.heroSubtitle ? resolveText(content.heroSubtitle, lang) || t.legal.subtitle : t.legal.subtitle;
   const subStyle   = content?.heroSubtitle ? resolveStyle(content.heroSubtitle, lang) as React.CSSProperties : {};
+
+  const intro      = content?.intro?.text?.trim() ? content.intro : LEGAL_DEFAULT_INTRO;
+  const outro      = content?.outro?.text?.trim() ? content.outro : LEGAL_DEFAULT_OUTRO;
+  const sections   = content?.sections?.length ? content.sections : LEGAL_DEFAULT_SECTIONS;
+  const introText  = resolveText(intro, lang, intro.text);
+  const introStyle = resolveStyle(intro, lang) as React.CSSProperties;
+  const outroText  = resolveText(outro, lang, outro.text);
+  const outroStyle = resolveStyle(outro, lang) as React.CSSProperties;
 
 
   return (
@@ -80,14 +56,20 @@ export default function Legal({ content }: Props = {}) {
       <div className={styles.dividerLine} />
 
       <div className={styles.content}>
-        <p className={styles.policyLine}>{LEGAL_INTRO}</p>
-        {LEGAL_SECTIONS.map((sec) => (
-          <div className={styles.policyBlock} key={sec.title}>
-            <h2 className={styles.policyTitle}>{sec.title}</h2>
-            <p className={styles.policyLine}>{sec.text}</p>
+        {introText && (
+          <p className={styles.policyLine} data-editable="intro" style={introStyle} dangerouslySetInnerHTML={{ __html: introText }} />
+        )}
+        {sections.map((sec, si) => (
+          <div className={styles.policyBlock} key={si}>
+            <h2 className={styles.policyTitle}>{resolveText(sec.title, lang, sec.title.text)}</h2>
+            {sec.lines.map((line, li) => (
+              <p className={styles.policyLine} key={li}>{resolveText(line, lang, line.text)}</p>
+            ))}
           </div>
         ))}
-        <p className={styles.policyLine}>{LEGAL_OUTRO}</p>
+        {outroText && (
+          <p className={styles.policyLine} data-editable="outro" style={outroStyle} dangerouslySetInnerHTML={{ __html: outroText }} />
+        )}
       </div>
     </section>
   );

@@ -30,7 +30,12 @@ const tabSchema = new mongoose.Schema({
 const legalPageContentSchema = new mongoose.Schema({
   _singleton: { type: String, default: "legalpage", unique: true },
   heroTitle:  { type: blockSchema, default: () => ({}) },
+  heroSubtitle: { type: blockSchema, default: () => ({}) },
   heroImage:  { type: String, default: "" },
+  intro:      { type: blockSchema, default: () => ({}) },
+  sections:   { type: [sectionSchema], default: [] },
+  outro:      { type: blockSchema, default: () => ({}) },
+  // legacy tabbed layout — no longer rendered
   tabs:       { type: [tabSchema], default: [] },
 }, { timestamps: true });
 

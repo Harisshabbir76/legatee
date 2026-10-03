@@ -1,15 +1,15 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { API_URL } from "@/lib/api-client";
 import { adminAuthHeader, getCookie, ADMIN_COOKIE } from "@/lib/token";
 import { adminFetch } from "@/lib/admin-fetch";
-import type { LegalPageData, LegalTab, LegalSection, ContentBlock, FooterData } from "@/lib/api";
+import type { LegalPageData, LegalSection, ContentBlock, FooterData } from "@/lib/api";
+import { LEGAL_DEFAULT_INTRO, LEGAL_DEFAULT_SECTIONS, LEGAL_DEFAULT_OUTRO } from "@/lib/legal-defaults";
 import { FooterTextPanel, FooterImagePanel } from "../shared/FooterEditorPanel";
 import { LanguageProvider } from "@/app/components/LanguageContext";
 import { getArDefault } from "@/lib/ar-content-defaults";
-import { getT } from "@/lib/translations";
 import Legal from "@/app/components/legal/Legal";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
@@ -41,10 +41,9 @@ const EDITOR_STYLES = `
     outline: 2.5px solid #3B82F6 !important;
   }
   .legatee-legal-editor a,
-  .legatee-legal-editor button:not([data-legal-tab]) {
+  .legatee-legal-editor button {
     pointer-events: none;
   }
-  .legatee-legal-editor [data-legal-tab],
   .legatee-legal-editor [data-editable],
   .legatee-legal-editor [data-editable-image] {
     pointer-events: auto !important;
@@ -76,66 +75,13 @@ function setBlock(content: LegalPageData, key: string, block: ContentBlock): Leg
 
 // -- Defaults ------------------------------------------------------------------
 
-function buildTabsFromTranslations(): LegalTab[] {
-  const en = getT("en").legal;
-  const ar = getT("ar").legal;
-  return en.tabs.map((label, i) => {
-    const tabEn = en.tabsContent[i];
-    const tabAr = ar.tabsContent[i];
-    return {
-      label: { text: label, textAr: ar.tabs[i] ?? "", tag: "span", style: {} },
-      intro: mkBlock(""),
-      sections: (tabEn?.sections ?? []).map((sec, si) => {
-        const secAr = tabAr?.sections[si];
-        return {
-          title: { text: sec.title, textAr: secAr?.title ?? "", tag: "h2", style: {} },
-          lines: sec.lines.map((l, li) => ({
-            text: l,
-            textAr: secAr?.lines[li] ?? "",
-            tag: "p",
-            style: {},
-          })),
-        };
-      }),
-    };
-  });
-}
-
-function mergeArIntoTabs(tabs: LegalTab[]): LegalTab[] {
-  const en = getT("en").legal;
-  const ar = getT("ar").legal;
-  return tabs.map((tab, i) => {
-    const tabAr = ar.tabsContent[i];
-    const tabEn = en.tabsContent[i];
-    // build a title→Arabic-section lookup (normalised lowercase for resilient matching)
-    const arByTitle = new Map<string, { title: string; lines: readonly string[] }>();
-    (tabAr?.sections ?? []).forEach((sec, si) => {
-      const enTitle = tabEn?.sections[si]?.title ?? "";
-      arByTitle.set(enTitle.toLowerCase().trim(), sec);
-    });
-    return {
-      ...tab,
-      label: { ...tab.label, textAr: tab.label.textAr || ar.tabs[i] || "" },
-      sections: tab.sections.map((sec) => {
-        const secAr = arByTitle.get(sec.title.text.toLowerCase().trim());
-        return {
-          ...sec,
-          title: { ...sec.title, textAr: sec.title.textAr || secAr?.title || "" },
-          lines: sec.lines.map((line, li) => ({
-            ...line,
-            textAr: line.textAr || secAr?.lines[li] || "",
-          })),
-        };
-      }),
-    };
-  });
-}
-
 const DEFAULT: LegalPageData = {
   heroTitle:    mkBlock("LEGAL", "h1"),
   heroSubtitle: mkBlock("At LEGATEE, transparency and trust are fundamental to every experience we create. This section outlines the policies, terms, and information that govern the use of our website, products, and services, helping ensure a secure and seamless journey for every customer."),
   heroImage: "",
-  tabs: buildTabsFromTranslations(),
+  intro:    LEGAL_DEFAULT_INTRO,
+  sections: LEGAL_DEFAULT_SECTIONS,
+  outro:    LEGAL_DEFAULT_OUTRO,
 };
 
 // -- PropertiesPanel sub-components --------------------------------------------
@@ -184,17 +130,13 @@ const ALIGN_OPTS  = ["","left","center","right","justify"].map((a) => ({ label: 
 function getLabel(key: string) {
   if (key === "heroTitle")    return "Page Heading";
   if (key === "heroSubtitle") return "Page Subtitle";
-  if (/^tabs\.\d+\.label$/.test(key)) return `Tab ${parseInt(key.split(".")[1]) + 1} Label`;
-  if (/^tabs\.\d+\.intro$/.test(key)) return `Tab ${parseInt(key.split(".")[1]) + 1} Intro`;
-  if (/^tabs\.\d+\.sections\.\d+\.title$/.test(key)) { const [,t,,s] = key.split("."); return `Tab ${+t+1} � Section ${+s+1} Title`; }
-  if (/^tabs\.\d+\.sections\.\d+\.lines\.\d+$/.test(key)) { const [,t,,s,,l] = key.split("."); return `Tab ${+t+1} � �${+s+1} � Line ${+l+1}`; }
+  if (key === "intro")        return "Intro Paragraph";
+  if (key === "outro")        return "Closing Paragraph";
   return key;
 }
 function getSection(key: string) {
   if (key === "heroTitle" || key === "heroSubtitle") return "Hero";
-  if (/^tabs\.\d+\.label/.test(key)) return "Tab Label";
-  if (/^tabs\.\d+\.intro/.test(key)) return "Tab Intro";
-  if (/^tabs\.\d+\.sections/.test(key)) return "Section Content";
+  if (key === "intro" || key === "outro") return "Legal Content";
   return "";
 }
 
@@ -363,23 +305,24 @@ function PropertiesPanel({ elKey, content, onBlock, extraContent, previewLang, o
 const inpBase: React.CSSProperties = { width: "100%", border: "1px solid #d4c5b5", borderRadius: 4, padding: "5px 8px", fontSize: 11, outline: "none", boxSizing: "border-box", fontFamily: "inherit", background: "#fff" };
 const lbl: React.CSSProperties = { display: "block", fontSize: 9, fontWeight: 700, color: "#6f6459", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 3 };
 
-function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabChange, onSetContent }: {
+function LegalContentPanel({ content, panelLang, setPanelLang, onSetContent }: {
   content: LegalPageData;
-  activeTab: number;
   panelLang: "en" | "ar";
   setPanelLang: (l: "en" | "ar") => void;
-  onTabChange: (i: number) => void;
   onSetContent: (c: LegalPageData) => void;
 }) {
   const [expandedSec, setExpandedSec] = useState<number | null>(null);
-  const tab = content.tabs[activeTab];
+  const sections = content.sections ?? [];
+  const dir = panelLang === "ar" ? "rtl" : "ltr";
 
-  useEffect(() => setExpandedSec(null), [activeTab]);
-
-  function txt(b: ContentBlock) { return panelLang === "ar" ? (b.textAr ?? "") : b.text; }
-  function setTxt(b: ContentBlock, v: string): ContentBlock { return panelLang === "ar" ? { ...b, textAr: v } : { ...b, text: v }; }
+  function txt(b: ContentBlock | undefined) { return !b ? "" : panelLang === "ar" ? (b.textAr ?? "") : b.text; }
+  function setTxt(b: ContentBlock | undefined, v: string): ContentBlock {
+    const base = b ?? mkBlock("");
+    return panelLang === "ar" ? { ...base, textAr: v } : { ...base, text: v };
+  }
   function upd(fn: (c: LegalPageData) => void) {
     const clone = JSON.parse(JSON.stringify(content)) as LegalPageData;
+    if (!clone.sections) clone.sections = [];
     fn(clone);
     onSetContent(clone);
   }
@@ -388,12 +331,9 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
     return sec.lines.map((l) => txt(l)).join("\n");
   }
   function setLinesFromText(si: number, raw: string) {
-    const existingLines = content.tabs[activeTab].sections[si].lines;
-    const lines = raw.split("\n").map((l, idx) => {
-      const existing = existingLines[idx] ?? mkBlock("");
-      return setTxt(existing, l);
-    });
-    upd((c) => { c.tabs[activeTab].sections[si].lines = lines; });
+    const existingLines = sections[si].lines;
+    const lines = raw.split("\n").map((l, idx) => setTxt(existingLines[idx] ?? mkBlock(""), l));
+    upd((c) => { c.sections![si].lines = lines; });
   }
 
   return (
@@ -402,7 +342,7 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
       {/* Header */}
       <div style={{ padding: "10px 14px", background: "#173946", flexShrink: 0 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: "#fff", letterSpacing: "0.04em" }}>Policy Content</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: "#fff", letterSpacing: "0.04em" }}>Legal Content</span>
           <div style={{ display: "flex", gap: 3 }}>
             {(["en", "ar"] as const).map((l) => (
               <button key={l} onClick={() => setPanelLang(l)}
@@ -414,33 +354,23 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
         </div>
       </div>
 
-      {/* Tab switcher */}
-      <div style={{ display: "flex", borderBottom: "2px solid #e8dfd4", flexShrink: 0, background: "#fff", overflowX: "auto" }}>
-        {content.tabs.map((t, i) => (
-          <button key={i} onClick={() => onTabChange(i)}
-            style={{ flex: "0 0 auto", padding: "9px 14px", border: "none", background: "none", color: activeTab === i ? "#173946" : "#999", fontSize: 10, fontWeight: activeTab === i ? 700 : 400, cursor: "pointer", borderBottom: activeTab === i ? "2px solid #173946" : "2px solid transparent", marginBottom: -2, letterSpacing: "0.04em", whiteSpace: "nowrap" }}>
-            {txt(t.label) || `Tab ${i + 1}`}
-          </button>
-        ))}
-      </div>
-
       <div style={{ overflowY: "auto", flex: 1, padding: "0 0 40px" }}>
 
-        {/* Tab label */}
+        {/* Intro */}
         <div style={{ padding: "12px 14px 10px", borderBottom: "1px solid #ede5d8", background: "#fff" }}>
-          <label style={lbl}>Tab Label</label>
-          <input style={inpBase} value={txt(tab.label)} dir={panelLang === "ar" ? "rtl" : "ltr"}
-            onChange={(e) => upd((c) => { c.tabs[activeTab].label = setTxt(c.tabs[activeTab].label, e.target.value); })} />
+          <label style={lbl}>Intro Paragraph</label>
+          <textarea style={{ ...inpBase, resize: "vertical", minHeight: 70, lineHeight: 1.5 }} value={txt(content.intro)} dir={dir}
+            onChange={(e) => upd((c) => { c.intro = setTxt(c.intro, e.target.value); })} />
         </div>
 
         {/* Section cards */}
         <div style={{ padding: "10px 14px 4px" }}>
           <div style={{ fontSize: 9, fontWeight: 700, color: "#6f6459", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>
-            Sections ({tab.sections.length}) — click to edit
+            Sections ({sections.length}) — click to edit
           </div>
         </div>
 
-        {tab.sections.map((sec, si) => {
+        {sections.map((sec, si) => {
           const isOpen = expandedSec === si;
           const preview = linesText(sec).replace(/\n/g, " ").slice(0, 90);
           return (
@@ -462,7 +392,7 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
                 <div style={{ display: "flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
                   <span style={{ fontSize: 10, color: "#999" }}>{isOpen ? "▲" : "▼"}</span>
                   <button
-                    onClick={(e) => { e.stopPropagation(); upd((c) => { c.tabs[activeTab].sections.splice(si, 1); if (expandedSec === si) setExpandedSec(null); }); }}
+                    onClick={(e) => { e.stopPropagation(); upd((c) => { c.sections!.splice(si, 1); }); if (expandedSec === si) setExpandedSec(null); }}
                     title="Delete section"
                     style={{ background: "none", border: "none", color: "#c0392b", cursor: "pointer", fontSize: 16, lineHeight: 1, padding: "0 2px" }}>×</button>
                 </div>
@@ -471,28 +401,18 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
               {/* Expanded editor */}
               {isOpen && (
                 <div style={{ padding: "12px 12px 14px" }}>
-                  {/* Per-section EN/AR tabs */}
-                  <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
-                    {(["en", "ar"] as const).map((l) => (
-                      <button key={l} onClick={(e) => { e.stopPropagation(); setPanelLang(l); }}
-                        style={{ flex: 1, padding: "4px 0", border: `1px solid ${panelLang === l ? "#173946" : "#d4c5b5"}`, borderRadius: 4, background: panelLang === l ? "#173946" : "#fff", color: panelLang === l ? "#fff" : "#6f6459", fontSize: 10, fontWeight: 700, cursor: "pointer", letterSpacing: "0.05em" }}>
-                        {l === "en" ? "EN" : "AR"}
-                      </button>
-                    ))}
-                  </div>
                   <label style={lbl}>Section Title</label>
                   <input
                     style={{ ...inpBase, marginBottom: 10, fontWeight: 600 }}
-                    value={txt(sec.title)} dir={panelLang === "ar" ? "rtl" : "ltr"}
+                    value={txt(sec.title)} dir={dir}
                     placeholder="Section title"
                     onClick={(e) => e.stopPropagation()}
-                    onChange={(e) => upd((c) => { c.tabs[activeTab].sections[si].title = setTxt(c.tabs[activeTab].sections[si].title, e.target.value); })} />
-                  <label style={lbl}>Content <span style={{ color: "#aaa", textTransform: "none", fontWeight: 400 }}>(one item per line)</span></label>
+                    onChange={(e) => upd((c) => { c.sections![si].title = setTxt(c.sections![si].title, e.target.value); })} />
+                  <label style={lbl}>Content <span style={{ color: "#aaa", textTransform: "none", fontWeight: 400 }}>(one paragraph per line)</span></label>
                   <textarea
-                    style={{ ...inpBase, resize: "vertical", minHeight: 180, lineHeight: 1.65, padding: "8px" }}
+                    style={{ ...inpBase, resize: "vertical", minHeight: 140, lineHeight: 1.65, padding: "8px" }}
                     value={linesText(sec)}
-                    dir={panelLang === "ar" ? "rtl" : "ltr"}
-                    placeholder={"First line of content\nSecond line\nThird line…"}
+                    dir={dir}
                     onClick={(e) => e.stopPropagation()}
                     onChange={(e) => setLinesFromText(si, e.target.value)}
                   />
@@ -503,10 +423,17 @@ function LegalContentPanel({ content, activeTab, panelLang, setPanelLang, onTabC
         })}
 
         <div style={{ padding: "4px 14px 16px" }}>
-          <button onClick={() => { upd((c) => { c.tabs[activeTab].sections.push({ title: mkBlock("New Section", "h2"), lines: [mkBlock("")] }); }); setExpandedSec(tab.sections.length); }}
+          <button onClick={() => { upd((c) => { c.sections!.push({ title: mkBlock("New Section", "h2"), lines: [mkBlock("")] }); }); setExpandedSec(sections.length); }}
             style={{ width: "100%", padding: "9px 0", background: "#173946", color: "#fff", border: "none", borderRadius: 6, fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
             + Add Section
           </button>
+        </div>
+
+        {/* Outro */}
+        <div style={{ padding: "12px 14px 10px", borderTop: "1px solid #ede5d8", background: "#fff" }}>
+          <label style={lbl}>Closing Paragraph</label>
+          <textarea style={{ ...inpBase, resize: "vertical", minHeight: 60, lineHeight: 1.5 }} value={txt(content.outro)} dir={dir}
+            onChange={(e) => upd((c) => { c.outro = setTxt(c.outro, e.target.value); })} />
         </div>
       </div>
     </div>
@@ -528,13 +455,14 @@ export default function LegalPageEditorClient({ initialContent, initialFooterCon
   function mergeBlock(fromDB: ContentBlock | undefined, fallback: ContentBlock): ContentBlock {
     return fromDB?.text?.trim() ? fromDB : fallback;
   }
-  const hasRealTabs = initialContent?.tabs?.some((t) => t.label?.text?.trim());
   const seed: LegalPageData = initialContent
     ? {
         heroTitle:    mergeBlock(initialContent.heroTitle, DEFAULT.heroTitle),
         heroSubtitle: mergeBlock(initialContent.heroSubtitle, DEFAULT.heroSubtitle!),
         heroImage:    initialContent.heroImage ?? "",
-        tabs:         mergeArIntoTabs(hasRealTabs ? initialContent.tabs : buildTabsFromTranslations()),
+        intro:        mergeBlock(initialContent.intro, DEFAULT.intro!),
+        sections:     initialContent.sections?.length ? initialContent.sections : DEFAULT.sections,
+        outro:        mergeBlock(initialContent.outro, DEFAULT.outro!),
       }
     : DEFAULT;
 
@@ -546,7 +474,6 @@ export default function LegalPageEditorClient({ initialContent, initialFooterCon
   const [selImg, setSelImg]             = useState<string | null>(null);
   const [footerSel, setFooterSel]       = useState<string | null>(null);
   const [footerSelImg, setFooterSelImg] = useState<string | null>(null);
-  const [activeTab, setActiveTab]       = useState(0);
   const [saving, setSaving]   = useState(false);
   const [uploading, setUploading] = useState(false);
   const [status, setStatus]   = useState<"saved" | "error" | null>(null);
@@ -567,7 +494,7 @@ export default function LegalPageEditorClient({ initialContent, initialFooterCon
     if (!canvasRef.current) return;
     canvasRef.current.querySelectorAll(".legatee-sel").forEach((e) => e.classList.remove("legatee-sel"));
     if (sel) canvasRef.current.querySelectorAll(`[data-editable="${CSS.escape(sel)}"]`).forEach((e) => e.classList.add("legatee-sel"));
-  }, [sel, content, activeTab]);
+  }, [sel, content]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -579,25 +506,16 @@ export default function LegalPageEditorClient({ initialContent, initialFooterCon
     e.preventDefault();
     e.stopPropagation();
 
-    // Tab switch
-    const tabEl = (e.target as HTMLElement).closest("[data-legal-tab]") as HTMLElement | null;
-    if (tabEl) {
-      const i = parseInt(tabEl.dataset.legalTab!);
-      setActiveTab(i);
-      setSel(null);
-      return;
-    }
-
     const txtEl = (e.target as HTMLElement).closest("[data-editable]") as HTMLElement | null;
     if (txtEl) {
       const key = txtEl.dataset.editable!;
       if (key.startsWith("footer.")) {
         setFooterSel((prev) => (prev === key ? null : key));
         setFooterSelImg(null); setSel(null); setSelImg(null);
-      } else if (key === "heroTitle" || key === "heroSubtitle") {
+      } else if (["heroTitle", "heroSubtitle", "intro", "outro"].includes(key)) {
         setSel(key); setFooterSel(null); setFooterSelImg(null); setSelImg(null);
       }
-      // legal content (tabs.x.y) is edited directly in LegalContentPanel — no PropertiesPanel needed
+      // section content is edited directly in LegalContentPanel — no PropertiesPanel needed
       return;
     }
 
@@ -709,10 +627,8 @@ export default function LegalPageEditorClient({ initialContent, initialFooterCon
           {/* Always-visible legal content panel */}
           <LegalContentPanel
             content={content}
-            activeTab={activeTab}
             panelLang={panelLang}
             setPanelLang={setPanelLang}
-            onTabChange={(i) => { setActiveTab(i); setSel(null); }}
             onSetContent={(c) => { setContent(c); setStatus(null); }}
           />
 

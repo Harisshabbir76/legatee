@@ -348,7 +348,11 @@ export interface LegalPageData {
   heroTitle: ContentBlock;
   heroSubtitle?: ContentBlock;
   heroImage?: string;
-  tabs: LegalTab[];
+  intro?: ContentBlock;
+  sections?: LegalSection[];
+  outro?: ContentBlock;
+  /** @deprecated old tabbed layout, no longer rendered */
+  tabs?: LegalTab[];
 }
 
 export interface ContactPageData {
